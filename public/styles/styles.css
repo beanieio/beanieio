@@ -3,6 +3,26 @@
   box-sizing: border-box !important;
 }
 
+:root {
+  --b1: #46AAC2;	/* Main Primary color */
+  --b2: #9FDCEB;
+  --b3: #6CC3D7;
+  --b4: #2893AD;
+  --b5: #067E9A;
+
+  --y1: #FFCC57;	/* Main Secondary color (1) */
+  --y2: #FFE5AA;
+  --y3: #FFD77C;
+  --y4: #FFC135;
+  --y5: #FAAE03;
+
+  --r1: #FF6B57;	/* Main Secondary color (2) */
+  --r2: #FFB4AA;
+  --r3: #FF8B7C;
+  --r4: #FF4D35;
+  --r5: #FA2003;
+}
+
 .shadow {
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),
    0 3px 1px -2px rgba(0,0,0,0.12),
@@ -12,6 +32,8 @@
 html, body {
   height: 100%;
   overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 /*  flex utility classes  */
@@ -28,3 +50,67 @@ html, body {
 .flex-align-stretch { align-items: stretch; }
 .flex-1 { flex: 1 };
 .flex-0 { flex: 0 };
+
+/* ICON support */
+.mdi::before {
+    font-size: 24px;
+    line-height: 14px;
+}
+.btn .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.btn-xs .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.btn-sm .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.dropdown-menu .mdi {
+    width: 18px;
+}
+.dropdown-menu .mdi::before {
+    position: relative;
+    top: 4px;
+    left: -8px;
+}
+.nav .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.navbar .navbar-toggle .mdi::before {
+    position: relative;
+    top: 4px;
+    color: #FFF;
+}
+.breadcrumb .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+.breadcrumb a:hover span {
+    text-decoration: underline;
+}
+.alert .mdi::before {
+    position: relative;
+    top: 4px;
+    margin-right: 2px;
+}
+.input-group-addon .mdi::before {
+    position: relative;
+    top: 3px;
+}
+.navbar-brand .mdi::before {
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+}
+.list-group-item .mdi::before {
+    position: relative;
+    top: 3px;
+    left: -3px
+}
