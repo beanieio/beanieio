@@ -8,3 +8,13 @@
    0 3px 1px -2px rgba(0,0,0,0.12),
    0 1px 5px 0 rgba(0,0,0,0.2) !important;
 }
+
+:root {
+  --mc1:#007615;
+  --mc2:#00971A;
+  --cc1:#ABA3F7;
+  --cc2:#4736F4;
+  --ac1:#53F3C3;
+  --ac2:#95F6D9;
+  --hov:#CEE0F5;
+}
