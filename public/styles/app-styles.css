@@ -5,11 +5,110 @@
   flex-direction: column;
 }
 
+.app-header {
+  height: 48px;
+  background-color: slategrey;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.app-full-window {
+  height: 100%;
+  display: flex;
+}
+
+.app-sidebar {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sidebar-entry {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  width: 100px;
+  min-height: 30px;
+  flex: 0 1 75px;
+  color: black;
+}
+
+.app-main-window {
+  flex: 1;
+  min-width: 300px;
+  height: 100%;
+}
+
+.form-bar-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 48px;
+  width: 100%;
+  background-color: blue;
+}
+
+.form-bar-button {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  width: 54px;
+  background-color: green;
+}
+
+.dashboard-window {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  min-width: 300px;
+  overflow-y: scroll;
+  padding: 0 20px;
+}
+
+.app-footer {
+  display: flex;
+  align-items: center;
+  background-color: slategrey;
+  height: 48px;
+  color: white;
+  z-index: 99;
+}
+
 @media(max-width: 575px) {
-  .app-header {
-    height: 30px;
-    background-color: grey;
-    color: white;
+
+  .app-full-window {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .app-main-window {
+    min-height: 0;
+  }
+
+  .report-tile {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 10px;
+  }
+
+  .report-tile-wide {
+    width: 100%;
+  }
+
+  .app-sidebar {
+    order: 99;
+    flex: 0 0 48px;
+    height: 48px;
+    min-height: 48px;
+    z-index: 99;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .app-footer {
@@ -18,78 +117,17 @@
 }
 
 @media(min-width: 576px) {
-  .app-header {
-    height: 48px;
-    background-color: slategrey;
-    color: white;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .app-full-window {
-    height: 100%;
-    display: flex;
-  }
-
-  .app-sidebar {
-    flex: 0 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .sidebar-entry {
-    display: flex;
-    align-items: center;
-    border: 1px solid black;
-    width: 100px;
-    min-height: 30px;
-    flex: 0 1 75px;
-    color: black;
-  }
-
   .sidebar-entry.sidebar-active {
     background-color: lightgrey;
     height: auto;
     flex: 1 1 125px;
   }
 
-  .app-main-window {
-    flex: 1;
-    min-width: 300px;
-  }
-
-  .form-bar-wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 48px;
-    width: 100%;
-    background-color: blue;
-  }
-
-  .form-bar-button {
-    display: flex;
-    align-items: center;
-    height: 48px;
-    width: 54px;
-    background-color: green;
-  }
-
-  .dashboard-window {
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    min-width: 300px;
-    overflow-y: scroll;
-    padding: 0 20px;
-  }
-
   .report-tile {
     flex: 1;
     width: 400px;
     min-width: 300px;
+    max-width: 600px;
     height: 300px;
     min-height: 300px;
     margin: 10px;
@@ -97,16 +135,9 @@
 
   .report-tile-wide {
     flex: 1;
+    max-width: 900px;
     width: 800px;
-    min-width: 600px;
+    min-width: 400px;
   }
 
-  .app-footer {
-    display: flex;
-    align-items: center;
-    background-color: slategrey;
-    height: 48px;
-    color: white;
-    z-index: 99;
-  }
 }
