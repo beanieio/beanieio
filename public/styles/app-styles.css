@@ -1,0 +1,71 @@
+#app, .app-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.app-header {
+  height: 48px;
+  background-color: grey;
+  color: white;
+}
+
+.app-full-window {
+  height: 100%;
+}
+
+.app-sidebar {
+  flex: 0 1 auto;
+}
+
+.sidebar-entry {
+  border: 1px solid black;
+  width: 100px;
+  min-height: 30px;
+  flex: 0 1 75px;
+  color: black;
+}
+
+.sidebar-entry.sidebar-active {
+  background-color: lightgrey;
+  height: auto;
+  flex: 1 1 125px;
+}
+
+.app-main-window {
+  min-width: 300px;
+}
+
+.form-bar-wrapper {
+  height: 48px;
+  width: 100%;
+  background-color: blue;
+}
+
+.form-bar-button {
+  height: 48px;
+  width: 54px;
+  background-color: green;
+}
+
+.dashboard-window {
+  height: 100%;
+  min-width: 300px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  padding: -20px;
+}
+
+.report-tile {
+  flex: 1;
+  width: 400px;
+  min-width: 300px;
+  height: 300px;
+  min-height: 300px;
+  margin: 10px;
+}
+
+.report-tile-wide {
+  flex: 1;
+  width: 800px;
+  min-width: 600px;
+}

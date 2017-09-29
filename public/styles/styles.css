@@ -9,6 +9,11 @@
    0 1px 5px 0 rgba(0,0,0,0.2) !important;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 /*  flex utility classes  */
 .flex { display: flex; }
 .flex-col { display: flex; flex-direction: column; }
