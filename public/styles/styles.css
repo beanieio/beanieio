@@ -28,3 +28,13 @@ html, body {
 .flex-align-stretch { align-items: stretch; }
 .flex-1 { flex: 1 };
 .flex-0 { flex: 0 };
+
+:root {
+  --mc1:#007615;
+  --mc2:#00971A;
+  --cc1:#ABA3F7;
+  --cc2:#4736F4;
+  --ac1:#53F3C3;
+  --ac2:#95F6D9;
+  --hov:#CEE0F5;
+}
