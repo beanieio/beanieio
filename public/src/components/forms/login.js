@@ -4,14 +4,12 @@ import axios from 'axios';
 import { findDOMNode } from 'react-dom';
 import { TextFieldInput } from './form-helpers.jsx';
 
-export default class SignUp extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      email: '',
       password: '',
-      confPassword: '',
       formWarning: ''
     };
   }
@@ -28,12 +26,11 @@ export default class SignUp extends Component {
   handleSubmit(e) {
     e && e.preventDefault();
     if (this.validateForm(e)) {
-      axios.post('/api/users/signup', {//TODO: be sure this endpoint matches server config, check back once db schema is finalized
+      axios.post('/api/users/login', {//TODO: be sure this endpoint matches server config, check back once db schema is finalized
         username: this.state.username,
         password: this.state.password,
-        email: this.state.email,
       }).then(resp => {
-        if (resp.status === 201 && resp.statusText === 'Created') { // user successfully created
+        if (resp.status === 200 && resp.statusText === 'OK') { // TODO: make sure this statusText matches response from server
           this.props.onLogin(resp.data.token);//TODO: make sure this prop is defined and passed down to this component
           this.props.history.push({pathname: '/'});//TODO: make sure this prop is defined and passed down to this component
         }
