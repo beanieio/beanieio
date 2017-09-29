@@ -1,71 +1,112 @@
 #app, .app-wrapper {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.app-header {
-  height: 48px;
-  background-color: grey;
-  color: white;
+@media(max-width: 575px) {
+  .app-header {
+    height: 30px;
+    background-color: grey;
+    color: white;
+  }
+
+  .app-footer {
+    display: none;
+  }
 }
 
-.app-full-window {
-  height: 100%;
-}
+@media(min-width: 576px) {
+  .app-header {
+    height: 48px;
+    background-color: slategrey;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-.app-sidebar {
-  flex: 0 1 auto;
-}
+  .app-full-window {
+    height: 100%;
+    display: flex;
+  }
 
-.sidebar-entry {
-  border: 1px solid black;
-  width: 100px;
-  min-height: 30px;
-  flex: 0 1 75px;
-  color: black;
-}
+  .app-sidebar {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
-.sidebar-entry.sidebar-active {
-  background-color: lightgrey;
-  height: auto;
-  flex: 1 1 125px;
-}
+  .sidebar-entry {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    width: 100px;
+    min-height: 30px;
+    flex: 0 1 75px;
+    color: black;
+  }
 
-.app-main-window {
-  min-width: 300px;
-}
+  .sidebar-entry.sidebar-active {
+    background-color: lightgrey;
+    height: auto;
+    flex: 1 1 125px;
+  }
 
-.form-bar-wrapper {
-  height: 48px;
-  width: 100%;
-  background-color: blue;
-}
+  .app-main-window {
+    flex: 1;
+    min-width: 300px;
+  }
 
-.form-bar-button {
-  height: 48px;
-  width: 54px;
-  background-color: green;
-}
+  .form-bar-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 48px;
+    width: 100%;
+    background-color: blue;
+  }
 
-.dashboard-window {
-  height: 100%;
-  min-width: 300px;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-  padding: -20px;
-}
+  .form-bar-button {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    width: 54px;
+    background-color: green;
+  }
 
-.report-tile {
-  flex: 1;
-  width: 400px;
-  min-width: 300px;
-  height: 300px;
-  min-height: 300px;
-  margin: 10px;
-}
+  .dashboard-window {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    min-width: 300px;
+    overflow-y: scroll;
+    padding: 0 20px;
+  }
 
-.report-tile-wide {
-  flex: 1;
-  width: 800px;
-  min-width: 600px;
+  .report-tile {
+    flex: 1;
+    width: 400px;
+    min-width: 300px;
+    height: 300px;
+    min-height: 300px;
+    margin: 10px;
+  }
+
+  .report-tile-wide {
+    flex: 1;
+    width: 800px;
+    min-width: 600px;
+  }
+
+  .app-footer {
+    display: flex;
+    align-items: center;
+    background-color: slategrey;
+    height: 48px;
+    color: white;
+    z-index: 99;
+  }
 }
