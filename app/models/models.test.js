@@ -1,13 +1,11 @@
 // For testing Entry and User Schema(s) in DB
 
-
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/test')
 
-
-var userSchema = new Schema({
+const userSchema = new Schema({
   username: {type: String, unique: true},
   password: String,
   logins: Number,
@@ -20,7 +18,8 @@ var userSchema = new Schema({
 })
 
 module.exports.User = mongoose.model('User', userSchema);
-var testUser = new User();
+
+const testUser = new User();
 
 testUser.username = 'Phillip';
 testUser.password = 'sd98f7s987d$!#%@';
@@ -34,7 +33,7 @@ testUser.emotional = ['despressed', 'bored'];
 
 testUser.save()
 
-var entrySchema = new Schema({
+const entrySchema = new Schema({
   userId: Schema.Types.ObjectId,
   datetime: Date,
   type: String,
@@ -51,8 +50,8 @@ var entrySchema = new Schema({
 })
 
 module.exports.Entry = mongoose.model('Entry', entrySchema)
-var newEntry = new Entry();
 
+const newEntry = new Entry();
 
 newEntry.datetime = new Date;
 newEntry.ingredients= ['wheat', 'lactose'];

@@ -1,15 +1,15 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/test')
+mongoose.connect('mongodb://localhost/healthme')
 
 
-var userSchema = new Schema({
+const userSchema = new Schema({
   username: {type: String, unique: true},
   password: String,
   logins: Number,
   submissions: Number,
-  email: String,
+  email: String,  // TODO: Find a way to ensure emails are unique IFF provided
   ingredients: [String],
   goals: Schema.Types.Mixed,
   physical: [String],
@@ -18,7 +18,7 @@ var userSchema = new Schema({
 
 module.exports.User = mongoose.model('User', userSchema);
 
-var entrySchema = new Schema({
+const entrySchema = new Schema({
   userId: Schema.Types.ObjectId,
   datetime: Date,
   type: String,
