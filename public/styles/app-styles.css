@@ -175,6 +175,11 @@
 }
 
 @media(min-width: 576px) {
+
+  .sidebar-entry:last-child {
+    border-bottom: none;
+  }
+
   .sidebar-entry.sidebar-active {
     height: auto;
     flex: 1 1 125px;
