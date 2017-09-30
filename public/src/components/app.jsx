@@ -7,18 +7,18 @@ const App = () => (
     </div>
     <div className="app-full-window">
       <div className="app-sidebar">
-        <div className="sidebar-entry sidebar-active"><span>Dashboard</span></div>
-        <div className="sidebar-entry"><span>Reports</span></div>
-        <div className="sidebar-entry"><span>Settings</span></div>
-        <div className="sidebar-entry"><span>Logout</span></div>
+        <div className="sidebar-entry"><i className="mdi mdi-home-circle"></i></div>
+        <div className="sidebar-entry sidebar-active"><i className="mdi mdi-chart-line"></i></div>
+        <div className="sidebar-entry"><i className="mdi mdi-settings"></i></div>
+        <div className="sidebar-entry"><i className="mdi mdi-logout"></i></div>
       </div>
       <div className="app-main-window">
         <div className="form-bar-wrapper">
-          <div className="form-bar-button"><span>Feeling</span></div>
-          <div className="form-bar-button"><span>Meal</span></div>
-          <div className="form-bar-button"><span>Exercise</span></div>
-          <div className="form-bar-button"><span>Sleep</span></div>
-          <div className="form-bar-button"><span>Water</span></div>
+          <div className="form-bar-button"><i className="mdi mdi-heart-pulse"></i></div>
+          <div className="form-bar-button"><i className="mdi mdi-food"></i></div>
+          <div className="form-bar-button"><i className="mdi mdi-bike"></i></div>
+          <div className="form-bar-button"><i className="mdi mdi-hotel"></i></div>
+          <div className="form-bar-button"><i className="mdi mdi-water"></i></div>
         </div>
         <div className="dashboard-window">
           <div className="report-tile shadow">Report goes here</div>
@@ -30,7 +30,7 @@ const App = () => (
       </div>
     </div>
     <div className="app-footer">
-      <div className="app-footer-content"><span>©2017 BeanieIO</span></div>
+      <div className="app-footer-content"><span>©2017 BeanieIo</span></div>
     </div>
   </div>
 );
