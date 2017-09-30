@@ -4,21 +4,21 @@
 }
 
 :root {
-  --b1: #46AAC2;	/* Main Primary color */
-  --b2: #9FDCEB;
-  --b3: #6CC3D7;
+  --b1: #9FDCEB;
+  --b2: #6CC3D7;
+  --b3: #46AAC2;	/* Main Primary color */
   --b4: #2893AD;
   --b5: #067E9A;
 
-  --y1: #FFCC57;	/* Main Secondary color (1) */
-  --y2: #FFE5AA;
-  --y3: #FFD77C;
+  --y1: #FFE5AA;
+  --y2: #FFD77C;
+  --y3: #FFCC57;	/* Main Secondary color (1) */
   --y4: #FFC135;
   --y5: #FAAE03;
 
-  --r1: #FF6B57;	/* Main Secondary color (2) */
-  --r2: #FFB4AA;
-  --r3: #FF8B7C;
+  --r1: #FFB4AA;
+  --r2: #FF8B7C;
+  --r3: #FF6B57;	/* Main Secondary color (2) */
   --r4: #FF4D35;
   --r5: #FA2003;
 }
