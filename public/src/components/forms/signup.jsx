@@ -1,8 +1,6 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import { findDOMNode } from 'react-dom';
-import { TextFieldInput } from './form-helpers.jsx';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -16,14 +14,6 @@ export default class SignUp extends Component {
     };
   }
 
-  componentDidMount() {
-    window.componentHandler.upgradeElements(findDOMNode(this));
-  }
-
-  componentWillUnmount() {
-    const element = findDOMNode(this);
-    window.componentHandler.downgradeElements(element);
-  }
 
   handleSubmit(e) {
     e && e.preventDefault();
@@ -50,69 +40,44 @@ export default class SignUp extends Component {
     }
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;//can be conditional if forms have special return patterns
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
   render () {
     return (
-      <form on-submit={e => this.handleSubmit(e)}>
-        <div class="form-group">
-          <label for="username">Email address</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            id="username"
-            placeholder="Enter a username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
+      <div className="login-wrapper">
+        <div className="login-container">
+          <div className="login-title">Sign Up For HealthMe</div>
+          <form on-submit={e => this.handleSubmit(e)}>
+            <input
+              type="text"
+              className="login-form-control"
+              id="username"
+              placeholder="Username"
+              onChange={e => this.setState({username: e.target.value})}
+            />
+            <input
+              type="email"
+              className="login-form-control"
+              id="email"
+              placeholder="Email"
+              onChange={e => this.setState({'email': e.target.value})}
+            />
+            <input
+              type="password"
+              className="login-form-control"
+              id="password"
+              placeholder="Password"
+              onChange={e => this.setState({'password': e.target.value})}
+            />
+            <input
+              type="password"
+              className="login-form-control"
+              id="confPassword"
+              placeholder="Confirm password"
+              onChange={e => this.setState({'confPassword': e.target.value})}
+            />
+            <button type="submit" className="login-btn login-form-control">Sign Up</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <div class="form-group">
-          <label for="confPassword">Confirm password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="confPassword"
-            name="confPassword"
-            placeholder="Confirm password"
-            value={this.state.confPassword}
-            onChange={this.handleInputChange}
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </div>
     );
   }
 }
