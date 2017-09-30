@@ -143,13 +143,30 @@
 
   .app-sidebar {
     order: 99;
-    flex: 0 0 48px;
-    height: 48px;
-    min-height: 48px;
+    flex: 0 0 64px;
     z-index: 99;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    background-color: var(--b4);
+  }
+
+  .sidebar-entry {
+    flex: 1 0 auto;
+    border-bottom: none;
+    border-right: 2px solid var(--b5);
+    width: auto;
+    color: white;
+    height: 64px;
+  }
+
+  .sidebar-entry:last-child {
+    border-right: none;
+  }
+
+  .sidebar-entry.sidebar-active {
+    background-color: var(--b1);
+    color: var(--b5);
   }
 
   .app-footer {
