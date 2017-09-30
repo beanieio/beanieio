@@ -5,12 +5,24 @@
   flex-direction: column;
 }
 
+/* heart-pulse  hotel   */
+
 .app-header {
   height: 48px;
-  background-color: slategrey;
+  background-color: var(--b4);
   color: white;
   display: flex;
   align-items: center;
+}
+
+.app-header-title {
+  padding-left: 20px;
+}
+
+.app-header-title span {
+  font-family: sans-serif;
+  font-size: 1.5em;
+  font-style: italic;
 }
 
 .app-full-window {
@@ -23,16 +35,28 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background-color: white;
 }
 
 .sidebar-entry {
   display: flex;
   align-items: center;
-  border: 1px solid black;
-  width: 100px;
+  justify-content: center;
+  border-bottom: 2px solid var(--b4);
+  border-right: 2px solid var(--b4);
+  width: 50px;
   min-height: 30px;
   flex: 0 1 75px;
-  color: black;
+  color: var(--b5);
+}
+
+.sidebar-entry:hover {
+  background-color: var(--y1);
+}
+
+.sidebar-entry i {
+  font-size: 2em;
+  cursor: pointer;
 }
 
 .app-main-window {
@@ -47,15 +71,26 @@
   align-items: center;
   height: 48px;
   width: 100%;
-  background-color: blue;
+  background-color: var(--b2);
 }
 
 .form-bar-button {
   display: flex;
+  flex: 1;
+  justify-content: center;
   align-items: center;
   height: 48px;
-  width: 54px;
-  background-color: green;
+  min-width: 50px;
+  max-width: 150px;
+  border-right: 2px solid var(--b5);
+  border-left: 2px solid var(--b5);
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+}
+
+.form-bar-button:hover {
+  background-color: var(--b1);
 }
 
 .dashboard-window {
@@ -73,10 +108,15 @@
 .app-footer {
   display: flex;
   align-items: center;
-  background-color: slategrey;
+  background-color: var(--b4);
   height: 48px;
   color: white;
   z-index: 99;
+  font-size: .7em;
+}
+
+.app-footer-content {
+  padding-left: 20px;
 }
 
 @media(max-width: 575px) {
@@ -119,9 +159,14 @@
 
 @media(min-width: 576px) {
   .sidebar-entry.sidebar-active {
-    background-color: lightgrey;
     height: auto;
     flex: 1 1 125px;
+    background-color: var(--y2);
+  }
+
+  .sidebar-entry.sidebar-active i {
+    align-self: flex-start;
+    margin-top: 10px;
   }
 
   .report-tile {
