@@ -41,18 +41,14 @@ module.exports.jwtAuth = () => passport.authenticate('jwt', {session: false});
 passport.use(new LocalStrategy(function(username, password, done) {
   if (debug) { console.log('Local auth - user: ', username, ' pwd: ', password); }
   User.findOne({username: username}).then(user => {
-    if (user) {
-      return user.comparePassword(password).then(match => {
-        if (match) {
-          done(null, user);
-        } else {
-          done(null, false, {messages: 'Incorrect password'});
-        }
-      });
-    } else {
-      done(null, false, {messages: 'User not found'});
-    }
+    if (user) { //TODO: confirm naming of comparePassword function with Phil
+      return user.comparePassword(password)
+        .then(match => {
+          if (match) { done(null, user); } else { done(null, false, {messages: 'Incorrect password'}); }
+        });
+    } else { done(null, false, {messages: 'User not found'}); }
   }).catch(err => console.log(err));
 }));
+// helper functions to provide
 module.exports.pwdAuth = () => passport.authenticate('local', {session: false});
 module.exports.passport = passport;
