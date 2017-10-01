@@ -17,7 +17,10 @@ export default class Rating extends Component {
   handleMouseLeave() { this.setState({hoveredValue: null}); }
 
   handleClick(v) {
-    this.setState({value: (this.state.value === v) ? null : v}); 
+    this.setState(
+      {value: (this.state.value === v) ? null : v},
+      () => this.props.onChange(this.state.value)
+    );
   }
 
   render() {
