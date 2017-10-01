@@ -20,7 +20,11 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-2']
         }
       },
-      // TODO: setup css loader
+      {
+        test: /\.css$/,
+        include: [__dirname + '/public/styles'],
+        loader: ['style-loader', 'css-loader']
+      }
     ]
   }
 };

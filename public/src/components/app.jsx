@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/app-styles.css';
 
 const App = () => (
   <div className="app-wrapper">
