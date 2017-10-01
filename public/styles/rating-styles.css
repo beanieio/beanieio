@@ -1,0 +1,22 @@
+.rating-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.rating-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  min-width: 25px;
+  min-height: 30px;
+  color: var(--b5);
+  border: 2px solid var(--b5);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.rating-element-filled {
+  color: white;
+  background-color: var(--b3);
+}
