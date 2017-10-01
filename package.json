@@ -40,6 +40,8 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-widgets": "^4.0.2",
+    "react-widgets-moment": "^4.0.2",
     "redux": "^3.7.2"
   },
   "devDependencies": {
