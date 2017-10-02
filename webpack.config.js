@@ -21,18 +21,14 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        include: [__dirname + '/public/styles', __dirname + '/node_modules'],
-        loader: ['style-loader', 'css-loader']
+        test: /\.css$/, // have to include node modules for css b/c of react-widgets
+        include: [path.join(__dirname, '/public'), path.join(__dirname, '/node_modules')],
+        loaders: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loaders: ['file-loader'],
-        include: path.resolve(__dirname, '../')
-      },
-      {
-        test: /\.(gif|jpe?g|png)$/,
-        loader: 'url-loader?limit=25000'
+        test: /\.(gif|jpe?g|png|ttf|eot|svg|woff2?)$/,
+        include: [path.join(__dirname, '/public'), path.join(__dirname, '/node_modules')],
+        loader: 'url-loader?name=[name].[ext]?limit=25000',
       }
     ]
   }
