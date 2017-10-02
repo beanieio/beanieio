@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import Dashboard from './dashboard.jsx';
 import Sidenav from './sidenav.jsx';
-import '../../styles/app-styles.css';
+import './app.css';
 
 export default class App extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class App extends Component {
             <div className="app-header-title"><span>HealthMe</span></div>
           </div>
           <div className="app-full-window">
-            <Sidenav />
+            <Sidenav activeNav={'dashboard'} />
             <div className="app-main-window">
               <Dashboard />
             </div>
