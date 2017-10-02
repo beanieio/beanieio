@@ -7,7 +7,7 @@ import './form-styles.css';
 import 'react-widgets/dist/css/react-widgets.css';
 momentLocalizer();
 
-const ingredientsDefaults = ['peanuts', 'wheat', 'gluten', 'dairy', 'egg', 'soy'];
+const ingredientsDefaults = ['peanuts', 'wheat', 'gluten', 'dairy', 'egg', 'soy', 'tree nuts', 'corn', 'shellfish', 'sesame', 'fish', 'red meat', 'chicken', 'strawberries', 'sucralose', 'high-fructose corn syrup'];
 
 export default class Meal extends Component {
   constructor(props) {
