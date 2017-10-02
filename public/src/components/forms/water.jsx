@@ -39,14 +39,14 @@ export default class Water extends Component {
     return (
       <div className="form-wrapper shadow">
         <div className="form-header flex flex-align-center space-between">
-          <span>How many fl oz of water would you like to add?</span>
+          <span>How much water have you been drinking?</span>
           <button type="button" className="close" aria-label="Close" onClick={() => this.handleCancel()}>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group flex flex-align-center">
-            <Combobox id="amount" data={[8, 12, 16, 20]} onChange={v => this.setState({amount: v})}/>
+            <Combobox id="amount" data={[8, 12, 16, 20]} onChange={v => this.setState({amount: v})} placeholder="Choose/Enter a number of fl oz."/>
           </div>
           <div className="form-group flex flex-align-center">
             <DateTimePicker id="date" onChange={v => this.setState({date: v})} value={this.state.date}/>
