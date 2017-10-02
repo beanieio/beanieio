@@ -8,9 +8,6 @@ import './form-styles.css';
 import 'react-widgets/dist/css/react-widgets.css';
 momentLocalizer();
 
-const physDefaults = ['Great All Around', 'Tired', 'Sore', 'Sick'];
-const emoDefaults = ['Energized', 'Relaxed', 'Stressed', 'Depressed'];
-
 export default class Sleep extends Component {
   constructor(props) {
     super(props);
@@ -23,12 +20,14 @@ export default class Sleep extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    console.log('Submitting data: '); //TODO: wire this up to api post
-    console.log({
+    let formdata = {
       duration: this.state.duration,
       quality: this.state.quality,
       date: this.state.date
-    });
+    };
+    axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
+      .then((res) => this.props.history.push({pathname: '/'}))
+      .catch((err) => console.log('error: ', err));
   }
 
   handleCancel() {
