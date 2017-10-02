@@ -10,7 +10,7 @@ import App from '../public/src/components/app.jsx';
 import '../public/styles/styles.css';
 import '../public/styles/app-styles.css';
 
-import PulseCheck from '../public/src/components/forms/pulse-check.jsx';
+import Exercise from '../public/src/components/forms/exercise.jsx';
 
 // storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -21,10 +21,10 @@ import PulseCheck from '../public/src/components/forms/pulse-check.jsx';
 storiesOf('App', module)
   .add('basic', () => <App />);
 
-storiesOf('PulseCheck', module)
+storiesOf('Exercise', module)
   .add('basic', () => (
     <div class="flex flex-center">
-      <PulseCheck />
+      <Exercise />
     </div>
   )
   );
