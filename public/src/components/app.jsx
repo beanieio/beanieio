@@ -22,7 +22,7 @@ export default class App extends Component {
   }
 
   getAuth() {
-    return `bearer ${this.state.token}`;
+    return this.state.token;
   }
 
   onLogin(token) {
