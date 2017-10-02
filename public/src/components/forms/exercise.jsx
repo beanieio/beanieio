@@ -22,6 +22,7 @@ export default class Exercise extends Component {
     e && e.preventDefault();
     console.log('Submitting data: '); //TODO: wire this up to api post
     let formdata = {
+      type: 'Exercise',
       duration: this.state.duration,
       intensity: this.state.quality,
       date: this.state.date
