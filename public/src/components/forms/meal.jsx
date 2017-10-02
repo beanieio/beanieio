@@ -3,7 +3,6 @@ import axios from 'axios';
 import moment from 'moment';
 import momentLocalizer from 'react-widgets-moment';
 import { Multiselect, DateTimePicker } from 'react-widgets';
-import Rating from '../rating.jsx';
 import './form-styles.css';
 import 'react-widgets/dist/css/react-widgets.css';
 momentLocalizer();
@@ -22,11 +21,19 @@ export default class Meal extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    console.log('Submitting data: '); //TODO: wire this up to api post
+    console.log('Submitting data: ');
     console.log({
-      physTags: this.state.ingredientsTags,
+      ingredientsTags: this.state.ingredientsTags,
       date: this.state.date
     });
+    let formData = {
+      type: 'Meal',
+      datetime: this.state.datetime,
+      ingredients: this.state.ingredients
+    };
+    axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
+      .then((res) => this.props.history.push({pathname: '/'}))
+      .catch((err) => console.log('error: ', err));
   }
 
   handleCancel() {
