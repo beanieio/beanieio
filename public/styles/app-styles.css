@@ -5,8 +5,6 @@
   flex-direction: column;
 }
 
-/* heart-pulse  hotel   */
-
 .app-header {
   height: 48px;
   background-color: var(--b4);
@@ -87,6 +85,7 @@
   font-size: 2em;
   color: white;
   cursor: pointer;
+  position: relative;
 }
 
 .form-bar-button:hover {
@@ -117,6 +116,20 @@
 
 .app-footer-content {
   padding-left: 20px;
+}
+
+/* styles to handle entry-form overlays */
+.entry-form-mount {
+  position: absolute;
+  top: 48px;
+}
+
+.entry-form-left {
+  left: 0;
+}
+
+.entry-form-right {
+  right: 0;
 }
 
 @media(max-width: 575px) {
@@ -167,6 +180,19 @@
   .sidebar-entry.sidebar-active {
     background-color: var(--b1);
     color: var(--b5);
+  }
+
+  .entry-form-mount {
+    position: fixed;
+    top: 96px;
+  }
+
+  .entry-form-left {
+    left: 0;
+  }
+
+  .entry-form-right {
+    left: 0;
   }
 
   .app-footer {
