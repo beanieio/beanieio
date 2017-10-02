@@ -49,15 +49,14 @@ export default class Sleep extends Component {
         </div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group flex flex-align-center">
-            <label className="form-label" htmlFor="duration">Hours:</label>
-            <Combobox className="form-multiselect" data={[0, 2, 4, 6, 8, 10]}
-              onChange={v => this.setState({duration: v})} placeholder="choose or enter an amount"
-              value={this.state.duration}
-            />
-          </div>
-          <div className="form-group flex flex-align-center">
             <label className="form-label" htmlFor="phys-score">Quality:</label>
             <Rating value={this.state.quality} onChange={v => this.setState({quality: v})}/>
+          </div>
+          <div className="form-group flex flex-align-center">
+            <Combobox className="form-multiselect" data={[0, 2, 4, 6, 8, 10]}
+              onChange={v => this.setState({duration: v})} placeholder="How many hours?"
+              value={this.state.duration}
+            />
           </div>
           <div className="form-group flex flex-align-center">
             <DateTimePicker id="date" className="form-datetimepicker"
