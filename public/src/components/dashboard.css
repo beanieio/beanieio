@@ -76,6 +76,7 @@
   .entry-form-mount {
     position: fixed;
     top: 96px;
+    left: 0;
   }
 
   .entry-form-left {
