@@ -1,10 +1,12 @@
 .form-wrapper {
   background-color: #eee;
-  padding: 5px;
+  padding: 10px;
+  max-width: 450px;
+  border-radius: 10px;
 }
 
 .form-wrapper form {
-  padding: 10px;
+  padding: 20px 20px 0 20px;
 }
 
 .form-header {
@@ -12,8 +14,13 @@
   color: var(--b5);
 }
 
+.form-header button {
+  color: var(--b3);
+}
+
 .form-group {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .form-label {
@@ -25,4 +32,17 @@
 .form-group .rating-wrapper {
   flex: 1;
   justify-content: flex-end;
+}
+
+.form-multiselect {
+  margin-bottom: 20px;
+}
+
+.form-submit-section {
+  margin: 20px 0 5px 0;
+}
+
+.form-submit-section button {
+  background-color: var(--b5);
+  color: white;
 }
