@@ -1,0 +1,28 @@
+.form-wrapper {
+  background-color: #eee;
+  padding: 5px;
+}
+
+.form-wrapper form {
+  padding: 10px;
+}
+
+.form-header {
+  font-size: 1.4em;
+  color: var(--b5);
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-label {
+  font-size: 1.1em;
+  color: #777;
+  margin: 0 10px 0 0;
+}
+
+.form-group .rating-wrapper {
+  flex: 1;
+  justify-content: flex-end;
+}
