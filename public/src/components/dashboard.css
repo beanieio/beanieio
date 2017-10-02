@@ -14,22 +14,26 @@
 
 .form-bar-button {
   display: flex;
-  flex: 1;
+  flex: 1 0 0;
   justify-content: center;
   align-items: center;
   height: 48px;
-  min-width: 50px;
-  max-width: 150px;
-  border-right: 2px solid var(--b5);
-  border-left: 2px solid var(--b5);
   font-size: 2em;
   color: white;
   cursor: pointer;
   position: relative;
 }
 
+.form-bar-button:last-child {
+  border-right: none
+}
+
+.form-bar-button-wide {
+  flex: 2 0 0;
+}
+
 .form-bar-button:hover {
-  background-color: var(--b1);
+  background-color: var(--b5);
 }
 
 .dashboard-window {
