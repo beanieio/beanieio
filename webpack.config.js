@@ -22,8 +22,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [__dirname + '/public/styles'],
+        include: [__dirname + '/public/styles', __dirname + '/node_modules'],
         loader: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loaders: ['file-loader'],
+        include: path.resolve(__dirname, '../')
+      },
+      {
+        test: /\.(gif|jpe?g|png)$/,
+        loader: 'url-loader?limit=25000'
       }
     ]
   }
