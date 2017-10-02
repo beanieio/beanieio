@@ -1,8 +1,8 @@
 .form-wrapper {
   background-color: #eee;
   padding: 10px;
-  max-width: 450px;
-  border-radius: 10px;
+  min-width: 400px;
+  font-size: 1rem;
 }
 
 .form-wrapper form {

@@ -76,9 +76,8 @@ export default class PulseCheck extends Component {
             />
           </div>
           <div className="form-group flex flex-align-center">
-            <label className="form-label" htmlFor="date">Date:</label>
             <DateTimePicker id="date" className="form-datetimepicker"
-              onChange={v => this.setState({date: v})}
+              onChange={v => this.setState({date: v})} value={this.state.date}
             />
           </div>
           <div className="form-submit-section flex flex-center">
