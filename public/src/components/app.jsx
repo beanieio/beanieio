@@ -15,6 +15,25 @@ export default class App extends Component {
       token: '',
       activeNav: 'dashboard',
     };
+
+    this.onLogin = this.onLogin.bind(this);
+    this.onLogout = this.onLogout.bind(this);
+    this.getAuth = this.getAuth.bind(this);
+  }
+
+  getAuth() {
+    return `bearer ${this.state.token}`;
+  }
+
+  onLogin(token) {
+    this.setState({loggedIn: true, token: token});
+    window.sessionStorage.setItem('healthme_jwt_token', token);
+  }
+
+  onLogout(e) {
+    e && e.preventDefault();
+    this.setState({loggedIn: false, token: ''});
+    window.sessionStorage.removeItem('healthme_jwt_token');
   }
 
   render() {
@@ -31,7 +50,7 @@ export default class App extends Component {
           </Switch>
           <div className="app-main-window">
             <Switch>
-              <PrivateRoute path="/dashboard" component={Dashboard} loggedIn={this.state.loggedIn} />
+              <PrivateRoute path="/dashboard" component={Dashboard} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
               <Route exact path="/" render={props => <Redirect to="/dashboard" />} />
             </Switch>
           </div>
