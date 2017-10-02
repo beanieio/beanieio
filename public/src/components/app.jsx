@@ -1,33 +1,52 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter, Switch } from 'react-router-dom';
 import Dashboard from './dashboard.jsx';
 import Sidenav from './sidenav.jsx';
+import Login from './login.jsx';
+import Signup from './signup.jsx';
 import './app.css';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-  }
 
+    this.state = {
+      loggedIn: true,
+      token: '',
+      activeNav: 'dashboard',
+    };
+  }
 
   render() {
     return (
-      <Router>
-        <div className="app-wrapper">
-          <div className="app-header">
-            <div className="app-header-title"><span>HealthMe</span></div>
-          </div>
-          <div className="app-full-window">
-            <Sidenav activeNav={'dashboard'} />
-            <div className="app-main-window">
-              <Dashboard />
-            </div>
-          </div>
-          <div className="app-footer">
-            <div className="app-footer-content"><span>©2017 BeanieIo</span></div>
+      <div className="app-wrapper">
+        <div className="app-header">
+          <div className="app-header-title"><span>HealthMe</span></div>
+        </div>
+        <div className="app-full-window">
+          <Switch>
+            <Route path="/login" render={props => (this.state.loggedIn) ? (<Redirect to="/dashboard" />) : (<Login onLogin={this.onLogin} {...props} />)} />
+            <Route path="/signup" render={props => (this.state.loggedIn) ? (<Redirect to="/dashboard" />) : (<Signup onLogin={this.onLogin} {...props} />)} />
+            <Route path="/:nav?" component={Sidenav}/>
+          </Switch>
+          <div className="app-main-window">
+            <Switch>
+              <PrivateRoute path="/dashboard" component={Dashboard} loggedIn={this.state.loggedIn} />
+              <Route exact path="/" render={props => <Redirect to="/dashboard" />} />
+            </Switch>
           </div>
         </div>
-      </Router>
+        <div className="app-footer">
+          <div className="app-footer-content"><span>©2017 BeanieIo</span></div>
+        </div>
+      </div>
     );
   }
 }
+
+
+const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
+  <Route {...rest} render={props => (
+    loggedIn ? (<Component {...props} {...rest}/>) : (<Redirect to="/login"/>)
+  )}/>
+);
