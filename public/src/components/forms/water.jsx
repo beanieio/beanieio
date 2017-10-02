@@ -19,6 +19,7 @@ export default class Water extends Component {
   handleSubmit(e) {
     e && e.preventDefault();
     let formdata = {
+      type: 'Water',
       amount: this.state.amount,
       date: this.state.date
     };
