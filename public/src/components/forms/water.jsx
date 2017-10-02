@@ -20,7 +20,6 @@ export default class Water extends Component {
     e && e.preventDefault();
     let formdata = {
       amount: this.state.amount,
-      chosenUnit: this.state.chosenUnit,
       date: this.state.date
     };
     axios.post('/api/formdata', formdata, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
