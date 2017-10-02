@@ -56,9 +56,9 @@ export default class App extends Component {
     } else {
       return (
         <Switch>
-          <Route path="/dashboard" component={Dashboard} getAuth={this.getAuth} />
-          <Route path="/reports" component={ReportsPlaceholder} getAuth={this.getAuth} />
-          <Route path="/settings" component={SettingsPlaceholder} getAuth={this.getAuth} />
+          <Route path="/dashboard" render={props => <Dashboard getAuth={this.getAuth} /> } />
+          <Route path="/reports" render={props => <ReportsPlaceholder getAuth={this.getAuth} /> } />
+          <Route path="/settings" render={props => <SettingsPlaceholder getAuth={this.getAuth} /> } />
           <Route path="/" render={props => <Redirect to="/dashboard" />} />
         </Switch>
       );
