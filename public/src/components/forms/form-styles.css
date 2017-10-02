@@ -3,6 +3,7 @@
   padding: 10px;
   min-width: 400px;
   font-size: 1rem;
+  cursor: default;
 }
 
 .form-wrapper form {

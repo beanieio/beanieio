@@ -46,7 +46,7 @@ export default class Meal extends Component {
 
   render() {
     return (
-      <div className="form-wrapper shadow">
+      <div className="form-wrapper shadow" onClick={e => e.stopPropagation()}>
         <div className="form-header flex flex-align-center space-between">
           <span>Select the ingredients you want to track for this meal.</span>
           <button type="button" className="close" aria-label="Close" onClick={() => this.handleCancel()}>
