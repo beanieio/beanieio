@@ -12,6 +12,12 @@ export default class Rating extends Component {
     this.scale = this.props.scale || [1, 2, 3, 4, 5];
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.state.value) {
+      this.setState({value: nextProps.value});
+    }
+  }
+
   handleMouseEnter(v) { this.setState({hoveredValue: v}); }
 
   handleMouseLeave() { this.setState({hoveredValue: null}); }
