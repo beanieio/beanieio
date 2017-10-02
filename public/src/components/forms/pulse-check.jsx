@@ -50,7 +50,7 @@ export default class PulseCheck extends Component {
       <div className="form-wrapper shadow">
         <div className="form-header flex flex-align-center space-between">
           <span>How are you feeling?</span>
-          <button type="button" class="close" aria-label="Close" onClick={() => this.handleCancel()}>
+          <button type="button" className="close" aria-label="Close" onClick={() => this.handleCancel()}>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
