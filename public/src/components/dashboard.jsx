@@ -19,7 +19,8 @@ export default class Dashboard extends Component {
     this.toggleForm = this.toggleForm.bind(this);
   }
 
-  toggleForm(form) {
+  toggleForm(e, form) {
+    e.stopPropagation();
     this.setState({openForm: this.state.openForm === form ? '' : form});
   }
 
@@ -40,25 +41,25 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div className="dashboard-container">
+      <div className="dashboard-container" onClick={this.closeForm}>
         <div className="form-bar-wrapper">
-          <div onClick={() => this.toggleForm('meal')} className="form-bar-button">
+          <div onClick={(e) => this.toggleForm(e, 'meal')} className="form-bar-button">
             <i className="mdi mdi-food"></i>
             {this.renderForm(Meal, 'meal', 'left')}
           </div>
-          <div onClick={() => this.toggleForm('exercise')} className="form-bar-button">
+          <div onClick={(e) => this.toggleForm(e, 'exercise')} className="form-bar-button">
             <i className="mdi mdi-bike"></i>
             {this.renderForm(Exercise, 'exercise', 'left')}
           </div>
-          <div onClick={() => this.toggleForm('pulse')} className="form-bar-button form-bar-button-wide">
+          <div onClick={(e) => this.toggleForm(e, 'pulse')} className="form-bar-button form-bar-button-wide">
             <i className="mdi mdi-heart-pulse"></i>
             {this.renderForm(PulseCheck, 'pulse')}
           </div>
-          <div onClick={() => this.toggleForm('sleep')} className="form-bar-button">
+          <div onClick={(e) => this.toggleForm(e, 'sleep')} className="form-bar-button">
             <i className="mdi mdi-hotel"></i>
             {this.renderForm(Sleep, 'sleep', 'right')}
           </div>
-          <div onClick={() => this.toggleForm('water')} className="form-bar-button">
+          <div onClick={(e) => this.toggleForm(e, 'water')} className="form-bar-button">
             <i className="mdi mdi-water"></i>
             {this.renderForm(Water, 'water', 'right')}
           </div>
