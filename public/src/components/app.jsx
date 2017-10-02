@@ -51,6 +51,8 @@ export default class App extends Component {
           <div className="app-main-window">
             <Switch>
               <PrivateRoute path="/dashboard" component={Dashboard} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
+              <PrivateRoute path="/reports" component={ReportsPlaceholder} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
+              <PrivateRoute path="/settings" component={SettingsPlaceholder} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
               <Route exact path="/" render={props => <Redirect to="/dashboard" />} />
             </Switch>
           </div>
@@ -62,6 +64,9 @@ export default class App extends Component {
     );
   }
 }
+
+const ReportsPlaceholder = () => (<div>Reports go here!</div>);
+const SettingsPlaceholder = () => (<div>Settings go here!</div>);
 
 
 const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
