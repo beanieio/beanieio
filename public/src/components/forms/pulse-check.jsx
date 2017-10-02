@@ -27,22 +27,17 @@ export default class PulseCheck extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    console.log('Submitting data: '); //TODO: wire this up to api post
-    console.log({
+    let formData = {
+      type: 'Pulse',
       phys: this.state.phys,
       emo: this.state.emo,
       physTags: this.state.physTags,
       emoTags: this.state.emoTags,
       date: this.state.date
-    });
-  }
-
-  handleCancel() {
-    if (!this.props.handleCancel) {
-      console.log('Error: missing cancel handler...'); //TODO: remove this once mounted
-    } else {
-      this.props.handleCancel();
-    }
+    };
+    axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
+      .then((res) => this.props.handleCancel())
+      .catch((err) => console.log('Error: ', err));
   }
 
   render() {
@@ -50,7 +45,7 @@ export default class PulseCheck extends Component {
       <div className="form-wrapper shadow" onClick={e => e.stopPropagation()}>
         <div className="form-header flex flex-align-center space-between">
           <span>How are you feeling?</span>
-          <button type="button" className="close" aria-label="Close" onClick={() => this.handleCancel()}>
+          <button type="button" className="close" aria-label="Close" onClick={() => this.props.handleCancel()}>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

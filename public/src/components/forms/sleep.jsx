@@ -27,16 +27,8 @@ export default class Sleep extends Component {
       date: this.state.date
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
-      .then((res) => this.props.history.push({pathname: '/'}))
+      .then((res) => this.props.handleCancel())
       .catch((err) => console.log('error: ', err));
-  }
-
-  handleCancel() {
-    if (!this.props.handleCancel) {
-      console.log('Error: missing cancel handler...'); //TODO: remove this once mounted
-    } else {
-      this.props.handleCancel();
-    }
   }
 
   render() {
@@ -44,7 +36,7 @@ export default class Sleep extends Component {
       <div className="form-wrapper shadow" onClick={e => e.stopPropagation()}>
         <div className="form-header flex flex-align-center space-between">
           <span>How did you sleep last night?</span>
-          <button type="button" className="close" aria-label="Close" onClick={() => this.handleCancel()}>
+          <button type="button" className="close" aria-label="Close" onClick={() => this.props.handleCancel()}>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

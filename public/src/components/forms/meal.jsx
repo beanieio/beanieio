@@ -32,7 +32,7 @@ export default class Meal extends Component {
       ingredients: this.state.ingredients
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
-      .then((res) => this.props.history.push({pathname: '/'}))
+      .then((res) => this.props.handleCancel())
       .catch((err) => console.log('error: ', err));
   }
 
@@ -49,7 +49,7 @@ export default class Meal extends Component {
       <div className="form-wrapper shadow" onClick={e => e.stopPropagation()}>
         <div className="form-header flex flex-align-center space-between">
           <span>Select the ingredients you want to track for this meal.</span>
-          <button type="button" className="close" aria-label="Close" onClick={() => this.handleCancel()}>
+          <button type="button" className="close" aria-label="Close" onClick={() => this.props.handleCancel()}>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
