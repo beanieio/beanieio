@@ -39,10 +39,18 @@
 }
 
 .form-submit-section {
-  margin: 20px 0 5px 0;
+  margin: 20px 0 10px 0;
 }
 
-.form-submit-section button {
-  background-color: var(--b5);
+.form-submit-btn {
+  background: linear-gradient(var(--b2), var(--b3));
   color: white;
+}
+
+.form-submit-btn:hover {
+  background: linear-gradient(var(--b3), var(--b4));
+}
+
+.form-submit-btn:focus:active {
+  box-shadow: none !important;
 }
