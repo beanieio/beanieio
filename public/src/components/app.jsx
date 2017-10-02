@@ -36,25 +36,45 @@ export default class App extends Component {
     window.sessionStorage.removeItem('healthme_jwt_token');
   }
 
+  renderNav() {
+    if (this.state.loggedIn) {
+      return (
+        <Route path="/:nav?" component={Sidenav}/>
+      );
+    }
+  }
+
+  renderMainWindow() {
+    if (!this.state.loggedIn) {
+      return (
+        <Switch>
+          <Route path="/login" render={props => <Login onLogin={this.onLogin} />} />
+          <Route path="/signup" render={props => <Signup onLogin={this.onLogin} />} />
+          <Redirect to="/login" />
+        </Switch>
+      );
+    } else {
+      return (
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} getAuth={this.getAuth} />
+          <Route path="/reports" component={ReportsPlaceholder} getAuth={this.getAuth} />
+          <Route path="/settings" component={SettingsPlaceholder} getAuth={this.getAuth} />
+          <Route path="/" render={props => <Redirect to="/dashboard" />} />
+        </Switch>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="app-wrapper">
         <div className="app-header">
-          <div className="app-header-title"><span>HealthMe</span></div>
+          <Link to="/dashboard" className="app-header-title"><span>HealthMe</span></Link>
         </div>
         <div className="app-full-window">
-          <Switch>
-            <Route path="/login" render={props => (this.state.loggedIn) ? (<Redirect to="/dashboard" />) : (<Login onLogin={this.onLogin} {...props} />)} />
-            <Route path="/signup" render={props => (this.state.loggedIn) ? (<Redirect to="/dashboard" />) : (<Signup onLogin={this.onLogin} {...props} />)} />
-            <Route path="/:nav?" component={Sidenav}/>
-          </Switch>
+          {this.renderNav()}
           <div className="app-main-window">
-            <Switch>
-              <PrivateRoute path="/dashboard" component={Dashboard} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
-              <PrivateRoute path="/reports" component={ReportsPlaceholder} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
-              <PrivateRoute path="/settings" component={SettingsPlaceholder} loggedIn={this.state.loggedIn} getAuth={this.getAuth} />
-              <Route exact path="/" render={props => <Redirect to="/dashboard" />} />
-            </Switch>
+            {this.renderMainWindow()}
           </div>
         </div>
         <div className="app-footer">
@@ -67,7 +87,6 @@ export default class App extends Component {
 
 const ReportsPlaceholder = () => (<div>Reports go here!</div>);
 const SettingsPlaceholder = () => (<div>Settings go here!</div>);
-
 
 const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
   <Route {...rest} render={props => (
