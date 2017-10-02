@@ -18,12 +18,12 @@ export default class Water extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    let formdata = {
+    let formData = {
       type: 'Water',
       amount: this.state.amount,
       date: this.state.date
     };
-    axios.post('/api/formdata', formdata, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
+    axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
       .then((res) => this.props.history.push({pathname: '/'}))
       .catch((err) => console.log('error: ', err));
   }

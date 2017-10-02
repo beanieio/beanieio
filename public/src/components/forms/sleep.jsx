@@ -20,7 +20,7 @@ export default class Sleep extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    let formdata = {
+    let formData = {
       type: 'Sleep',
       duration: this.state.duration,
       quality: this.state.quality,
