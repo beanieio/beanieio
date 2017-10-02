@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PulseCheck from './forms/pulse-check.jsx';
+import './dashboard.css';
 
 export default class Dashboard extends Component {
   constructor(props) {
