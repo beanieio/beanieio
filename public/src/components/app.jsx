@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/app-styles.css';
+import PulseCheck from './forms/pulse-check.jsx';
 
 const App = () => (
   <div className="app-wrapper">
@@ -15,11 +16,24 @@ const App = () => (
       </div>
       <div className="app-main-window">
         <div className="form-bar-wrapper">
-          <div className="form-bar-button"><i className="mdi mdi-heart-pulse"></i></div>
-          <div className="form-bar-button"><i className="mdi mdi-food"></i></div>
-          <div className="form-bar-button"><i className="mdi mdi-bike"></i></div>
-          <div className="form-bar-button"><i className="mdi mdi-hotel"></i></div>
-          <div className="form-bar-button"><i className="mdi mdi-water"></i></div>
+          <div className="form-bar-button">
+            <i className="mdi mdi-food"></i>
+          </div>
+          <div className="form-bar-button">
+            <i className="mdi mdi-bike"></i>
+          </div>
+          <div className="form-bar-button">
+            <i className="mdi mdi-heart-pulse"></i>
+            <div className="entry-form-mount">
+              <PulseCheck />
+            </div>
+          </div>
+          <div className="form-bar-button">
+            <i className="mdi mdi-hotel"></i>
+          </div>
+          <div className="form-bar-button">
+            <i className="mdi mdi-water"></i>
+          </div>
         </div>
         <div className="dashboard-window">
           <div className="report-tile shadow">Report goes here</div>
@@ -35,14 +49,5 @@ const App = () => (
     </div>
   </div>
 );
-
-
-
-
-
-
-
-
-
 
 export default App;
