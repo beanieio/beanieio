@@ -50,9 +50,8 @@ export default class Exercise extends Component {
         </div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group flex flex-align-center">
-            <label className="form-label" htmlFor="duration">Minutes:</label>
             <Combobox className="form-multiselect" data={[15, 30, 45, 60]}
-              onChange={v => this.setState({duration: v})} placeholder="choose or enter an amount"
+              onChange={v => this.setState({duration: v})} placeholder="How many minutes?"
               value={this.state.duration}
             />
           </div>
