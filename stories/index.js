@@ -8,9 +8,16 @@ import { Button, Welcome } from '@storybook/react/demo';
 
 import App from '../public/src/components/app.jsx';
 import '../public/styles/styles.css';
-import '../public/styles/app-styles.css';
+import '../public/src/components/app.css';
+import '../public/styles/entry-styles.css';
 
-import PulseCheck from '../public/src/components/forms/pulse-check.jsx';
+// activity feed entries
+import PulseCheckEntry from '../public/src/components/entries/pulse-check-entry.jsx';
+import SleepEntry from '../public/src/components/entries/sleep-entry.jsx';
+import ExerciseEntry from '../public/src/components/entries/exercise-entry.jsx';
+import MealEntry from '../public/src/components/entries/meal-entry.jsx';
+import WaterEntry from '../public/src/components/entries/water-entry.jsx';
+import EntryList from '../public/src/components/entries/entry-list.jsx';
 
 // storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -18,13 +25,15 @@ import PulseCheck from '../public/src/components/forms/pulse-check.jsx';
 //   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
 //   .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
 
-storiesOf('App', module)
-  .add('basic', () => <App />);
+// storiesOf('App', module)
+//   .add('basic', () => <App />);
 
-storiesOf('PulseCheck', module)
+storiesOf('Entries', module)
   .add('basic', () => (
-    <div class="flex flex-center">
-      <PulseCheck />
+    <div className="flex flex-center">
+      <div className="report-tile">
+        <EntryList />
+      </div>
     </div>
   )
   );
