@@ -1,0 +1,89 @@
+.entry-list-container {
+  display: flex;
+  flex-flow: column;
+  height: auto;
+  background-color: gray;
+}
+
+.entry-list-header {
+  color: white;
+  text-shadow: grey;
+  text-align: center;
+}
+
+.entry-list {
+  display: flex;
+  flex-flow: column;
+}
+
+.feed-entry-container {
+  border: 1px grey;
+  display: flex;
+  flex-flow: column;
+  height: auto !important;
+  background-color: white;
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.feed-entry-header {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.feed-entry-time {
+  display: flex;
+  flex: auto;
+  height: auto !important;
+  font-size: 1em;
+  font-style: italic;
+  color: grey;
+}
+
+.feed-entry-icon {
+  color: grey;
+  display: flex;
+  flex: auto;
+  margin-right: 5px;
+}
+
+.feed-entry-content {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  height: auto !important;
+}
+
+.feed-entry-detail {
+  display: flex;
+  padding: 5px 0;
+  justify-content: flex-start;
+  font-size: 1em;
+  color: var(--mc1);
+  margin-right: 15px;
+  height: auto !important;
+}
+
+.feed-entry-tag-box {
+  display: flex;
+  flex: auto;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: center;
+  height: auto !important;
+}
+
+.feed-entry-tag {
+  font-size: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2px;
+  margin: 0 5px;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
