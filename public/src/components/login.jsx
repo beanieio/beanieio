@@ -61,7 +61,7 @@ export default class Login extends Component {
               <button type="submit" className="login-btn login-form-control">Login</button>
             </div>
             <div>
-              <Link to="/signup">Signup</Link>
+              <Link className="login-link" to="/signup">Signup</Link>
             </div>
           </form>
         </div>
@@ -69,5 +69,3 @@ export default class Login extends Component {
     );
   }
 }
-
-// {/* <a href="" className="login-link" onClick={(e) => this.goToSignup(e)}>Sign Up</a> */}

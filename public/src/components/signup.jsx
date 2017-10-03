@@ -1,6 +1,7 @@
-
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './login.css';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -75,6 +76,9 @@ export default class SignUp extends Component {
               onChange={e => this.setState({'confPassword': e.target.value})}
             />
             <button type="submit" className="login-btn login-form-control">Sign Up</button>
+            <div>
+              <Link className="login-link" to="/login">Already have an account? Login now</Link>
+            </div>
           </form>
         </div>
       </div>

@@ -57,8 +57,9 @@
 .login-btn {
   background-color: white;
   border: 0;
-  color: #53e3a6;
+  color: var(--b5);
   cursor: pointer;
+  font-weight: normal;
 }
 
 .login-btn:hover {
@@ -66,8 +67,10 @@
 }
 
 .login-link {
-  color: white;
+  color: var(--b5);
 }
+
+
 
 .login-link:hover {
   color: white;
