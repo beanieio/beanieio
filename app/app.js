@@ -3,6 +3,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { User, Entry } = require('./models/models.js')
 const debug = process.env.DEBUG || false;
+const jwt = require('jsonwebtoken')
+const helpers = require('./auth/auth.js')
 
 const app = express();
 
@@ -12,11 +14,34 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/entries', (req, res) => {
   Entry.find()
-  .then(function(entry) {
+  .then((entry) => {
     res.status(200).json(entry)
   })
-  // curl --request GET 'localhost:3000/api/formdata'
 })
+
+app.post('/api/users/login', (req, res) => {
+  const newJWT = jwt.sign({username: req.body.username}, helpers.jwtOptions.secretOrKey);
+  res.json({message: 'Login Successful!', token: token});
+});
+
+app.post('/api/users/signup', (req, res) => {
+  User.findOne({username: req.body.username})
+  .then(user => {
+    if (user) {
+      res.status(422).send('Username taken. Please enter a new username.')
+    }
+    let newUser = new User({
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email
+    })
+    return newUser.save();
+  })
+  .then(() => {
+    const newJWT = jwt.sign({username: req.body.username}, helpers.jwtOptions.secretOrKey);
+    res.status(201).send({message: 'Thank you for signing up!', token: newJWT})
+  }).catch(err => res.status(500).send('Server err: ', err));
+});
 
 app.post('/api/formdata', (req, res) => {
   const entry = new Entry({
@@ -38,7 +63,7 @@ app.post('/api/formdata', (req, res) => {
   .then(() => res.status(201).send('Entry created'))
   .catch(err => res.status(500).send('Server error', err))
 });
-// curl -H "Content-Type: application/json" -X POST -d '{"userId": "test","ingredients": ["wheat", "lactose"],"sleepDuration": 6,"sleepQuality": 4,"exerciseDuration": 20,"exerciseIntensity": 4,"waterAmount": 62,"physicalScore": 3,"emotionalScore": 4,"physicalTags": ["great", "awsome"],"emotionalTags": ["happy", "sad"]}' http://localhost:3000/api/formdata
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '/public/index.html'));
 });

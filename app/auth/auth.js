@@ -1,7 +1,7 @@
 const passport = require('passport');
-const LocalStrategy = require('pasport-local');
+const LocalStrategy = require('passport-local');
 const passportJWT = require('passport-jwt');
-const jwtStrategy = passportJWT.Strategy;
+const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 const { User } = require('../models/models.js');
 const debug = process.env.DEBUG || false;
