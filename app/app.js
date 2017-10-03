@@ -20,7 +20,7 @@ app.get('/api/entries', jwtAuth(), (req, res) => {
 });
 
 app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
-  User.findOne().select('ingredients physical emotional').exec()
+  User.findOne({username: req.user.username}).select('username ingredients physical emotional').exec()
     .then(config => {
       res.status(200).json(config);
     });
