@@ -19,7 +19,7 @@ app.get('/api/entries', jwtAuth(), (req, res) => {
   })
 })
 
-app.post('/api/users/login', jwtAuth(), (req, res) => {
+app.post('/api/users/login', pwdAuth(), (req, res) => {
   const newJWT = jwt.sign({username: req.body.username}, jwtOptions.secretOrKey);
   res.json({message: 'Login Successful!', token: token});
 });
