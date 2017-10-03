@@ -19,6 +19,13 @@ app.get('/api/entries', jwtAuth(), (req, res) => {
     });
 });
 
+app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
+  Entry.find({}).select('-username', '-password', '-email')
+  .then((config) => {
+    res.status(200).json(config)
+  })
+})
+
 app.post('/api/users/login', pwdAuth(), (req, res) => {
   const newJWT = jwt.sign({username: req.body.username}, jwtOptions.secretOrKey);
   res.json({message: 'Login Successful!', token: newJWT});
