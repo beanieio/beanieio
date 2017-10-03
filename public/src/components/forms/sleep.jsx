@@ -14,7 +14,7 @@ export default class Sleep extends Component {
     this.state = {
       duration: null,
       quality: null,
-      date: new Date(),
+      datetime: new Date(),
     };
   }
 
@@ -22,9 +22,9 @@ export default class Sleep extends Component {
     e && e.preventDefault();
     let formData = {
       type: 'Sleep',
-      duration: this.state.duration,
-      quality: this.state.quality,
-      date: this.state.date
+      slDuration: this.state.duration,
+      slQuality: this.state.quality,
+      datetime: this.state.datetime
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
       .then((res) => this.props.handleCancel())
@@ -52,8 +52,8 @@ export default class Sleep extends Component {
             />
           </div>
           <div className="form-group flex flex-align-center">
-            <DateTimePicker id="date" className="form-datetimepicker"
-              onChange={v => this.setState({date: v})} value={this.state.date}
+            <DateTimePicker id="datetime" className="form-datetimepicker"
+              onChange={v => this.setState({datetime: v})} value={this.state.datetime}
             />
           </div>
           <div className="form-submit-section flex flex-center">

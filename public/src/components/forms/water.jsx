@@ -12,7 +12,7 @@ export default class Water extends Component {
     super(props);
     this.state = {
       amount: 0,
-      date: new Date(),
+      datetime: new Date(),
     };
   }
 
@@ -20,8 +20,8 @@ export default class Water extends Component {
     e && e.preventDefault();
     let formData = {
       type: 'Water',
-      amount: this.state.amount,
-      date: this.state.date
+      waterAmount: this.state.amount,
+      datetime: this.state.datetime
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
       .then((res) => this.props.handleCancel())
@@ -42,7 +42,7 @@ export default class Water extends Component {
             <Combobox id="amount" data={[8, 12, 16, 20]} onChange={v => this.setState({amount: v})} placeholder="Choose/Enter a number of fl oz."/>
           </div>
           <div className="form-group flex flex-align-center">
-            <DateTimePicker id="date" onChange={v => this.setState({date: v})} value={this.state.date}/>
+            <DateTimePicker id="datetime" onChange={v => this.setState({datetime: v})} value={this.state.datetime}/>
           </div>
           <div className="form-submit-section flex flex-center">
             <button type="submit" className="btn form-submit-btn shadow">Submit</button>

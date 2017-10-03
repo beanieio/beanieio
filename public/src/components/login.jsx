@@ -15,26 +15,21 @@ export default class Login extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    if (this.validateForm(e)) {
-      axios.post('/api/users/login', {//TODO: be sure this endpoint matches server config, check back once db schema is finalized
+    if (this.validateForm()) {
+      axios.post('/api/users/login', {
         username: this.state.username,
         password: this.state.password,
       }).then(resp => {
-        if (resp.status === 200 && resp.statusText === 'OK') { // TODO: make sure this statusText matches response from server
-          this.props.onLogin(resp.data.token);//TODO: make sure this prop is defined and passed down to this component
-          this.props.history.push({pathname: '/'});//TODO: make sure this prop is defined and passed down to this component
+        console.log(resp);
+        if (resp.status === 200 && resp.statusText === 'OK') {
+          this.props.onLogin(resp.data.token);
         }
-      }).catch(err => this.setState({formWarning: 'Server error: ' + err}));//will this warning show up in form?
+      }).catch(err => this.setState({formWarning: 'Server error: ' + err}));//TODO: form validation with meaningful error messages
     }
   }
 
-  validateForm(e) {
-    if (this.state.password !== this.state.confPassword) {
-      this.setState({formWarning: 'Passwords must match, please try again.'});
-      return false;
-    } else {
-      return true;
-    }
+  validateForm() {
+    return true; // TODO: add form validation
   }
 
   render () {

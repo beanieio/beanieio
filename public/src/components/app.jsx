@@ -11,7 +11,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       token: '',
       activeNav: 'dashboard',
     };

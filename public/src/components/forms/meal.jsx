@@ -15,21 +15,16 @@ export default class Meal extends Component {
     this.state = {
       ingredientsOpts: ingredientsDefaults, //TODO: serve this with an api get on mount
       ingredientsTags: [],
-      date: new Date(),
+      datetime: new Date(),
     };
   }
 
   handleSubmit(e) {
     e && e.preventDefault();
-    console.log('Submitting data: ');
-    console.log({
-      ingredientsTags: this.state.ingredientsTags,
-      date: this.state.date
-    });
     let formData = {
       type: 'Meal',
       datetime: this.state.datetime,
-      ingredients: this.state.ingredients
+      ingredients: this.state.ingredientsTags
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
       .then((res) => this.props.handleCancel())
@@ -61,8 +56,8 @@ export default class Meal extends Component {
             />
           </div>
           <div className="form-group flex flex-align-center">
-            <DateTimePicker id="date" className="form-datetimepicker"
-              onChange={v => this.setState({date: v})} value={this.state.date}
+            <DateTimePicker id="datetime" className="form-datetimepicker"
+              onChange={v => this.setState({datetime: v})} value={this.state.datetime}
             />
           </div>
           <div className="form-submit-section flex flex-center">

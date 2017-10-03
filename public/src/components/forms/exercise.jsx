@@ -14,7 +14,7 @@ export default class Exercise extends Component {
     this.state = {
       duration: null,
       intensity: null,
-      date: new Date(),
+      datetime: new Date(),
     };
   }
 
@@ -23,9 +23,9 @@ export default class Exercise extends Component {
     console.log('Submitting data: '); //TODO: wire this up to api post
     let formData = {
       type: 'Exercise',
-      duration: this.state.duration,
-      intensity: this.state.quality,
-      date: this.state.date
+      excDuration: this.state.duration,
+      excIntensity: this.state.intensity,
+      datetime: this.state.datetime
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
       .then((res) => this.props.handleCancel())
@@ -53,8 +53,8 @@ export default class Exercise extends Component {
             <Rating value={this.state.intensity} onChange={v => this.setState({intensity: v})}/>
           </div>
           <div className="form-group flex flex-align-center">
-            <DateTimePicker id="date" className="form-datetimepicker"
-              onChange={v => this.setState({date: v})} value={this.state.date}
+            <DateTimePicker id="datetime" className="form-datetimepicker"
+              onChange={v => this.setState({datetime: v})} value={this.state.datetime}
             />
           </div>
           <div className="form-submit-section flex flex-center">

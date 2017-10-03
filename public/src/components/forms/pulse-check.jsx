@@ -21,7 +21,7 @@ export default class PulseCheck extends Component {
       emoOpts: emoDefaults, //TODO: serve this with an api get on mount
       physTags: [],
       emoTags: [],
-      date: new Date(),
+      datetime: new Date(),
     };
   }
 
@@ -33,7 +33,7 @@ export default class PulseCheck extends Component {
       emo: this.state.emo,
       physTags: this.state.physTags,
       emoTags: this.state.emoTags,
-      date: this.state.date
+      datetime: this.state.datetime
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
       .then((res) => this.props.handleCancel())
@@ -71,8 +71,8 @@ export default class PulseCheck extends Component {
             />
           </div>
           <div className="form-group flex flex-align-center">
-            <DateTimePicker id="date" className="form-datetimepicker"
-              onChange={v => this.setState({date: v})} value={this.state.date}
+            <DateTimePicker id="datetime" className="form-datetimepicker"
+              onChange={v => this.setState({datetime: v})} value={this.state.datetime}
             />
           </div>
           <div className="form-submit-section flex flex-center">

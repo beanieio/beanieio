@@ -44,7 +44,7 @@ export default class Dashboard extends Component {
       <div className="dashboard-container" onClick={this.closeForm}>
         <div className="form-bar-wrapper">
           <div onClick={(e) => this.toggleForm(e, 'meal')} className="form-bar-button">
-            <i className="mdi mdi-food"></i>
+            <i className="mdi mdi-food-variant"></i>
             {this.renderForm(Meal, 'meal', 'left')}
           </div>
           <div onClick={(e) => this.toggleForm(e, 'exercise')} className="form-bar-button">
@@ -60,7 +60,7 @@ export default class Dashboard extends Component {
             {this.renderForm(Sleep, 'sleep', 'right')}
           </div>
           <div onClick={(e) => this.toggleForm(e, 'water')} className="form-bar-button">
-            <i className="mdi mdi-water"></i>
+            <i className="mdi mdi-cup-water"></i>
             {this.renderForm(Water, 'water', 'right')}
           </div>
         </div>
