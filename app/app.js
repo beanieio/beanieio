@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { User, Entry } = require('./models/models.js')
 const debug = process.env.DEBUG || false;
 const jwt = require('jsonwebtoken')
-const { jwtOptions, jwtAuth } = require('./auth/auth.js')
+const { jwtOptions, jwtAuth, pwdAuth } = require('./auth/auth.js')
 
 const app = express();
 
