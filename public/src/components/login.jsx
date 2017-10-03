@@ -1,6 +1,7 @@
-
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './login.css';
 
 export default class Login extends Component {
   constructor(props) {
@@ -39,9 +40,9 @@ export default class Login extends Component {
   render () {
     return (
       <div className="login-wrapper">
-        <div className="login-container">
+        <div className="login-container flex flex-col flex-center">
           <div className="login-title">Login To HealthMe</div>
-          <form class ="login-form" on-submit={e => this.handleSubmit(e)}>
+          <form className="login-form" onSubmit={e => this.handleSubmit(e)}>
             <input
               type="text"
               className="login-form-control"
@@ -60,7 +61,7 @@ export default class Login extends Component {
               <button type="submit" className="login-btn login-form-control">Login</button>
             </div>
             <div>
-              <a href="" className="login-link" onClick={(e) => this.goToSignup(e)}>Sign Up</a>
+              <Link to="/signup">Signup</Link>
             </div>
           </form>
         </div>
@@ -68,3 +69,5 @@ export default class Login extends Component {
     );
   }
 }
+
+// {/* <a href="" className="login-link" onClick={(e) => this.goToSignup(e)}>Sign Up</a> */}
