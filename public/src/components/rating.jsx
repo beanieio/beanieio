@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import '../../styles/rating-styles.css';
+import './rating.css';
 
 export default class Rating extends Component {
   constructor(props) {
