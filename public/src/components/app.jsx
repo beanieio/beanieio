@@ -9,10 +9,13 @@ import './app.css';
 export default class App extends Component {
   constructor(props) {
     super(props);
-
+    // check for an existing token
+    // TODO: store this in encrypted https cookies instead for security!
+    const jwt = window.localStorage.getItem('healthme_jwt_token') || '';
+    const loggedIn = !!jwt;
     this.state = {
-      loggedIn: false,
-      token: '',
+      loggedIn: loggedIn,
+      token: jwt,
       activeNav: 'dashboard',
     };
 
@@ -27,13 +30,13 @@ export default class App extends Component {
 
   onLogin(token) {
     this.setState({loggedIn: true, token: token});
-    window.sessionStorage.setItem('healthme_jwt_token', token);
+    window.localStorage.setItem('healthme_jwt_token', token);
   }
 
   onLogout(e) {
     e && e.preventDefault();
     this.setState({loggedIn: false, token: ''});
-    window.sessionStorage.removeItem('healthme_jwt_token');
+    window.localStorage.removeItem('healthme_jwt_token');
   }
 
   renderNav() {
