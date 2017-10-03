@@ -5,15 +5,15 @@ import './sidenav.css';
 const navs = [
   {label: 'dashboard', icon: 'mdi-home-circle', link: '/dashboard'},
   {label: 'reports', icon: 'mdi-chart-line', link: '/reports'},
-  {label: 'settings', icon: 'mdi-settings', link: '/settings'},
-  {label: 'logout', icon: 'mdi-logout', link: '/'}
+  {label: 'settings', icon: 'mdi-settings', link: '/settings'}
 ];
 
-const Sidenav = ({match}) => (
+const Sidenav = ({match, onLogout}) => (
   <div className="app-sidebar">
     {navs.map((nav, i) => (
       <NavLink key={`nav${i}`} link={nav.link} icon={nav.icon} active={match.params.nav === nav.label} />
     ))}
+    <div onClick={onLogout} className="sidebar-entry sidebar-logout"><i className="mdi mdi-logout"></i></div>
   </div>
 );
 

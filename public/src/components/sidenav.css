@@ -22,6 +22,10 @@
   background-color: var(--y1);
 }
 
+.sidebar-entry.sidebar-logout:hover {
+  background-color: var(--r1);
+}
+
 .sidebar-entry i {
   font-size: 2em;
   cursor: pointer;
