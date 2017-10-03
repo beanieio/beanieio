@@ -44,7 +44,7 @@ export default class SignUp extends Component {
   render () {
     return (
       <div className="login-wrapper">
-        <div className="login-container">
+        <div className="login-container flex flex-col flex-center">
           <div className="login-title">Sign Up For HealthMe</div>
           <form on-submit={e => this.handleSubmit(e)}>
             <input
