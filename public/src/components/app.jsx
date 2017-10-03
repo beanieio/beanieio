@@ -39,7 +39,7 @@ export default class App extends Component {
   renderNav() {
     if (this.state.loggedIn) {
       return (
-        <Route path="/:nav?" component={Sidenav}/>
+        <Route path="/:nav?" render={props => <Sidenav {...props} onLogout={this.onLogout} />} />
       );
     }
   }
