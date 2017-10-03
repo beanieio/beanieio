@@ -32,3 +32,6 @@ bower_components/
 
 # Mac OS
 .DS_Store
+
+# Storybook
+stories/index.js

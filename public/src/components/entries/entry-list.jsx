@@ -4,6 +4,7 @@ import ExerciseEntry from './exercise-entry';
 import MealEntry from './meal-entry';
 import WaterEntry from './water-entry';
 import SleepEntry from './sleep-entry';
+import PulseCheckEntry from './pulse-check-entry';
 
 export default class EntryList extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class EntryList extends Component {
           <MealEntry />
           <SleepEntry />
           <ExerciseEntry />
+          <PulseCheckEntry />
         </div>
       </div>
     );
