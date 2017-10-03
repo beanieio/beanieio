@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { User, Entry } = require('./models/models.js')
 const debug = process.env.DEBUG || false;
 const jwt = require('jsonwebtoken')
-const helpers = require('./auth/auth.js')
+const { jwtOptions, jwtAuth } = require('./auth/auth.js')
 
 const app = express();
 
@@ -12,15 +12,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.get('/api/entries', (req, res) => {
+app.get('/api/entries', jwtAuth(), (req, res) => {
   Entry.find()
   .then((entry) => {
     res.status(200).json(entry)
   })
 })
 
-app.post('/api/users/login', (req, res) => {
-  const newJWT = jwt.sign({username: req.body.username}, helpers.jwtOptions.secretOrKey);
+app.post('/api/users/login', jwtAuth(), (req, res) => {
+  const newJWT = jwt.sign({username: req.body.username}, jwtOptions.secretOrKey);
   res.json({message: 'Login Successful!', token: token});
 });
 
@@ -38,7 +38,7 @@ app.post('/api/users/signup', (req, res) => {
     return newUser.save();
   })
   .then(() => {
-    const newJWT = jwt.sign({username: req.body.username}, helpers.jwtOptions.secretOrKey);
+    const newJWT = jwt.sign({username: req.body.username}, jwtOptions.secretOrKey);
     res.status(201).send({message: 'Thank you for signing up!', token: newJWT})
   }).catch(err => res.status(500).send('Server err: ', err));
 });
