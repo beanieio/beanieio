@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import './rating.css';
 
+//TODO: refactor to allow a readonly attribute
+
 export default class Rating extends Component {
   constructor(props) {
     super(props);
