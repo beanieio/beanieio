@@ -2,25 +2,15 @@ import React from 'react';
 import Chart from 'chart.js';
 import PieceLabel from 'chart.piecelabel.js';
 
-const PieChart = () =>{
-  var data = {
-    labels: ['A', 'B', 'C', 'D', 'E'],
-    datasets: [{
-      data: [10, 20, 30, 10, 5],
-      backgroundColor: [
-        '#9FDCEB',
-        '#FFE5AA',
-        '#FFB4AA',
-        '#6CC3D7',
-        '#FFD77C'
-      ]
-    }],
-  };
+const PieChart = ({data}) =>{
   var ctx = 'pieChart';
   var chart = new Chart(ctx, {
     type: 'pie',
     data: data,
     options: {
+      legend: {
+        display: false
+      },
       pieceLabel: {
         // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
         render: 'label',
@@ -32,7 +22,7 @@ const PieChart = () =>{
         showZero: false,
 
         // font size, default is defaultFontSize
-        fontSize: 10,
+        fontSize: 20,
 
         // font color, can be color array for each data or function for dynamic color, default is defaultFontColor
         fontColor: 'white',
@@ -44,11 +34,11 @@ const PieChart = () =>{
         fontFamily: "'Lato', Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
         // draw label in arc, default is false
-        arc: true,
+        arc: false,
 
         // position to draw label, available value is 'default', 'border' and 'outside'
         // default is 'default'
-        position: 'default',
+        position: 'border',
 
         // draw label even it's overlap, default is false
         overlap: false,
@@ -56,7 +46,7 @@ const PieChart = () =>{
     }
   });
 
-  return <canvas id="pieChart" width="400" height="400"></canvas>;
+  return <canvas id="pieChart"></canvas>;
 };
 
 export default PieChart;

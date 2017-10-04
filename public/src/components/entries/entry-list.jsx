@@ -19,10 +19,10 @@ export default class EntryList extends Component {
 
   componentDidMount() {
     axios.get('/api/entries', {
-      // params: {limit: 5},
+      params: {limit: 5},
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
-      this.setState({entries: res.data.slice(0, 5)});
+      this.setState({entries: res.data});
     });
   }
 

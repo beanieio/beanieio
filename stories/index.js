@@ -20,7 +20,7 @@ import '../public/styles/entry-styles.css';
 // import EntryList from '../public/src/components/entries/entry-list.jsx';
 
 // chart modules
-import PieChart from '../public/src/components/reports/pie/pie-chart';
+import MealReport from '../public/src/components/reports/meal-report';
 
 // storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -41,11 +41,11 @@ import PieChart from '../public/src/components/reports/pie/pie-chart';
 //   )
 //   );
 
-storiesOf('PieChart', module)
+storiesOf('MealReport', module)
   .add('basic', () => (
     <div className="flex flex-center">
       <div className="report-tile">
-        <PieChart />
+        <MealReport type="Meal" />
       </div>
     </div>
   ));

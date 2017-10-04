@@ -1,0 +1,6 @@
+.pie-report-container {
+  display: flex;
+  flex: 1;
+  align-content: center;
+  justify-content: space-between;
+}
