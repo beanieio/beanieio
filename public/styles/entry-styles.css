@@ -10,8 +10,12 @@
 }
 
 .entry-list-header {
-  color: var(--b5);
+  display: flex;
+  padding: 5px 10px;
+  background: var(--b5);
+  color: white;
   text-align: left;
+  margin-bottom: 5px;
 }
 
 .feed-entry-container {
@@ -57,7 +61,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-style: italic;
   color: grey;
 }
