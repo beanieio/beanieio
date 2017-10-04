@@ -3,7 +3,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { User, Entry } = require('./models/models.js');
 const ObjectId = require('mongoose').Types.ObjectId;
-const debug = process.env.DEBUG || true;
+
+const debug = process.env.DEBUG || false;
+const httpPort = process.env.HTTP_PORT || 8080;
+const httpsPort = process.env.HTTPS_PORT || 8443;
+
 const jwt = require('jsonwebtoken');
 const { jwtOptions, jwtAuth, pwdAuth } = require('./auth/auth.js');
 
@@ -14,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 const httpsRoute = function (req, res, next) {
   if (debug) { console.log((req.secure ? 'Secure' : 'Insecure') + ' connection received to: ', req.url); }
-  if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + ':3100' + req.path); }
+  if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + req.path); }
 };
 // redirect non secure traffic to https
 app.get('*', httpsRoute);
@@ -88,4 +92,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '/public/index.html'));
 });
 
-module.exports = app;
+module.exports.app = app;
+module.exports.httpPort = httpPort;
+module.exports.httpsPort = httpsPort;
