@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { User, Entry } = require('./models/models.js');
 const ObjectId = require('mongoose').Types.ObjectId;
 
+const morgan = require('morgan');
 const debug = process.env.DEBUG || false;
 const httpPort = process.env.HTTP_PORT || 8080;
 const httpsPort = process.env.HTTPS_PORT || 8443;
@@ -13,6 +14,7 @@ const { jwtOptions, jwtAuth, pwdAuth } = require('./auth/auth.js');
 
 const app = express();
 
+app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
@@ -26,6 +28,7 @@ app.get('*', httpsRoute);
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/entries', jwtAuth(), (req, res) => {
+  if (debug) { console.log('Get request entries for: ', req.user); }
   let q = {userId: ObjectId(req.user._id)};
   if (req.query.type) { q.type = req.query.type; }
   Entry.find(q).limit(req.query.limit ? req.query.limit * 1 : 5).sort({datetime: -1})
@@ -35,6 +38,7 @@ app.get('/api/entries', jwtAuth(), (req, res) => {
 });
 
 app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
+  if (debug) { console.log('Get request formconfig for: ', req.user); }
   User.findOne({username: req.user.username}).select('username ingredients physical emotional').exec()
     .then(config => {
       res.status(200).json(config);
@@ -42,11 +46,13 @@ app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
 });
 
 app.post('/api/users/login', pwdAuth(), (req, res) => {
+  if (debug) { console.log('Login attempt for: ', req.body.username); }
   const newJWT = jwt.sign({username: req.body.username}, jwtOptions.secretOrKey);
   res.json({message: 'Login Successful!', token: newJWT});
 });
 
 app.post('/api/users/signup', (req, res) => {
+  if (debug) { console.log('Signup for: ', req.body.username); }
   User.findOne({username: req.body.username})
     .then(user => {
       if (user) {
@@ -66,7 +72,7 @@ app.post('/api/users/signup', (req, res) => {
 });
 
 app.post('/api/formdata', jwtAuth(), (req, res) => {
-  if (debug) { console.log('Posting formdata for: ', req.user); }
+  if (debug) { console.log('Post request formdata for: ', req.user); }
   if (debug) { console.log('Form data is: ', req.body); }
   const entry = new Entry({
     userId: req.user._id,
