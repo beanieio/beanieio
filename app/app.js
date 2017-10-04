@@ -21,10 +21,11 @@ app.get('*', httpsRoute);
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/entries', jwtAuth(), (req, res) => {
-  Entry.find()
-    .then((entry) => {
-      res.status(200).json(entry);
-    });
+  Entry.find({userId: ObjectId(req.user._id)})
+    .limit(req.query.limit ? req.query.limit * 1 : 5).sort({datetime: -1})
+    .exec().then(entries => {
+      res.status(200).json(entries);
+    }).catch(err => res.status(500).send('Server error: ', err));
 });
 
 app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
