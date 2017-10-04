@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { User, Entry } = require('./models/models.js');
+const ObjectId = require('mongoose').Types.ObjectId;
 const debug = process.env.DEBUG || true;
 const jwt = require('jsonwebtoken');
 const { jwtOptions, jwtAuth, pwdAuth } = require('./auth/auth.js');
@@ -21,8 +22,9 @@ app.get('*', httpsRoute);
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/entries', jwtAuth(), (req, res) => {
-  Entry.find({userId: ObjectId(req.user._id)})
-    .limit(req.query.limit ? req.query.limit * 1 : 5).sort({datetime: -1})
+  let q = {userId: ObjectId(req.user._id)};
+  if (req.query.type) { q.type = req.query.type; }
+  Entry.find(q).limit(req.query.limit ? req.query.limit * 1 : 5).sort({datetime: -1})
     .exec().then(entries => {
       res.status(200).json(entries);
     }).catch(err => res.status(500).send('Server error: ', err));
