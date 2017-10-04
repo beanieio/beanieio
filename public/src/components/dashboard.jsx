@@ -4,6 +4,7 @@ import Exercise from './forms/exercise.jsx';
 import PulseCheck from './forms/pulse-check.jsx';
 import Sleep from './forms/sleep.jsx';
 import Water from './forms/water.jsx';
+import EntryList from './entries/entry-list.jsx';
 import classNames from 'classnames';
 import './dashboard.css';
 
@@ -66,10 +67,10 @@ export default class Dashboard extends Component {
         </div>
         <div className="dashboard-window">
           <div className="report-tile shadow">Report goes here</div>
+          <div className="report-tile report-tile-wide shadow"><EntryList auth={this.props.getAuth} /></div>
           <div className="report-tile report-tile-wide shadow">Report goes here</div>
           <div className="report-tile report-tile-wide shadow">Report goes here</div>
-          <div className="report-tile report-tile-wide shadow">Report goes here</div>
-          <div className="report-tile report-tile-wide shadow">Report goes here</div>
+          <div className="report-tile report-tile-wide shadow"></div>
         </div>
       </div>
     );

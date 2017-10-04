@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ExerciseEntry from './exercise-entry';
-import MealEntry from './meal-entry';
-import WaterEntry from './water-entry';
-import SleepEntry from './sleep-entry';
-import PulseCheckEntry from './pulse-check-entry';
+import ExerciseEntry from './exercise-entry.jsx';
+import MealEntry from './meal-entry.jsx';
+import WaterEntry from './water-entry.jsx';
+import SleepEntry from './sleep-entry.jsx';
+import PulseCheckEntry from './pulse-check-entry.jsx';
 const debug = process.env.DEBUG || false;
 
 const EntryItem = ({entry}) => {
