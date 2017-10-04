@@ -5,6 +5,7 @@ import './rating.css';
 export default class Rating extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       value: this.props.value || null,
       hoveredValue: null,
@@ -50,6 +51,7 @@ export default class Rating extends Component {
             }
             onMouseEnter={() => this.handleMouseEnter(v)}
             onClick={() => this.handleClick(v)}
+            readonly={this.props.readonly}
           />
         ))}
       </div>
@@ -60,7 +62,10 @@ export default class Rating extends Component {
 const RatingElement = (props) => {
   return (
     <div key={`r${props.ind}`}
-      className={classNames('rating-element', {'rating-element-filled': props.filled})}
+      className={classNames('rating-element', {
+        'rating-element-filled': props.filled,
+        'rating-element-readonly': props.readonly,
+      })}
       onMouseEnter={() => props.onMouseEnter()} onClick={() => props.onClick()}
     >
       <span>{props.val}</span>

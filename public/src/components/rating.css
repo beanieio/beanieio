@@ -20,3 +20,7 @@
   color: white;
   background-color: var(--b3);
 }
+
+.rating-element-readonly {
+  cursor: default;
+}
