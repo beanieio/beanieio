@@ -9,7 +9,9 @@ const MealEntry = ({entry}) => {
       <i className="feed-entry-icon mdi mdi-24px mdi-food-variant"></i>
       <div className="feed-entry-content">
         <div className="feed-entry-detail-group">
-          {entry.ingredients.map((ingredient, i) => <div className="feed-entry-tag" key={`ing${i}`}>{ingredient}</div>)}
+          <div className="feed-entry-detail">
+            {entry.ingredients.map((ingredient, i) => <div className="feed-entry-tag" key={`ing${i}`}>{ingredient}</div>)}
+          </div>
         </div>
       </div>
       <div className="feed-entry-time">{moment(entry.datetime).calendar()}</div>
