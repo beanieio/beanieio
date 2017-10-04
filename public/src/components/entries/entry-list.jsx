@@ -22,7 +22,7 @@ export default class EntryList extends Component {
       // params: {limit: 5},
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
-      this.setState({entries: res.data});
+      this.setState({entries: res.data.slice(0, 5)});
     });
   }
 
