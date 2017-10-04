@@ -9,8 +9,8 @@ export default class EntryList extends Component {
       entries: [
         { "_id" : ("59d3c9671e277887d042a495"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:31:04.373Z"), "type" : "Pulse", "physicalScore" : 4, "emotionalScore" : 2, "emotionalTags" : [ "Energized", "Relaxed" ], "physicalTags" : [ "Great All Around", "Sick" ], "ingredients" : [ ], "__v" : 0 },
         { "_id" : ("59d3cb8058e33a88d957cb21"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:40:10.042Z"), "type" : "Sleep", "sleepDuration" : 6, "sleepQuality" : 4, "emotionalTags" : [ ], "physicalTags" : [ ], "ingredients" : [ ], "__v" : 0 },
-        // { "_id" : ("59d3cbeb9e949e88f795db87"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:41:45.079Z"), "type" : "Exercise", "exerciseDuration" : 30, "exerciseIntensity" : 3, "emotionalTags" : [ ], "physicalTags" : [ ], "ingredients" : [ ], "__v" : 0 },
-        // { "_id" : ("59d3ccff9e949e88f795db88"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:46:33.186Z"), "type" : "Meal", "emotionalTags" : [ ], "physicalTags" : [ ], "ingredients" : [ "wheat", "dairy", "egg" ], "__v" : 0 },
+        { "_id" : ("59d3cbeb9e949e88f795db87"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:41:45.079Z"), "type" : "Exercise", "exerciseDuration" : 30, "exerciseIntensity" : 3, "emotionalTags" : [ ], "physicalTags" : [ ], "ingredients" : [ ], "__v" : 0 },
+        { "_id" : ("59d3ccff9e949e88f795db88"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:46:33.186Z"), "type" : "Meal", "emotionalTags" : [ ], "physicalTags" : [ ], "ingredients" : [ "wheat", "dairy", "egg" ], "__v" : 0 },
         { "_id" : ("59d3cd099e949e88f795db89"), "userId" : ("59d3c9561e277887d042a494"), "datetime" : ("2017-10-03T17:46:44.786Z"), "type" : "Water", "waterAmount" : 12, "emotionalTags" : [ ], "physicalTags" : [ ], "ingredients" : [ ], "__v" : 0 }
       ]
     };
