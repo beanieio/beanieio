@@ -12,7 +12,7 @@ const SleepEntry = ({entry}) => {
       <div className="feed-entry-content">
         <div className="feed-entry-detail-group">
           <div className="feed-entry-detail">{entry.sleepDuration} hours</div>
-          <div className="feed-entry-detail"><Rating value={entry.sleepQuality}/></div>
+          <div className="feed-entry-detail"><Rating readonly value={entry.sleepQuality}/></div>
         </div>
       </div>
       <div className="feed-entry-time">{moment(entry.dateTime).calendar()}</div>

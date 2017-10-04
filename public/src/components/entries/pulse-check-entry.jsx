@@ -11,11 +11,11 @@ const PulseCheckEntry = ({entry}) => {
       <div className="feed-entry-content">
         <div className="feed-entry-detail-group">
           <div className="feed-entry-detail">Physical</div>
-          <div className="feed-entry-detail"><Rating value={entry.physicalScore}/></div>
+          <div className="feed-entry-detail"><Rating readonly value={entry.physicalScore}/></div>
         </div>
         <div className="feed-entry-detail-group">
           <div className="feed-entry-detail">Emotional</div>
-          <div className="feed-entry-detail"><Rating value={entry.emotionalScore}/></div>
+          <div className="feed-entry-detail"><Rating readonly value={entry.emotionalScore}/></div>
         </div>
       </div>
       <div className="feed-entry-time">{moment(entry.datetime).calendar()}</div>

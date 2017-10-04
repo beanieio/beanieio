@@ -11,7 +11,7 @@ const ExerciseEntry = ({entry}) => {
       <div className="feed-entry-content">
         <div className="feed-entry-detail-group">
           <div className="feed-entry-detail">2{entry.exerciseDuration} minutes</div>
-          <div className="feed-entry-detail"><Rating value={entry.exerciseIntensity} /></div>
+          <div className="feed-entry-detail"><Rating readonly value={entry.exerciseIntensity} /></div>
         </div>
       </div>
       <div className="feed-entry-time">{moment(entry.datetime).calendar()}</div>
