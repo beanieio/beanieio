@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import './rating.css';
 
-//TODO: refactor to allow a readonly attribute
-
 export default class Rating extends Component {
   constructor(props) {
     super(props);
@@ -15,20 +13,30 @@ export default class Rating extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.state.value) {
+    if (!this.props.readonly && nextProps.value !== this.state.value) {
       this.setState({value: nextProps.value});
     }
   }
 
-  handleMouseEnter(v) { this.setState({hoveredValue: v}); }
+  handleMouseEnter(v) {
+    if (!this.props.readonly) {
+      this.setState({hoveredValue: v});
+    }
+  }
 
-  handleMouseLeave() { this.setState({hoveredValue: null}); }
+  handleMouseLeave() {
+    if (!this.props.readonly) {
+      this.setState({hoveredValue: null});
+    }
+  }
 
   handleClick(v) {
-    this.setState(
-      {value: (this.state.value === v) ? null : v},
-      () => this.props.onChange(this.state.value)
-    );
+    if (!this.props.readonly) {
+      this.setState(
+        {value: (this.state.value === v) ? null : v},
+        () => this.props.onChange(this.state.value)
+      );
+    }
   }
 
   render() {
