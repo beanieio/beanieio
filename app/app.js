@@ -10,6 +10,14 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+
+const httpsRoute = function (req, res, next) {
+  if (debug) { console.log((req.secure ? 'Secure' : 'Insecure') + ' connection received to: ', req.url); }
+  if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + ':3100' + req.path); }
+};
+// redirect non secure traffic to https
+app.get('*', httpsRoute);
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/entries', jwtAuth(), (req, res) => {
