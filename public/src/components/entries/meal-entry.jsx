@@ -1,7 +1,9 @@
 import React from 'react';
 import moment from 'moment';
+const debug = process.env.DEBUG || false;
 
 const MealEntry = ({entry}) => {
+  if (debug) { console.log('meal entry: ', entry); }
   return (
     <div className="feed-entry-container">
       <div className="feed-entry-header">

@@ -4,10 +4,11 @@ import MealEntry from './meal-entry';
 import WaterEntry from './water-entry';
 import SleepEntry from './sleep-entry';
 import PulseCheckEntry from './pulse-check-entry';
+const debug = process.env.DEBUG || false;
 
 const EntryItem = ({entry}) => {
   let entryItem = null;
-  console.log(entry);
+  if (debug) { console.log(entry); }
   if (entry.type === 'Pulse') {
     return <PulseCheckEntry entry={entry}/>;
   } else if (entry.type === 'Sleep') {
