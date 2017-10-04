@@ -5,7 +5,6 @@ import './rating.css';
 export default class Rating extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       value: this.props.value || null,
       hoveredValue: null,
