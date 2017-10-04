@@ -26,6 +26,7 @@
     "axios": "^0.16.2",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "chart.js": "^2.7.0",
     "classnames": "^2.2.5",
     "express": "^4.15.5",
     "jquery": "^3.2.1",
