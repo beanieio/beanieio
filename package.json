@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "webpack --watch",
     "start": "nodemon app/index.js",
+    "startprod": "HTTP_PORT=8080 HTTPS_PORT=8443 nodemon app/index.js",
+    "startproddebug": "DEBUG=true HTTP_PORT=8080 HTTPS_PORT=8443 nodemon app/index.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
