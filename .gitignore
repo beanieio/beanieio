@@ -1,5 +1,7 @@
 ### node etc ###
 
+app/cert
+
 # Logs
 logs
 *.log
