@@ -44,6 +44,6 @@ export default class BarChart extends Component {
   }
 
   render() {
-    return <canvas id={this.props.id} height='325'></canvas>;
+    return <canvas id={this.props.id}></canvas>;
   }
 }
