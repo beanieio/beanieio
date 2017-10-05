@@ -7,7 +7,10 @@ const typeMap = {'Meal': 'ingredients', 'Emo': 'emotional', 'Phys': 'physical'};
 export default class ConfigSet extends Component {
   constructor(props) {
     super(props);
-    this.state = { configData: [] };
+    this.state = {
+      configData: [],
+      newItem: '',
+    };
     this.configType = typeMap[this.props.type];
     this.toggleStatus = this.toggleStatus.bind(this);
   }
@@ -28,6 +31,10 @@ export default class ConfigSet extends Component {
     this.setState({configData: newConfig});
   }
 
+  addItem() {
+    console.log('Adding item: ', this.state.newItem);
+  }
+
 
 
   render() {
@@ -43,7 +50,13 @@ export default class ConfigSet extends Component {
               );
             })}
           </div>
-          <div className="config-list-new-item">
+          <div className="config-list-new-item input-group">
+            <input type="text" className="form-control" value={this.state.newItem}
+              placeholder="Add a new item..." aria-label="Add a new item..."
+              onChange={e => this.setState({newItem: e.target.value})}/>
+            <span className="input-group-btn">
+              <button className="btn btn-secondary" type="button" onClick={() => this.addItem()}>+</button>
+            </span>
           </div>
           <div className="config-submit">
             <button className="btn btn-primary">Reset</button>
