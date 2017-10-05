@@ -9,8 +9,7 @@
 }
 
 .login-container {
-  /*background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);*/
-  background: linear-gradient(to bottom right, var(--b5), var(--b1));
+  background: linear-gradient(to bottom right, var(--b4), var(--b1));
   padding: 80px 0;
   height: 100%;
   width: 100%;
@@ -51,7 +50,7 @@
 
 .login-form-control:focus {
   background-color: white;
-  color: #53e3a6;
+  color: var(--b5);
 }
 
 .login-btn {
@@ -70,10 +69,13 @@
   color: var(--b5);
 }
 
-
-
 .login-link:hover {
   color: white;
+}
+
+.login-warning {
+  color: red;
+  font-size: 1.2em;
 }
 
 .login-wrapper ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
