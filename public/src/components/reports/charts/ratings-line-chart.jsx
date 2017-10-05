@@ -3,6 +3,13 @@ import Chart from 'chart.js';
 import moment from 'moment';
 const debug = process.env.DEBUG || true;
 
+const fieldMap = {
+  physicalScore: {legend: 'Physical'},
+  emotionalScore: {legend: 'Emotional'},
+  sleepQuality: {legend: 'Sleep'},
+  exerciseIntensity: {legend: 'Exercise'},
+};
+
 export default class RatingsLineChart extends Component {
 
   constructor(props) {
@@ -29,11 +36,11 @@ export default class RatingsLineChart extends Component {
             },
             scaleLabel: {
               display: true,
-              labelString: 'Rating', //TODO: configure this to work for combo line charts
+              labelString: 'Rating',
             },
             ticks: {
               beginAtZero: true,
-              max: 5, //TODO: make this configurable
+              max: 5,
             },
           }],
           xAxes: [{

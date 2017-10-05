@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LineChart from './charts/line-chart.jsx';
+import RatingsLineChart from './charts/ratings-line-chart.jsx';
 import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
@@ -24,7 +24,7 @@ const fieldMap = {
   waterAmount: {legend: 'Water', axis: 'fl oz'},
 };
 
-export default class PieReport extends Component {
+export default class RatingsLineReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,7 +82,7 @@ export default class PieReport extends Component {
         <div className="pie-report-container">
           <div className="pie-report-header">{this.props.title}</div>
           <div className="pie-report-content">
-            <LineChart data={this.state.data} id={`line-chart-${this.entryType.toLowerCase()}`}/>
+            <RatingsLineChart data={this.state.data} id={`line-chart-${this.entryType.toLowerCase()}`}/>
           </div>
         </div>
       </div>
