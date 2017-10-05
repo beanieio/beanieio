@@ -6,12 +6,20 @@ import moment from 'moment';
 import './chart-report.css';
 const debug = process.env.DEBUG || false;
 
+const colors = [
+  '#8CB369',
+  '#f6ae2d',
+  '#60afff',
+  '#5B5F97',
+  '#f26419'
+];
+
 const fieldMap = {
-  physicalScore: 'Physical Rating',
-  emotionalScore: 'Emotional Rating',
-  sleepDuration: 'Hours of Sleep',
-  exerciseDuration: 'Minutes of Exercise',
-  waterAmount: 'Water Consumption',
+  physicalScore: {legend: 'Physical', axis: 'Rating'},
+  emotionalScore: {legend: 'Emotional', axis: 'Rating'},
+  sleepDuration: {legend: 'Sleep', axis: 'Hours'},
+  exerciseDuration: {legend: 'Exercise', axis: 'Minutes'},
+  waterAmount: {legend: 'Water', axis: 'fl oz'},
 };
 
 export default class PieReport extends Component {
@@ -36,13 +44,30 @@ export default class PieReport extends Component {
   }
 
   filterData(entries) {
+    // Data processing using only underscore. Other libraries/packages might make this much more optimal
     var datasets = [ ];
-    _.each(this.fields, (field, index) => {
-      let label = fieldMap[field];
-      datasets[index] = {label: label, data: [ ]};
-      _.each(entries, entry => {
-        if (entry[field] !== null) { datasets[index].data.push({x: entry.datetime, y: entry[field]}); }
-      });
+    _.each(this.fields, (field, index) => { // for each field passed in as a prop
+      let label = fieldMap[field].legend; // give it a label based on the map of fields to labels
+      datasets[index] = {label: label, data: [ ], backgroundColor: colors[index]}; // give it a color
+      let day = moment(entries[0].datetime).day(); // setup to do daily averages
+      let date = moment(entries[0].datetime).startOf('day');
+      let j = 0;
+      let daySum = 0;
+      let count = 0;
+      while (j < entries.length) {
+        if (moment(entries[j].datetime).day() === day) { // accumulate values while on the same day
+          daySum += entries[j][field];
+          count++;
+          j++;
+        } else {
+          if (daySum !== 0) { datasets[index].data.push({x: date, y: daySum / count}); } //push to dataset and reset accumulators
+          daySum = entries[j][field];
+          day = moment(entries[j].datetime).day();
+          date = moment(entries[j].datetime).startOf('day');
+          count = 0;
+          j++;
+        }
+      }
     });
 
     if (debug) { console.log('Dataset created in report: ', datasets); }

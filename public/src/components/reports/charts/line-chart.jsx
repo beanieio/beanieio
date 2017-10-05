@@ -19,9 +19,23 @@ export default class LineChart extends Component {
         maintainAspectRatio: false,
         responsive: true,
         legend: {
-          display: true
+          display: true,
+          position: 'bottom',
         },
         scales: {
+          yAxes: [{
+            gridLines: {
+              display: false,
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Rating', //TODO: configure this to work for combo line charts
+            },
+            ticks: {
+              beginAtZero: true,
+              max: 5, //TODO: make this configurable
+            },
+          }],
           xAxes: [{
             gridLines: {
               display: false,
