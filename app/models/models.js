@@ -4,7 +4,24 @@ mongoose.Promise = global.Promise;
 const bcrypt = require('bcrypt');
 mongoose.connect('mongodb://127.0.0.1:27017/healthme');
 
-//TODO: establish user config defaults
+const ingredientsDefaults = [
+  'nuts', 'wheat', 'gluten', 'dairy', 'egg',
+  'soy', 'fish', 'red meat', 'poultry', 'fruits',
+  'leafy vegetables', 'peppers', 'sugar', 'sweetener',
+  'greasy', 'fried', 'oil', 'liquor', 'beer', 'wine'
+];
+
+const emoDefaults = [
+  'Fine', 'Energized', 'Relaxed',
+  'Unmotivated', 'Stressed', 'Drained', 'Depressed'
+];
+
+const physDefaults = [
+  'Great', 'Okay', 'Tired', 'Sore', 'Cramps',
+  'Sick', 'Headache', 'Bloated', 'Nauseous'
+];
+
+
 const userSchema = new Schema(
   {
     username: {type: String, unique: true},
@@ -21,7 +38,9 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', function(next) {
-  // TODO: setup the default user config
+  this.ingredients = ingredientsDefaults;
+  this.emotional = emoDefaults;
+  this.physical = physDefaults;
   return bcrypt.hash(this.password, 10).then(hash => {
     this.password = hash;
     next();
