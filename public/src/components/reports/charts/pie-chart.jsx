@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import PieceLabel from 'chart.piecelabel.js';
-const debug = process.env.DEBUG || true;
+const debug = process.env.DEBUG || false;
+
+Chart.defaults.global.defaultFontSize = 12;
 
 export default class PieChart extends Component {
 
@@ -14,7 +16,7 @@ export default class PieChart extends Component {
       type: 'pie',
       data: this.props.data,
       options: {
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         responsive: true,
         legend: {
           display: false
@@ -23,7 +25,6 @@ export default class PieChart extends Component {
           render: 'label',
           showZero: false,
           fontColor: 'white',
-          fontSize: 12,
           fontStyle: 'italic',
           position: 'border',
         }
@@ -32,13 +33,16 @@ export default class PieChart extends Component {
   }
 
   componentWillReceiveProps (props) {
-    console.log('Will rec: ', props.data);
+    if (debug) { console.log('Will rec: ', props.data); }
     this.chart.data = props.data;
     this.chart.update();
   }
 
   render() {
-    if (debug) { console.log('Pie chart is rendering.'); }
+    if (debug) {
+      console.log('Pie chart is rendering.');
+      console.log(Chart.defaults.global.layout);
+    }
     return <canvas id={this.props.id}></canvas>;
   }
 }

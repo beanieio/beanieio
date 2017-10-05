@@ -81,7 +81,7 @@ export default class PieReport extends Component {
         <div className="pie-report-container">
           <div className="pie-report-header">{this.props.title}</div>
           <div className="pie-report-content">
-            <PieChart data={this.state.data} id={`pie-chart-${this.type}`}/>
+            <PieChart data={this.state.data} id={`pie-chart-${this.entryType.toLowerCase()}`}/>
           </div>
         </div>
       </div>
