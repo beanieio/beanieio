@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 import moment from 'moment';
 const debug = process.env.DEBUG || true;
 
-export default class LineChart extends Component {
+export default class RatingsLineChart extends Component {
 
   constructor(props) {
     super(props);
