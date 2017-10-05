@@ -33,7 +33,13 @@ export default class Login extends Component {
   }
 
   validateForm() {
-    return true; // TODO: add form validation
+    if (!this.state.username) {
+      this.setState({formWarning: 'Please enter a username'});
+    } else if (!this.state.password) {
+      this.setState({formWarning: 'Please enter a password.'});
+    } else {
+      return true;
+    }
   }
 
   render () {
