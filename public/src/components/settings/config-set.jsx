@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './settings.css';
 
-const typeMap = {'Meal': 'ingredients', 'Emo': 'emotional', 'Phys': 'physical'};
+const typeMap = {'Meal Ingredients': 'ingredients', 'Emotional Tags': 'emotional', 'Physical Tags': 'physical'};
 
 export default class ConfigSet extends Component {
   constructor(props) {
