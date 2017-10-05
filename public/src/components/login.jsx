@@ -20,7 +20,6 @@ export default class Login extends Component {
         username: this.state.username,
         password: this.state.password,
       }).then(resp => {
-        console.log(resp);
         if (resp.status === 200 && resp.statusText === 'OK') {
           this.props.onLogin(resp.data.token);
         }
