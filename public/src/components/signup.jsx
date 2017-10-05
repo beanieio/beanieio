@@ -19,16 +19,17 @@ export default class SignUp extends Component {
   handleSubmit(e) {
     e && e.preventDefault();
     if (this.validateForm(e)) {
-      axios.post('/api/users/signup', {//TODO: be sure this endpoint matches server config, check back once db schema is finalized
+      axios.post('/api/users/signup', {
         username: this.state.username,
         password: this.state.password,
         email: this.state.email,
       }).then(resp => {
         if (resp.status === 201 && resp.statusText === 'Created') { // user successfully created
-          this.props.onLogin(resp.data.token);//TODO: make sure this prop is defined and passed down to this component
-          this.props.history.push({pathname: '/'});//TODO: make sure this prop is defined and passed down to this component
+          this.props.onLogin(resp.data.token);
         }
-      }).catch(err => this.setState({formWarning: 'Server error: ' + err}));//will this warning show up in form?
+      }).catch(err => {
+        this.setState({formWarning: err.response.data});
+      });
     }
   }
 
@@ -76,6 +77,7 @@ export default class SignUp extends Component {
               onChange={e => this.setState({'confPassword': e.target.value})}
             />
             <button type="submit" className="login-btn login-form-control">Sign Up</button>
+            {this.state.formWarning && (<div className="login-warning">{this.state.formWarning}</div>)}
             <div>
               <Link className="login-link" to="/login">Already have an account? Login now</Link>
             </div>
