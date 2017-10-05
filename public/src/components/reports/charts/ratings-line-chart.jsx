@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import moment from 'moment';
-const debug = process.env.DEBUG || true;
+const debug = process.env.DEBUG || false;
 
 const fieldMap = {
   physicalScore: {legend: 'Physical'},
