@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import BarChart from './charts/bar-chart.jsx';
+import moment from 'moment';
 
 
 export default class SleepTile extends Component {
@@ -14,7 +15,7 @@ export default class SleepTile extends Component {
   componentDidMount() {
     axios.get('/api/entries', {
       params: {
-        limit: 7,
+        limit: 50,
         type: 'Water'
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
@@ -24,15 +25,27 @@ export default class SleepTile extends Component {
   }
 
   filterData(entries) {
-    let newArr = [];
+    let week = {
+      Monday: 0,
+      Tuesday: 0,
+      Wednesday: 0,
+      Thursday: 0,
+      Friday: 0,
+      Saturday: 0,
+      Sunday: 0
+    };
+    let totals = [];
     for (let i = 0; i < entries.length; i++) {
-      newArr.push(entries[i].waterAmount);
+      week[moment(entries[i].datetime).format('dddd')] += entries[i].waterAmount;
+    }
+    for (let j in week) {
+      totals.push(week[j]);
     }
     let data = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       datasets: [{
         label: 'oz of water',
-        data: newArr,
+        data: totals,
         backgroundColor: [
           'rgb(255,107,87)',
           'rgb(70,170,194)',

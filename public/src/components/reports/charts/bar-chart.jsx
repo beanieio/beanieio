@@ -11,8 +11,8 @@ export default class BarChart extends Component {
       type: 'bar',
       data: this.props.data,
       options: {
-        responsive: false,
-        maintainAspectRatio: false,
+        responsive: true,
+        maintainAspectRatio: true,
         legend: {
           display: false
         },
@@ -23,7 +23,7 @@ export default class BarChart extends Component {
             },
             ticks: {
               beginAtZero: true,
-              max: 64
+              max: 100
             }
           }],
           xAxes: [{
