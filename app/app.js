@@ -39,7 +39,7 @@ app.get('/api/entries', jwtAuth(), (req, res) => {
 
 app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
   if (debug) { console.log('Get request formconfig for: ', req.user); }
-  User.findOne({username: req.user.username}).select('username ingredients physical emotional').exec()
+  User.findOne({username: req.user.username}).select('-_id ingredients physical emotional').exec()
     .then(config => {
       res.status(200).json(config);
     });
