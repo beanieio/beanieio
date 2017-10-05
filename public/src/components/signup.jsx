@@ -34,8 +34,14 @@ export default class SignUp extends Component {
   }
 
   validateForm(e) {
-    if (this.state.password !== this.state.confPassword) {
+    if (!this.state.username) {
+      this.setState({formWarning: 'Please enter a username'});
+      return false;
+    } else if (this.state.password && this.state.password !== this.state.confPassword) {
       this.setState({formWarning: 'Passwords must match, please try again.'});
+      return false;
+    } else if (!this.state.password || !this.state.confPassword) {
+      this.setState({formWarning: 'Please enter a password.'});
       return false;
     } else {
       return true;
