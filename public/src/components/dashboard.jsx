@@ -53,7 +53,7 @@ export default class Dashboard extends Component {
             <i className="mdi mdi-bike"></i>
             {this.renderForm(Exercise, 'exercise', 'left')}
           </div>
-          <div onClick={(e) => this.toggleForm(e, 'pulse')} className="form-bar-button form-bar-button-wide">
+          <div onClick={(e) => this.toggleForm(e, 'pulse')} className="form-bar-button">
             <i className="mdi mdi-heart-pulse"></i>
             {this.renderForm(PulseCheck, 'pulse')}
           </div>
