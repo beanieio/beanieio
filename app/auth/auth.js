@@ -6,19 +6,6 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const { User } = require('../models/models.js');
 const debug = process.env.DEBUG || false;
 
-// ==========  Passport Utilities  ============ \\
-passport.serializeUser((user, done) => {
-  if (debug) { console.log('Serializing user: ', user); }
-  done(null, user.username);
-});
-// using username to get user data
-passport.deserializeUser((username, done) => {
-  if (debug) { console.log('Deserializing user with: ', username); }
-  User.findOne({username: username}).then(user => done(null, user))
-    .catch(err => console.log(err));
-});
-// ============================================= //
-
 // ==========  JWT Strategy Setup  ============ \\
 // using auth header as bearer token requires auth as:
 // header: 'Authorization': 'bearer TOKEN_GOES_HERE'
