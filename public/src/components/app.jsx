@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter, Switch } from 'react-router-dom';
 import Dashboard from './dashboard.jsx';
+import Settings from './settings/settings.jsx';
 import Sidenav from './sidenav.jsx';
 import Login from './login.jsx';
 import Signup from './signup.jsx';
@@ -61,7 +62,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/dashboard" render={props => <Dashboard getAuth={this.getAuth} /> } />
           <Route path="/reports" render={props => <ReportsPlaceholder getAuth={this.getAuth} /> } />
-          <Route path="/settings" render={props => <SettingsPlaceholder getAuth={this.getAuth} /> } />
+          <Route path="/settings" render={props => <Settings getAuth={this.getAuth} /> } />
           <Route path="/" render={props => <Redirect to="/dashboard" />} />
         </Switch>
       );
@@ -89,7 +90,6 @@ export default class App extends Component {
 }
 
 const ReportsPlaceholder = () => (<div>Reports go here!</div>);
-const SettingsPlaceholder = () => (<div>Settings go here!</div>);
 
 const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
   <Route {...rest} render={props => (
