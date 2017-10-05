@@ -19,18 +19,38 @@
 }
 
 .config-container {
+  min-width: 300px;
+  max-width: 500px;
+  flex: 1;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media(max-width: 575px) {
+  .config-container {
+    width: 100%;
+  }
 }
 
 .config-header {
   font-size: 1.2em;
-  background-color: var(--b3);
+  flex: 0 0 auto;
+  background-color: var(--b5);
   color: white;
   padding: 5px;
 }
 
+.config-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .config-list {
   padding: 5px;
+  flex: 1;
 }
 
 .config-list-item {
