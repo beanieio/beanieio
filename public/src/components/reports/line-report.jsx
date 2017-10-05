@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import LineChart from './charts/line-chart.jsx';
 import axios from 'axios';
 import _ from 'lodash';
+import moment from 'moment';
 import './chart-report.css';
-const debug = process.env.DEBUG || true;
+const debug = process.env.DEBUG || false;
 
 const fieldMap = {
   physicalScore: 'Physical Rating',
@@ -35,27 +36,17 @@ export default class PieReport extends Component {
   }
 
   filterData(entries) {
-    var chartData = {
-      datasets: [ ],
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom'
-          }]
-        }
-      }
-    };
+    var datasets = [ ];
     _.each(this.fields, (field, index) => {
       let label = fieldMap[field];
-      chartData.datasets[index] = {label: label, data: [ ]};
+      datasets[index] = {label: label, data: [ ]};
       _.each(entries, entry => {
-        if (entry[field] !== null) { chartData.datasets[index].data.push({x: entry.datetime, y: entry[field]}); }
+        if (entry[field] !== null) { datasets[index].data.push({x: entry.datetime, y: entry[field]}); }
       });
     });
 
-    if (debug) { console.log(chartData); }
-    this.setState({data: chartData});
+    if (debug) { console.log('Dataset created in report: ', datasets); }
+    this.setState({data: datasets});
   }
 
   render() {

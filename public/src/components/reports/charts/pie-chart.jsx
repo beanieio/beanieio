@@ -33,15 +33,14 @@ export default class PieChart extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (debug) { console.log('Will rec: ', props.data); }
+    if (debug) { console.log('Line chart will rec: ', props.data); }
     this.chart.data = props.data;
     this.chart.update();
   }
 
   render() {
     if (debug) {
-      console.log('Pie chart is rendering.');
-      console.log(Chart.defaults.global.layout);
+      console.log('Line chart is rendering.');
     }
     return <canvas id={this.props.id}></canvas>;
   }
