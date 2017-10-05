@@ -12,7 +12,7 @@ export default class BarChart extends Component {
       data: this.props.data,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         legend: {
           display: false
         },
@@ -45,6 +45,6 @@ export default class BarChart extends Component {
   }
 
   render() {
-    return <canvas id={this.props.id}></canvas>;
+    return <canvas id={this.props.id} height='325'></canvas>;
   }
 }
