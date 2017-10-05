@@ -23,7 +23,6 @@ export default class BarChart extends Component {
             },
             ticks: {
               beginAtZero: true,
-              max: 100
             }
           }],
           xAxes: [{

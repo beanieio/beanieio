@@ -4,7 +4,7 @@ import BarChart from './charts/bar-chart.jsx';
 import moment from 'moment';
 
 
-export default class WaterReport extends Component {
+export default class SleepReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ export default class WaterReport extends Component {
     axios.get('/api/entries', {
       params: {
         limit: 50,
-        type: 'Water'
+        type: 'Sleep'
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
@@ -36,7 +36,7 @@ export default class WaterReport extends Component {
     };
     let totals = [];
     for (let i = 0; i < entries.length; i++) {
-      week[moment(entries[i].datetime).format('dddd')] += entries[i].waterAmount;
+      week[moment(entries[i].datetime).format('dddd')] += entries[i].sleepDuration;
     }
     for (let j in week) {
       totals.push(week[j]);
@@ -44,7 +44,7 @@ export default class WaterReport extends Component {
     let data = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       datasets: [{
-        label: 'oz of water',
+        label: '# of hours slept',
         data: totals,
         backgroundColor: [
           'rgb(255,107,87)',
@@ -74,9 +74,9 @@ export default class WaterReport extends Component {
     return (
       <div className="pie-report">
         <div className="pie-report-container">
-          <div className="pie-report-header">Your Water Report</div>
+          <div className="pie-report-header">Your Sleep Report</div>
           <div className="pie-report-content">
-            <BarChart data={this.state.data} id={'water'}/>
+            <BarChart data={this.state.data} id={'sleep'}/>
           </div>
         </div>
       </div>

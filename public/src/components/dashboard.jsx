@@ -7,6 +7,8 @@ import Water from './forms/water.jsx';
 import EntryList from './entries/entry-list.jsx';
 import PieReport from './reports/pie-report.jsx';
 import WaterReport from './reports/water-report.jsx';
+import SleepReport from './reports/sleep-report.jsx';
+import ExerciseReport from './reports/exercise-report.jsx';
 import classNames from 'classnames';
 import './dashboard.css';
 
@@ -72,8 +74,8 @@ export default class Dashboard extends Component {
           <div className="report-tile report-tile-wide shadow"><EntryList auth={this.props.getAuth} /></div>
           <div className="report-tile report-tile-wide shadow"><WaterReport auth={this.props.getAuth}/></div>
           <div className="report-tile report-tile-wide shadow">Report goes here</div>
-          <div className="report-tile report-tile-wide shadow">Report goes here</div>
-          <div className="report-tile report-tile-wide shadow"></div>
+          <div className="report-tile report-tile-wide shadow"><SleepReport auth={this.props.getAuth}/></div>
+          <div className="report-tile report-tile-wide shadow"><ExerciseReport auth={this.props.getAuth}/></div>
         </div>
       </div>
     );
