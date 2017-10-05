@@ -10,7 +10,7 @@ const ExerciseEntry = ({entry}) => {
       <i className="feed-entry-icon mdi mdi-24px mdi-bike"></i>
       <div className="feed-entry-content">
         <div className="feed-entry-detail-group">
-          <div className="feed-entry-detail">2{entry.exerciseDuration} minutes</div>
+          <div className="feed-entry-detail">{entry.exerciseDuration} minutes</div>
           <div className="feed-entry-detail"><Rating readonly value={entry.exerciseIntensity} /></div>
         </div>
       </div>
