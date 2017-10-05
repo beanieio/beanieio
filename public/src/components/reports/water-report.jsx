@@ -4,7 +4,7 @@ import BarChart from './charts/bar-chart.jsx';
 import moment from 'moment';
 
 
-export default class SleepTile extends Component {
+export default class WaterReport extends Component {
   constructor(props) {
     super(props);
     this.state = {

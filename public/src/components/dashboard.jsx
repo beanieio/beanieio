@@ -70,7 +70,7 @@ export default class Dashboard extends Component {
         <div className="dashboard-window">
           <div className="report-tile shadow"><PieReport auth={this.props.getAuth} title="Recent Ingredients:" type="Meal"/></div>
           <div className="report-tile report-tile-wide shadow"><EntryList auth={this.props.getAuth} /></div>
-          <div className="report-tile report-tile-wide shadow"><WaterReport data={this.props.data} auth={this.props.getAuth}/></div>
+          <div className="report-tile report-tile-wide shadow"><WaterReport auth={this.props.getAuth}/></div>
           <div className="report-tile report-tile-wide shadow">Report goes here</div>
           <div className="report-tile report-tile-wide shadow">Report goes here</div>
           <div className="report-tile report-tile-wide shadow"></div>
