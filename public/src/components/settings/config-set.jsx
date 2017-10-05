@@ -80,8 +80,8 @@ export default class ConfigSet extends Component {
             </span>
           </div>
           <div className="config-submit">
-            <button className="btn btn-primary">Reset</button>
-            <button className="btn btn-primary" onClick={() => this.saveConfigData()}>Save</button>
+            <button className="btn shadow">Reset</button>
+            <button className="btn shadow" onClick={() => this.saveConfigData()}>Save</button>
           </div>
         </div>
       </div>

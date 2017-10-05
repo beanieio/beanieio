@@ -1,18 +1,21 @@
 .settings-container {
-  padding: 10px;
   display: flex;
   flex-direction: column;
 }
 
 .settings-header {
-  font-size: 1.4em;
+  font-size: 1.5em;
   color: var(--b5);
   flex: 0 0 48px;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 20px;
 }
 
 .settings-window {
   display: flex;
   flex-flow: row wrap;
+  padding: 0 10px;
 }
 
 .config-container {
@@ -37,8 +40,23 @@
   border-bottom: 1px solid var(--b1);
 }
 
+.config-list-item:last-child {
+  border: none;
+}
+
+.config-list-item-inactive {
+  color: var(--r3);
+}
+
 .config-list-item-inactive .config-list-item-name {
   text-decoration: line-through;
+  font-style: italic;
+}
+
+.config-list-item .close {
+  font-size: 1.3em;
+  color: var(--r4);
+  padding: 0 10px;
 }
 
 .config-list-new-item {
@@ -62,6 +80,16 @@
   display: flex;
   justify-content: space-around;
   padding: 10px;
+}
+
+.config-submit .btn {
+  background: linear-gradient(var(--b2), var(--b3));
+  color: white;
+  border: none;
+}
+
+.config-submit .btn:hover {
+  background: linear-gradient(var(--b3), var(--b4));
 }
 
 
