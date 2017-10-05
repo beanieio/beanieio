@@ -45,6 +45,15 @@ app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
     });
 });
 
+app.put('/api/users/formconfig', jwtAuth(), (req, res) => {
+  if (debug) { console.log('Post request formconfig for: ', req.user); }
+  if (debug) { console.log('Formconfig data posted is: ', req.body); }
+  User.findOneAndUpdate({username: req.user.username}, {[req.body.type]: req.body.configData})
+    .exec().then(() => res.status(200).send('config updated'))
+    .catch(err => res.status(500).send('Server error: ', err));
+});
+
+
 app.post('/api/users/login', pwdAuth(), (req, res) => {
   if (debug) { console.log('Login attempt for: ', req.body.username); }
   const newJWT = jwt.sign({username: req.body.username}, jwtOptions.secretOrKey);
