@@ -7,13 +7,10 @@ import './form-styles.css';
 import 'react-widgets/dist/css/react-widgets.css';
 momentLocalizer();
 
-const ingredientsDefaults = ['peanuts', 'wheat', 'gluten', 'dairy', 'egg', 'soy', 'tree nuts', 'corn', 'shellfish', 'sesame', 'fish', 'red meat', 'chicken', 'strawberries', 'sucralose', 'high-fructose corn syrup'];
-
 export default class Meal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredientsOpts: ingredientsDefaults, //TODO: serve this with an api get on mount
       ingredientsTags: [],
       datetime: new Date(),
     };
@@ -31,14 +28,6 @@ export default class Meal extends Component {
       .catch((err) => console.log('error: ', err));
   }
 
-  handleCancel() {
-    if (!this.props.handleCancel) {
-      console.log('Error: missing cancel handler...'); //TODO: remove this once mounted
-    } else {
-      this.props.handleCancel();
-    }
-  }
-
   render() {
     return (
       <div className="form-wrapper shadow" onClick={e => e.stopPropagation()}>
@@ -50,7 +39,7 @@ export default class Meal extends Component {
         </div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group flex flex-align-center">
-            <Multiselect className="form-multiselect" data={this.state.ingredientsOpts}
+            <Multiselect className="form-multiselect" data={this.props.formConfigData}
               onChange={v => this.setState({ingredientsTags: v})} placeholder="Type or select ingredients here"
               value={this.state.ingredientsTags}
             />

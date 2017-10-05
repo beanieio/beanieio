@@ -17,8 +17,8 @@ export default class PulseCheck extends Component {
     this.state = {
       phys: null,
       emo: null,
-      physOpts: physDefaults, //TODO: serve this with an api get on mount
-      emoOpts: emoDefaults, //TODO: serve this with an api get on mount
+      physOpts: this.props.formConfigData.physConfig,
+      emoOpts: this.props.formConfigData.emoConfig,
       physTags: [],
       emoTags: [],
       datetime: new Date(),
