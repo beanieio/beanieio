@@ -1,46 +1,45 @@
 import React, { Component } from 'react';
-import PieReport from './pie-report.jsx';
+import PieChart from './charts/pie-chart.jsx';
 import axios from 'axios';
 import _ from 'lodash';
-const debug = process.env.DEBUG || true;
-// componentDidMount() {
-//   axios.get('/api/entries', {
-//     params: {
-//       type: this.props.entryType || 'Meal'
-//     },
-//     headers: {'Authorization': 'bearer ' + this.props.auth()}
-//   }).then(res => {
-//     this.setState({entries: res.data});
-//   });
-// }
+import './pie-report.css';
+const debug = process.env.DEBUG || false;
+
+const typeMap = {
+  Meal: {type: 'Meal', field: 'ingredients'},
+  PulseEmo: {type: 'Pulse', field: 'emotionalTags'},
+  PulsePhys: {type: 'Pulse', field: 'physicalTags'},
+};
 
 export default class MealReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      entries: [
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-03T17:31:04.373Z', type: 'Pulse', physicalScore: 4, emotionalScore: 2, emotionalTags: [ 'Energized', 'Relaxed' ], physicalTags: [ 'Great All Around', 'Sick' ], ingredients: [ ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-03T17:40:10.042Z', type: 'Sleep', sleepDuration: 6, sleepQuality: 4, emotionalTags: [ ], physicalTags: [ ], ingredients: [ ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-03T17:41:45.079Z', type: 'Exercise', exerciseDuration: 30, exerciseIntensity: 3, emotionalTags: [ ], physicalTags: [ ], ingredients: [ ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-03T17:46:33.186Z', type: 'Meal', emotionalTags: [ ], physicalTags: [ ], ingredients: [ 'wheat', 'dairy', 'egg' ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-03T17:46:44.786Z', type: 'Water', waterAmount: 12, emotionalTags: [ ], physicalTags: [ ], ingredients: [ ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-04T16:35:23.329Z', type: 'Sleep', sleepDuration: 6, sleepQuality: 4, emotionalTags: [ ], physicalTags: [ ], ingredients: [ ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-04T16:35:33.626Z', type: 'Exercise', exerciseDuration: 15, exerciseIntensity: 3, emotionalTags: [ ], physicalTags: [ ], ingredients: [ ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-04T16:35:41.974Z', type: 'Meal', emotionalTags: [ ], physicalTags: [ ], ingredients: [ 'dairy' ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-04T22:08:41.225Z', type: 'Meal', emotionalTags: [ ], physicalTags: [ ], ingredients: [ 'wheat', 'gluten', 'dairy', 'egg' ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-04T22:08:49.175Z', type: 'Meal', emotionalTags: [ ], physicalTags: [ ], ingredients: [ 'gluten', 'soy', 'wheat', 'shellfish' ]},
-        {userId: '59d3c9561e277887d042a494', datetime: '2017-10-04T22:08:57.598Z', type: 'Meal', emotionalTags: [ ], physicalTags: [ ], ingredients: [ 'soy', 'gluten', 'tree nuts', 'shellfish', 'wheat' ]}
-      ]
+      data: [ ]
     };
+
+    this.entryType = typeMap[this.props.type].type;
+    this.field = typeMap[this.props.type].field;
   }
 
-  render() {
-    var tags = _.filter(this.state.entries, (entry) => {
-      return entry['ingredients'].length !== 0;
+  componentDidMount() {
+    axios.get('/api/entries', {
+      params: {
+        type: this.entryType
+      },
+      headers: {'Authorization': 'bearer ' + this.props.auth()}
+    }).then(res => {
+      this.filterData(res.data);
+    });
+  }
+
+  filterData(entries) {
+    var tags = _.filter(entries, (entry) => {
+      return entry[this.field].length !== 0;
     });
 
     tags = _.flatMap(tags, (entry) => {
-      return entry['ingredients'];
+      return entry[this.field];
     });
 
     tags = _.reduce(tags, (allTags, tag) => {
@@ -58,28 +57,34 @@ export default class MealReport extends Component {
 
     var labels = _.map(tags, (i) => i[0]).slice(0, 5);
     var values = _.map(tags, (i) => i[1]).slice(0, 5);
-
-    // if (debug) { console.log(tags, labels, values); }
-
     var data = {
       labels: labels,
       datasets: [{
         data: values,
         backgroundColor: [
-          '#46AAC2',
-          '#FFCC57',
-          '#FF6B57',
-          '#6CC3D7',
-          '#FFD77C'
+          '#8CB369',
+          '#5B5F97',
+          '#60afff',
+          '#f6ae2d',
+          '#f26419'
         ]
       }],
     };
-
+    if (debug) { console.log(tags, labels, values); }
     if (debug) { console.log(data); }
+    this.setState({data: data});
+  }
 
+  render() {
     return (
-      <PieReport type="Meal" data={data} />
-      // <p>Pie Report Here</p>
+      <div className="pie-report">
+        <div className="pie-report-container">
+          <div className="pie-report-header">{this.props.title}</div>
+          <div className="pie-report-content">
+            <PieChart data={this.state.data} id={`pie-chart-${this.type}`}/>
+          </div>
+        </div>
+      </div>
     );
   }
 }

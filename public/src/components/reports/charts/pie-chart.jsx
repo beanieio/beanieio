@@ -1,52 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Chart from 'chart.js';
 import PieceLabel from 'chart.piecelabel.js';
+const debug = process.env.DEBUG || true;
 
-const PieChart = ({data, id}) =>{
-  var ctx = id;
-  var chart = new Chart(ctx, {
-    type: 'pie',
-    data: data,
-    options: {
-      legend: {
-        display: false
-      },
-      pieceLabel: {
-        // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
-        render: 'label',
+export default class PieChart extends Component {
 
-        // precision for percentage, default is 0
-        precision: 0,
+  constructor(props) {
+    super(props);
+  }
 
-        // identifies whether or not labels of value 0 are displayed, default is false
-        showZero: false,
-
-        // font size, default is defaultFontSize
-        // fontSize: 10,
-
-        // font color, can be color array for each data or function for dynamic color, default is defaultFontColor
-        fontColor: 'white',
-
-        // font style, default is defaultFontStyle
-        fontStyle: 'bold',
-
-        // font family, default is defaultFontFamily
-        fontFamily: "'Lato', Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-
-        // draw label in arc, default is false
-        arc: false,
-
-        // position to draw label, available value is 'default', 'border' and 'outside'
-        // default is 'default'
-        position: 'border',
-
-        // draw label even it's overlap, default is false
-        overlap: false,
+  componentDidMount() {
+    this.chart = new Chart(this.props.id, {
+      type: 'pie',
+      data: this.props.data,
+      options: {
+        maintainAspectRatio: true,
+        responsive: true,
+        legend: {
+          display: false
+        },
+        pieceLabel: {
+          render: 'label',
+          showZero: false,
+          fontColor: 'white',
+          fontSize: 12,
+          fontStyle: 'italic',
+          position: 'border',
+        }
       }
-    }
-  });
+    });
+  }
 
-  return <canvas id={id}></canvas>;
-};
+  componentWillReceiveProps (props) {
+    console.log('Will rec: ', props.data);
+    this.chart.data = props.data;
+    this.chart.update();
+  }
 
-export default PieChart;
+  render() {
+    if (debug) { console.log('Pie chart is rendering.'); }
+    return <canvas id={this.props.id}></canvas>;
+  }
+}
