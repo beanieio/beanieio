@@ -24,7 +24,11 @@ export default class Login extends Component {
         if (resp.status === 200 && resp.statusText === 'OK') {
           this.props.onLogin(resp.data.token);
         }
-      }).catch(err => this.setState({formWarning: 'Server error: ' + err}));//TODO: form validation with meaningful error messages
+      }).catch(err => {
+        if (err.response.status === 401) {
+          this.setState({formWarning: 'Incorrect username or password, please try again.'});
+        }
+      });
     }
   }
 
@@ -55,6 +59,7 @@ export default class Login extends Component {
             <div>
               <button type="submit" className="login-btn login-form-control">Login</button>
             </div>
+            {this.state.formWarning && (<div className="login-warning">{this.state.formWarning}</div>)}
             <div>
               <Link className="login-link" to="/signup">Signup</Link>
             </div>
