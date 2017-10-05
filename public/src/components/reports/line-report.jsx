@@ -5,6 +5,14 @@ import _ from 'lodash';
 import './chart-report.css';
 const debug = process.env.DEBUG || true;
 
+const fieldMap = {
+  physicalScore: 'Physical Rating',
+  emotionalScore: 'Emotional Rating',
+  sleepDuration: 'Hours of Sleep',
+  exerciseDuration: 'Minutes of Exercise',
+  waterAmount: 'Water Consumption',
+};
+
 export default class PieReport extends Component {
   constructor(props) {
     super(props);
@@ -27,10 +35,27 @@ export default class PieReport extends Component {
   }
 
   filterData(entries) {
-    //handle data...
-    if (debug) { console.log(tags, labels, values); }
-    if (debug) { console.log(data); }
-    this.setState({data: data});
+    var chartData = {
+      datasets: [ ],
+      options: {
+        scales: {
+          xAxes: [{
+            type: 'linear',
+            position: 'bottom'
+          }]
+        }
+      }
+    };
+    _.each(this.fields, (field, index) => {
+      let label = fieldMap[field];
+      chartData.datasets[index] = {label: label, data: [ ]};
+      _.each(entries, entry => {
+        if (entry[field] !== null) { chartData.datasets[index].data.push({x: entry.datetime, y: entry[field]}); }
+      });
+    });
+
+    if (debug) { console.log(chartData); }
+    this.setState({data: chartData});
   }
 
   render() {

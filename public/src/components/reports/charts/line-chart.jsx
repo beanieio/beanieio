@@ -11,7 +11,7 @@ export default class LineChart extends Component {
 
   componentDidMount() {
     this.chart = new Chart(this.props.id, {
-      type: 'line',
+      type: 'scatter',
       data: this.props.data,
       options: {
         maintainAspectRatio: false,
