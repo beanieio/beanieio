@@ -29,29 +29,36 @@ export default class ConfigSet extends Component {
   }
 
   toggleStatus(i) {
-    console.log('Toggle selected on element: ', i);
     let newConfig = this.state.configData.slice();
     newConfig[i].active = !newConfig[i].active;
     this.setState({configData: newConfig});
   }
 
   addItem() {
-    console.log('Adding item: ', this.state.newItem);
     let newConfig = this.state.configData.slice();
     newConfig.push({name: this.state.newItem, active: true});
     this.setState({configData: newConfig, newItem: ''});
   }
 
-  save() {
+  saveConfigData() {
     let data = this.state.configData.reduce((actives, el) => {
       if (el.active) { actives.push(el.name); }
       return actives;
     }, []);
-    axios.post('/api/users/formconfig', {
-      type: this.configType,
-      configData: data,
-    }).then(() => this.refreshConfigData())
+    axios.put('/api/users/formconfig',
+      {type: this.configType, configData: data},
+      {headers: {'Authorization': 'bearer ' + this.props.auth()}}
+    ).then(() => this.refreshConfigData())
       .catch(err => console.log(err));
+  }
+
+  renderConfigList() {
+    if (this.state.configData.length) {
+      return this.state.configData.map((el, i) => (
+        <ConfigListItem name={el.name} active={el.active} i={i}
+          key={`c-${i}`} toggleStatus={this.toggleStatus} />
+      ));
+    } else { return null; }
   }
 
   render() {
@@ -60,12 +67,7 @@ export default class ConfigSet extends Component {
         <div className="config-header"><span>{this.props.type}</span></div>
         <div className="config-panel">
           <div className="config-list">
-            {this.state.configData.length && this.state.configData.map((el, i) => {
-              return (
-                <ConfigListItem name={el.name} active={el.active}
-                  i={i} key={`c-${i}`} toggleStatus={this.toggleStatus} />
-              );
-            })}
+            {this.renderConfigList()}
           </div>
           <div className="config-list-new-item input-group">
             <input type="text" className="form-control" value={this.state.newItem}
@@ -79,7 +81,7 @@ export default class ConfigSet extends Component {
           </div>
           <div className="config-submit">
             <button className="btn btn-primary">Reset</button>
-            <button className="btn btn-primary" onClick={() => this.save()}>Save</button>
+            <button className="btn btn-primary" onClick={() => this.saveConfigData()}>Save</button>
           </div>
         </div>
       </div>
