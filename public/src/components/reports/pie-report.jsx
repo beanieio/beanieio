@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PieChart from './charts/pie-chart.jsx';
 import axios from 'axios';
 import _ from 'lodash';
-import './pie-report.css';
+import './chart-report.css';
 const debug = process.env.DEBUG || false;
 
 const typeMap = {
@@ -11,7 +11,7 @@ const typeMap = {
   PulsePhys: {type: 'Pulse', field: 'physicalTags'},
 };
 
-export default class MealReport extends Component {
+export default class PieReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
