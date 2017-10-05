@@ -1,0 +1,27 @@
+.settings-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-header {
+  font-size: 1.4em;
+  color: var(--b5);
+  flex: 0 0 48px;
+}
+
+.settings-window {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.config-container {
+  margin: 10px;
+}
+
+.config-header {
+  font-size: 1.2em;
+  background-color: var(--b3);
+  color: white;
+  padding: 5px;
+}
