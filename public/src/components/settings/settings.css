@@ -25,3 +25,7 @@
   color: white;
   padding: 5px;
 }
+
+.config-list-item-inactive {
+  text-decoration: line-through;
+}

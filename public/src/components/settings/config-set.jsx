@@ -23,8 +23,12 @@ export default class ConfigSet extends Component {
 
   toggleStatus(i) {
     console.log('Toggle selected on element: ', i);
-
+    let newConfig = this.state.configData.slice();
+    newConfig[i].active = !newConfig[i].active;
+    this.setState({configData: newConfig});
   }
+
+
 
   render() {
     return (
@@ -38,6 +42,8 @@ export default class ConfigSet extends Component {
                   i={i} key={`c-${i}`} toggleStatus={this.toggleStatus} />
               );
             })}
+          </div>
+          <div className="config-list-new-item">
           </div>
           <div className="config-submit">
             <button className="btn btn-primary">Reset</button>
