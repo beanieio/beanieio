@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Meal from './forms/meal.jsx';
 import Exercise from './forms/exercise.jsx';
 import PulseCheck from './forms/pulse-check.jsx';
@@ -15,13 +16,25 @@ import './dashboard.css';
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       openForm: '',
+      ingredientConfig: [],
+      pulseConfig: {}
     };
-
     this.closeForm = this.closeForm.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+  }
+
+  componentWillMount() {
+    axios.get('/api/users/formconfig',
+      {headers: {'Authorization': 'bearer ' + this.props.getAuth()}}
+    ).then(resp => {
+      console.log('form data received: ', resp);
+      this.setState({
+        ingredientConfig: resp.data.ingredients,
+        pulseConfig: {emoConfig: resp.data.emotional, physConfig: resp.data.physical}
+      });
+    });
   }
 
   toggleForm(e, form) {
@@ -35,10 +48,11 @@ export default class Dashboard extends Component {
 
   renderForm(FormComponent, formName, mount) {
     if (this.state.openForm === formName) {
+      const formConfigData = formName === 'meal' ? this.state.ingredientConfig : formName === 'pulse' ? this.state.pulseConfig : null;
       const mountClass = classNames('entry-form-mount', {'entry-form-left': mount === 'left', 'entry-form-right': mount === 'right'});
       return (
         <div className={mountClass}>
-          <FormComponent auth={this.props.getAuth} handleCancel={this.closeForm} />
+          <FormComponent auth={this.props.getAuth} handleCancel={this.closeForm} formConfigData={formConfigData} />
         </div>
       );
     }
@@ -73,7 +87,6 @@ export default class Dashboard extends Component {
           <div className="report-tile shadow"><PieReport auth={this.props.getAuth} title="Recent Ingredients:" type="Meal"/></div>
           <div className="report-tile report-tile-wide shadow"><EntryList auth={this.props.getAuth} /></div>
           <div className="report-tile report-tile-wide shadow"><WaterReport auth={this.props.getAuth}/></div>
-          <div className="report-tile report-tile-wide shadow">Report goes here</div>
           <div className="report-tile report-tile-wide shadow"><SleepReport auth={this.props.getAuth}/></div>
           <div className="report-tile report-tile-wide shadow"><ExerciseReport auth={this.props.getAuth}/></div>
         </div>
