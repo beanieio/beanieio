@@ -34,7 +34,7 @@
 @media(max-width: 575px) {
   .app-sidebar {
     order: 99;
-    flex: 0 0 64px;
+    flex: 0 0 auto;
     z-index: 99;
     flex-direction: row;
     justify-content: space-around;
@@ -48,7 +48,7 @@
     border-right: 2px solid var(--b5);
     width: auto;
     color: white;
-    height: 64px;
+    height: 48px;
   }
 
   .sidebar-entry:last-child {
