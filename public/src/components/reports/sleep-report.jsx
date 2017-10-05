@@ -14,7 +14,8 @@ export default class SleepTile extends Component {
   componentDidMount() {
     axios.get('/api/entries', {
       params: {
-        limit: 7
+        limit: 7,
+        type: 'Water'
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
