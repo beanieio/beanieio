@@ -16,6 +16,10 @@ export default class ConfigSet extends Component {
   }
 
   componentWillMount() {
+    this.refreshConfigData();
+  }
+
+  refreshConfigData() {
     axios.get('/api/users/formconfig', {
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(resp => {
@@ -33,9 +37,22 @@ export default class ConfigSet extends Component {
 
   addItem() {
     console.log('Adding item: ', this.state.newItem);
+    let newConfig = this.state.configData.slice();
+    newConfig.push({name: this.state.newItem, active: true});
+    this.setState({configData: newConfig, newItem: ''});
   }
 
-
+  save() {
+    let data = this.state.configData.reduce((actives, el) => {
+      if (el.active) { actives.push(el.name); }
+      return actives;
+    }, []);
+    axios.post('/api/users/formconfig', {
+      type: this.configType,
+      configData: data,
+    }).then(() => this.refreshConfigData())
+      .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -53,14 +70,16 @@ export default class ConfigSet extends Component {
           <div className="config-list-new-item input-group">
             <input type="text" className="form-control" value={this.state.newItem}
               placeholder="Add a new item..." aria-label="Add a new item..."
-              onChange={e => this.setState({newItem: e.target.value})}/>
+              onChange={e => this.setState({newItem: e.target.value})}
+              onKeyPress={e => { if (e.key === 'Enter') { this.addItem(); } }}
+            />
             <span className="input-group-btn">
               <button className="btn btn-secondary" type="button" onClick={() => this.addItem()}>+</button>
             </span>
           </div>
           <div className="config-submit">
             <button className="btn btn-primary">Reset</button>
-            <button className="btn btn-primary">Save</button>
+            <button className="btn btn-primary" onClick={() => this.save()}>Save</button>
           </div>
         </div>
       </div>
@@ -70,7 +89,7 @@ export default class ConfigSet extends Component {
 
 const ConfigListItem = ({name, active, i, toggleStatus}) => (
   <div className={'config-list-item ' + (active ? '' : 'config-list-item-inactive') }>
-    <div>{name}</div>
+    <div className="config-list-item-name">{name}</div>
     <button type="button" className="close" aria-label="Close" onClick={() => toggleStatus(i)}>
       <span aria-hidden="true">&times;</span>
     </button>

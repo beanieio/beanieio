@@ -26,6 +26,55 @@
   padding: 5px;
 }
 
-.config-list-item-inactive {
+.config-list {
+  padding: 5px;
+}
+
+.config-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px solid var(--b1);
+}
+
+.config-list-item-inactive .config-list-item-name {
   text-decoration: line-through;
+}
+
+.config-list-new-item {
+  padding: 10px;
+}
+
+.config-list-new-item .form-control {
+  padding: .3em .5em;
+  border-radius: 0;
+  color: var(--b5);
+}
+
+.config-list-new-item .btn {
+  padding: .3em .5em;
+  border-radius: 0;
+  color: var(--b5);
+  background-color: white;
+}
+
+.config-submit {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+
+
+.config-list-new-item ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--b3);
+}
+.config-list-new-item ::-moz-placeholder { /* Firefox 19+ */
+  color: var(--b3);
+}
+.config-list-new-item :-ms-input-placeholder { /* IE 10+ */
+  color: var(--b3);
+}
+.config-list-new-item :-moz-placeholder { /* Firefox 18- */
+  color: var(--b3);
 }
