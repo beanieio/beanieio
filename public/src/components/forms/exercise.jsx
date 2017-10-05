@@ -20,7 +20,6 @@ export default class Exercise extends Component {
 
   handleSubmit(e) {
     e && e.preventDefault();
-    console.log('Submitting data: '); //TODO: wire this up to api post
     let formData = {
       type: 'Exercise',
       excDuration: this.state.duration,
