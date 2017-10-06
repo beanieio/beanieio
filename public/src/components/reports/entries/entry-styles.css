@@ -1,12 +1,8 @@
-.entry-list {
-  display: flex;
-  flex-flow: column;
-  align-content: center;
-}
-
 .entry-list-container {
   display: flex;
   flex-flow: column;
+  height: 100%;
+  width: 100%;
 }
 
 .entry-list-header {
@@ -16,6 +12,14 @@
   color: white;
   text-align: left;
   margin-bottom: 5px;
+}
+
+.entry-list {
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  flex: 1;
+  justify-content: space-around
 }
 
 .feed-entry-container {
