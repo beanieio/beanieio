@@ -9,7 +9,7 @@ import Exercise from './forms/exercise.jsx';
 import PulseCheck from './forms/pulse-check.jsx';
 import Sleep from './forms/sleep.jsx';
 import Water from './forms/water.jsx';
-import EntryList from './entries/entry-list.jsx';
+import EntryList from './reports/entries/entry-list.jsx';
 import PieReport from './reports/pie-report.jsx';
 import BarReport from './reports/bar-report.jsx';
 import RatingsLineReport from './reports/ratings-line-report.jsx';

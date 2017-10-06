@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import Rating from '../rating.jsx';
+import Rating from '../../rating.jsx';
 const debug = process.env.DEBUG || false;
 
 const PulseCheckEntry = ({entry}) => {
