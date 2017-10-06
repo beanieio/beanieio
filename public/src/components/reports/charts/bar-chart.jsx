@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
+import moment from 'moment';
 const debug = process.env.DEBUG || false;
 Chart.defaults.global.defaultFontSize = 12;
 
@@ -29,11 +30,20 @@ export default class BarChart extends Component {
           }],
           xAxes: [{
             gridLines: {
-              display: false
+              display: false,
             },
-            ticks: {
-              fontSize: 10
-            }
+            type: 'time',
+            time: {
+              min: moment().startOf('week'),
+              max: moment().endOf('week'),
+              unit: 'day',
+              unitStepSize: 1,
+              tooltipFormat: 'dddd',
+              displayFormats: {
+                day: 'dd',
+              },
+            },
+            position: 'bottom'
           }]
         }
       }
