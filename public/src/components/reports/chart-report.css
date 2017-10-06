@@ -1,17 +1,17 @@
-.pie-report {
+.report {
   display: flex;
   flex-flow: column;
   align-content: center;
   height: 100%;
 }
 
-.pie-report-container {
+.report-container {
   display: flex;
   flex-flow: column;
   flex: 1;
 }
 
-.pie-report-header {
+.report-header {
     display: flex;
     padding: 5px 10px;
     background: var(--b5);
@@ -20,14 +20,14 @@
     margin-bottom: 5px;
 }
 
-.pie-chart-container {
+.chart-container {
   display: flex;
   flex-flow: row;
   justify-content: center;
   padding: 2px;
 }
 
-.pie-report-content {
+.report-content {
   display: flex;
   flex: 1;
   align-content: center;
