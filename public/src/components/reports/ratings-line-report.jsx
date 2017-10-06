@@ -3,7 +3,7 @@ import RatingsLineChart from './charts/ratings-line-chart.jsx';
 import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment';
-import './chart-report.css';
+import './report.css';
 const debug = process.env.DEBUG || false;
 
 const colors = [
