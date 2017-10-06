@@ -5,7 +5,7 @@ import moment from 'moment';
 import { aggregateCurrentWeek } from './report-helpers.js';
 import './report.css';
 
-typeMap = { // map from entry type to its duration/amt field in db
+const typeMap = { // map from entry type to its duration/amt field in db
   'Water': 'waterAmount',
   'Exercise': 'exerciseDuration',
   'Sleep': 'sleepDuration',
