@@ -6,16 +6,16 @@ import { aggregateCurrentWeek } from './report-helpers.js';
 import './report.css';
 
 const typeMap = { // map from entry type to its duration/amt field in db
-  'Water': 'waterAmount',
-  'Exercise': 'exerciseDuration',
-  'Sleep': 'sleepDuration',
+  'Water': {field: 'waterAmount', label: 'oz'},
+  'Exercise': {field: 'exerciseDuration', label: 'minutes'},
+  'Sleep': {field: 'sleepDuration', label: 'hours'}
 };
 
 export default class BarReport extends Component {
   constructor(props) {
     super(props);
     this.state = { data: [] };
-    this.field = typeMap[this.props.type];
+    this.config = typeMap[this.props.type];
   }
 
   //TODO: update get/entries route to be time dependent, not amount dependent
@@ -29,11 +29,11 @@ export default class BarReport extends Component {
   }
 
   filterData(entries) {
-    let procEntries = aggregateCurrentWeek(entries, this.field);
+    let procEntries = aggregateCurrentWeek(entries, this.config.field);
     let data = {
       labels: procEntries.week,
       datasets: [{
-        label: ' oz of water',
+        label: ' ' + this.config.label,
         data: procEntries.totals,
         backgroundColor: [
           'rgb(255,107,87)',
