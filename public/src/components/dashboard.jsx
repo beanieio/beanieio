@@ -30,7 +30,6 @@ export default class Dashboard extends Component {
     axios.get('/api/users/formconfig',
       {headers: {'Authorization': 'bearer ' + this.props.getAuth()}}
     ).then(resp => {
-      console.log('form data received: ', resp);
       this.setState({
         ingredientConfig: resp.data.ingredients,
         pulseConfig: {emoConfig: resp.data.emotional, physConfig: resp.data.physical}
