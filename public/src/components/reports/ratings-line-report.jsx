@@ -40,6 +40,7 @@ export default class RatingsLineReport extends Component {
   updateData() {
     axios.get('/api/entries', {
       params: {
+        limit: 100,
         type: this.entryType || null
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
@@ -57,33 +58,30 @@ export default class RatingsLineReport extends Component {
   }
 
   filterData(entries) {
-    // Data processing using only underscore. Other libraries/packages might make this easier
+    if (debug) { console.log(entries); }
     var datasets = [ ];
-    _.each(this.fields, (field, index) => { // for each field passed in as a prop
-      let label = fieldMap[field].legend; // give it a label based on the map of fields to labels
-      datasets[index] = {label: label, data: [ ], backgroundColor: colors[index]}; // give it a color
-      let day = moment(entries[0].datetime).day(); // setup to do daily averages
-      let date = moment(entries[0].datetime).startOf('day');
-      let j = 0;
-      let daySum = 0;
-      let count = 0;
-      while (j < entries.length) {
-        if (moment(entries[j].datetime).day() === day) { // accumulate values while on the same day
-          daySum += entries[j][field];
-          count++;
-          j++;
+    _.each(this.fields, (field, i) => {
+      datasets.push({label: fieldMap[field].legend, data: [ ], borderColor: colors[i]});
+      var data = { };
+      _.each(entries, (entry, j) => {
+        let day = moment(entries[j].datetime).startOf('day');
+        if (day in data) {
+          data[day].sum += entries[j][field];
+          data[day].count++;
         } else {
-          if (daySum !== 0) { datasets[index].data.push({x: date, y: daySum / count}); } //push to dataset and reset accumulators
-          daySum = entries[j][field];
-          day = moment(entries[j].datetime).day();
-          date = moment(entries[j].datetime).startOf('day');
-          count = 0;
-          j++;
+          data[day] = { };
+          data[day].sum = entries[j][field];
+          data[day].count = 1;
         }
-      }
+      });
+
+      _.forIn(data, (value, key) => {
+        datasets[i].data.push({x: new Date(key), y: value.sum / value.count});
+      });
     });
 
-    if (debug) { console.log('Dataset created in report: ', datasets); }
+
+    if (debug) { console.log('Data created in report: ', datasets); }
     this.setState({data: datasets});
   }
 

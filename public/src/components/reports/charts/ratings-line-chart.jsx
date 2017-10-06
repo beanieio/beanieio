@@ -18,7 +18,7 @@ export default class RatingsLineChart extends Component {
 
   componentDidMount() {
     this.chart = new Chart(this.props.id, {
-      type: 'scatter',
+      type: 'line',
       data: {
         datasets: this.props.data,
       },
