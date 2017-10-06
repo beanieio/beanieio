@@ -9,6 +9,8 @@ const debug = process.env.DEBUG || false;
 const httpPort = process.env.HTTP_PORT || 8080;
 const httpsPort = process.env.HTTPS_PORT || 8443;
 
+const correlationHandler = require('./handlers/correlation-data.js');
+
 const jwt = require('jsonwebtoken');
 const { jwtOptions, jwtAuth, pwdAuth } = require('./auth/auth.js');
 
@@ -37,6 +39,8 @@ app.get('/api/entries', jwtAuth(), (req, res) => {
     }).catch(err => res.status(500).send('Server error: ', err));
 });
 
+app.get('/api/reports/correlation', jwtAuth(), correlationHandler);
+
 app.get('/api/users/formconfig', jwtAuth(), (req, res) => {
   if (debug) { console.log('Get request formconfig for: ', req.user); }
   User.findOne({username: req.user.username}).select('-_id ingredients physical emotional').exec()
@@ -52,7 +56,6 @@ app.put('/api/users/formconfig', jwtAuth(), (req, res) => {
     .exec().then(() => res.status(200).send('config updated'))
     .catch(err => res.status(500).send('Server error: ', err));
 });
-
 
 app.post('/api/users/login', pwdAuth(), (req, res) => {
   if (debug) { console.log('Login attempt for: ', req.body.username); }
