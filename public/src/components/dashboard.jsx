@@ -1,5 +1,9 @@
+// libraries
 import React, { Component } from 'react';
 import axios from 'axios';
+import classNames from 'classnames';
+
+// components
 import Meal from './forms/meal.jsx';
 import Exercise from './forms/exercise.jsx';
 import PulseCheck from './forms/pulse-check.jsx';
@@ -7,11 +11,10 @@ import Sleep from './forms/sleep.jsx';
 import Water from './forms/water.jsx';
 import EntryList from './entries/entry-list.jsx';
 import PieReport from './reports/pie-report.jsx';
-import WaterReport from './reports/water-report.jsx';
-import SleepReport from './reports/sleep-report.jsx';
-import ExerciseReport from './reports/exercise-report.jsx';
+import BarReport from './reports/bar-report.jsx';
 import RatingsLineReport from './reports/ratings-line-report.jsx';
-import classNames from 'classnames';
+
+// styles
 import './dashboard.css';
 
 export default class Dashboard extends Component {
@@ -86,12 +89,10 @@ export default class Dashboard extends Component {
         <div className="dashboard-window">
           <div className="report-tile shadow"><PieReport auth={this.props.getAuth} title="Recent Ingredients:" type="Meal"/></div>
           <div className="report-tile report-tile-wide shadow"><EntryList auth={this.props.getAuth} /></div>
-          <div className="report-tile report-tile-wide shadow"><WaterReport auth={this.props.getAuth}/></div>
-          <div className="report-tile report-tile-wide shadow"><SleepReport auth={this.props.getAuth}/></div>
-          <div className="report-tile report-tile-wide shadow"><ExerciseReport auth={this.props.getAuth}/></div>
-          <div className="report-tile report-tile-wide shadow"><RatingsLineReport auth={this.props.getAuth} title="Pulse Scores Summary: " type="Pulse" fields={['emotionalScore', 'physicalScore']}/></div>
-          <div className="report-tile report-tile-wide shadow">Report goes here</div>
-          <div className="report-tile report-tile-wide shadow"></div>
+          <div className="report-tile shadow"><BarReport type="Water" title="Current Week - Water" ind={3} auth={this.props.getAuth}/></div>
+          <div className="report-tile shadow"><BarReport type="Sleep" title="Current Week - Sleep" ind={3} auth={this.props.getAuth}/></div>
+          <div className="report-tile shadow"><BarReport type="Exercise" title="Current Week - Exercise" ind={3} auth={this.props.getAuth}/></div>
+          <div className="report-tile shadow"><RatingsLineReport auth={this.props.getAuth} title="Pulse Scores Summary: " type="Pulse" fields={['emotionalScore', 'physicalScore']}/></div>
         </div>
       </div>
     );
