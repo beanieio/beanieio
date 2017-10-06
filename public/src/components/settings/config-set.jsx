@@ -62,7 +62,7 @@ export default class ConfigSet extends Component {
   }
 
   render() {
-    return (
+    return this.state.configData.length ? (
       <div className="config-container shadow">
         <div className="config-header"><span>{this.props.type}</span></div>
         <div className="config-panel">
@@ -85,7 +85,7 @@ export default class ConfigSet extends Component {
           </div>
         </div>
       </div>
-    );
+    ) : ( null );
   }
 }
 
