@@ -48,7 +48,9 @@ export default class Dashboard extends Component {
   }
 
   closeForm() {
-    this.setState({openForm: ''});
+    if (this.state.openForm) {
+      this.setState({openForm: ''});
+    }
   }
 
   signalFormSubmitted(formName) {
