@@ -32,19 +32,21 @@ const getEntriesForFeeling = function (userId, feeling, feelingType) {
   return Entry.find({userId: userId})
     .where('type').equals('Pulse')
     .where(feelingType).equals(feeling)
-    .where('datetime').gt(moment().subtract(ONE_MONTH));
+    .where('datetime').gt(moment().subtract(ONE_MONTH))
+    .sort({datetime: 1}).exec();
 };
 
 const getLastEntries = function (userId, duration) {
   let startTime = moment().subtract(duration);
-  return Entry.find({userId: userId}).where('datetime').gte(startTime);
+  return Entry.find({userId: userId})
+    .where('datetime').gte(startTime).sort({datetime: 1}).exec();
 };
 
 const getPreceedingEntries = function(userId, sourceEntry, duration) {
   let entryTime = moment(sourceEntry.datetime);
   let startTime = moment(entryTime).subtract(duration);
   return Entry.find({userId: userId}).where('datetime')
-    .gte(startTime).lte(entryTime).exec();
+    .gte(startTime).lte(entryTime).sort({datetime: 1}).exec();
 };
 
 module.exports = getCorrelationData;
