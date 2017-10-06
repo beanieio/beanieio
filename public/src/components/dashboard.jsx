@@ -10,7 +10,6 @@ import PieReport from './reports/pie-report.jsx';
 import WaterReport from './reports/water-report.jsx';
 import SleepReport from './reports/sleep-report.jsx';
 import ExerciseReport from './reports/exercise-report.jsx';
-import LineReport from './reports/line-report.jsx';
 import RatingsLineReport from './reports/ratings-line-report.jsx';
 import classNames from 'classnames';
 import './dashboard.css';
@@ -91,7 +90,6 @@ export default class Dashboard extends Component {
           <div className="report-tile report-tile-wide shadow"><WaterReport auth={this.props.getAuth}/></div>
           <div className="report-tile report-tile-wide shadow"><SleepReport auth={this.props.getAuth}/></div>
           <div className="report-tile report-tile-wide shadow"><ExerciseReport auth={this.props.getAuth}/></div>
-          <div className="report-tile report-tile-wide shadow"><LineReport auth={this.props.getAuth} title="Pulse Scores Summary: " type="Pulse" fields={['emotionalScore', 'physicalScore']}/></div>
           <div className="report-tile report-tile-wide shadow"><RatingsLineReport auth={this.props.getAuth} title="Pulse Scores Summary: " type="Pulse" fields={['emotionalScore', 'physicalScore']}/></div>
           <div className="report-tile report-tile-wide shadow">Report goes here</div>
           <div className="report-tile report-tile-wide shadow"></div>
