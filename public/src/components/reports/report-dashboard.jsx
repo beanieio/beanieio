@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ComboLineReport from './combo-line-report.jsx';
+import ComboPieReport from './combo-pie-report.jsx';
 import axios from 'axios';
-import './dashboard.css';
-const debug = process.env.DEBUG || true;
+import '../dashboard.css';
+const debug = process.env.DEBUG || false;
 
 export default class ReportDashboard extends Component {
   constructor(props) {
@@ -11,11 +12,9 @@ export default class ReportDashboard extends Component {
       // openForm: '',
       // ingredientConfig: [],
       // pulseConfig: {},
-      raw: [ ],
-      pulseMatches: [ ],
-      mealMatches: [ ],
       feeling: null,
       outcome: null,
+      data: { },
     };
     // this.closeForm = this.closeForm.bind(this);
     // this.toggleForm = this.toggleForm.bind(this);
@@ -32,14 +31,15 @@ export default class ReportDashboard extends Component {
     //   });
     // });
 
-    axios.get('/api/correlation', {
+    axios.get('/api/reports/correlation', {
       params: {
-        feeling: 'Tired',
+        feeling: 'tired',
         type: 'physicalTags',
       },
       headers: {'Authorization': 'bearer ' + this.props.getAuth()}
     }).then(res => {
-      this.handleData(res.data);
+      this.setState({data: res.data});
+      if (debug) { console.log(res.data); }
     });
   }
 
@@ -65,31 +65,14 @@ export default class ReportDashboard extends Component {
   //   }
   // }
 
-  handleData(resData) {
-    this.handleRawData(resData.raw);
-    this.handlePulseData(resData.pulseMatches);
-    this.handleMealData(resData.mealMatches);
-  }
-
-  handleRawData () {
-
-  }
-
-  handlePulseData () {
-
-  }
-
-  handleMealData () {
-
-  }
-
   render() {
     return (
       <div className="dashboard-container" onClick={this.closeForm}>
         <div className="form-bar-wrapper">
         </div>
         <div className="dashboard-window">
-          <div className="report-tile report-tile-wide shadow"><ComboLineReport /></div>
+          <div className="report-tile report-tile-wide shadow"><ComboLineReport data={this.state.data}/></div>
+          <div className="report-tile report-tile-wide shadow"><ComboPieReport data={this.state.data.mealMatches} type='Meal'/></div>
         </div>
       </div>
     );
@@ -97,7 +80,6 @@ export default class ReportDashboard extends Component {
 }
 // TODO: incoporate these elements
 
-// <div className="report-tile report-tile-wide shadow"><ComboPieReport auth={this.props.getAuth} /></div>
 
 // <div onClick={(e) => this.toggleForm(e, 'meal')} className="form-bar-button">
 //   <i className="mdi mdi-food-variant"></i>

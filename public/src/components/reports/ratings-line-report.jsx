@@ -17,11 +17,8 @@ const colors = [
 const fieldMap = {
   physicalScore: {legend: 'Physical Score', axis: 'Rating'},
   emotionalScore: {legend: 'Emotional Score', axis: 'Rating'},
-  sleepDuration: {legend: 'Sleep Duration', axis: 'Hours'},
   sleepQuality: {legend: 'Sleep Quality', axis: 'Rating'},
-  exerciseDuration: {legend: 'Exercise Duration', axis: 'Minutes'},
   exerciseIntensity: {legend: 'Exercise Intensity', axis: 'Rating'},
-  waterAmount: {legend: 'Water', axis: 'fl oz'},
 };
 
 export default class RatingsLineReport extends Component {
@@ -61,7 +58,7 @@ export default class RatingsLineReport extends Component {
     if (debug) { console.log(entries); }
     var datasets = [ ];
     _.each(this.fields, (field, i) => {
-      datasets.push({label: fieldMap[field].legend, data: [ ], borderColor: colors[i]});
+      datasets.push({label: fieldMap[field].legend, data: [ ], fill: false, borderColor: colors[i]});
       var data = { };
       _.each(entries, (entry, j) => {
         let day = moment(entries[j].datetime).startOf('day');

@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
-import LineChart from './charts/line-chart.jsx';
+import ComboLineChart from './charts/combo-line-chart.jsx';
 import _ from 'lodash';
 import moment from 'moment';
 import './chart-report.css';
-const debug = process.env.DEBUG || true;
+const debug = process.env.DEBUG || false;
 
-const colors = [
-  '#8CB369',
-  '#f6ae2d',
-  '#60afff',
-  '#5B5F97',
-  '#f26419'
-];
-
-const fields = {
-  Sleep: {legend: 'Sleep Duration', yAxisId: 'hours-y-axis'},
-  Water: {legend: 'Exercise Duration', yAxisId: 'minutes-y-axis'},
-  Exercise: {legend: 'Water', yAxisId: 'fl-oz-y-axis'},
-};
 
 export default class ComboLineReport extends Component {
   constructor(props) {
@@ -29,80 +16,66 @@ export default class ComboLineReport extends Component {
   }
 
   componentWillReceiveProps (props) {
-    this.handleData(this.props.data);
+    if (debug) { console.log('Raw Data received by combo-line-report: ', props.data); }
+    this.handleData(props.data);
   }
 
-  handleData(resData) {
+  handleData(data) {
+    console.log(data.raw);
+    const rawData = data.raw;
+    const fields = {
+      Sleep: {field: 'sleepDuration', label: 'Sleep Duration', yAxisID: 'hours-y-axis', borderColor: '#8CB369', data: [ ]},
+      Water: {field: 'waterAmount', label: 'Exercise Duration', yAxisID: 'minutes-y-axis', borderColor: '#f6ae2d', data: [ ]},
+      Exercise: {field: 'exerciseDuration', label: 'Water', yAxisID: 'fl-oz-y-axis', borderColor: '#60afff', data: [ ]},
+    };
     var datasets = [ ];
 
-
-    if (debug) { console.log('Dataset created in report: ', datasets); }
-
-    var chartData = {
-      type: 'line',
-      data: {
-        datasets: datasets,
-      },
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        legend: {
-          display: true,
-          position: 'bottom',
-        },
-        scales: {
-          yAxes: [{
-            id: 'hours-y-axis',
-            type: 'linear',
-            position: 'left',
-            gridLines: {
-              display: false,
-            },
-            scaleLabel: {
-              labelString: 'Sleep (hours)',
-            },
-          }, {
-            id: 'minutes-y-axis',
-            type: 'linear',
-            position: 'left',
-            gridLines: {
-              display: false,
-            },
-            scaleLabel: {
-              labelString: 'Exercise (minutes)',
-            },
-          }, {
-            id: 'fl-oz-y-axis',
-            type: 'linear',
-            position: 'right',
-            gridLines: {
-              display: false,
-            },
-            scaleLabel: {
-              labelString: 'Water Consumed (fl oz)',
-            },
-          }],
-          xAxes: [{
-            gridLines: {
-              display: false,
-            },
-            type: 'time',
-            time: {
-              min: moment().startOf('week'),
-              max: moment().endOf('week'),
-              unit: 'day',
-              unitStepSize: 1,
-              tooltipFormat: 'ddd',
-              displayFormats: {
-                day: 'ddd',
-              },
-            },
-            position: 'bottom'
-          }]
-        }
+    _.forIn(rawData, (value, key) => {
+      if (key in fields) {
+        let field = fields[key].field;
+        let entries = rawData[key];
+        let data = { };
+        _.each(entries, entry => {
+          let day = moment(entry.datetime).startOf('day');
+          if (day in data) {
+            data[day].sum += entry[field];
+            data[day].count++;
+          } else {
+            data[day] = { };
+            data[day].sum = entry[field];
+            data[day].count = 1;
+          }
+        });
+        let points = [ ];
+        _.forIn(data, (value, key) => {
+          points.push({x: new Date(key), y: value.sum / value.count});
+        });
+        points = _.sortBy(points, point => point.x);
+        datasets.push({label: fields[key].label, yAxisID: fields[key].yAxisID, borderColor: fields[key].borderColor, fill: false, data: points});
       }
-    };
-    this.setState({data: chartData});
+    });
+
+    const matchData = data.pulseMatches;
+    let points = [ ];
+    _.forIn(matchData, entry => {
+      points.push({x: new Date(entry.datetime), y: entry.physicalScore});
+      points.push({x: new Date(entry.datetime), y: entry.emotionalScore});
+    });
+
+    let matchDataset = {
+      label: 'feeling observed',
+      borderColor: 'red',
+      pointBorderColor: 'red',
+      showLine: false,
+      fill: false,
+      data: points,
+      yAxisID: 'ratings-y-axis'};
+    datasets.push(matchDataset);
+
+
+    if (debug) { console.log('matchDataset created in report: ', points); }
+
+    this.setState({data: datasets});
   }
 
 

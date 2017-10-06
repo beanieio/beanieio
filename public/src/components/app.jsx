@@ -5,6 +5,7 @@ import Settings from './settings/settings.jsx';
 import Sidenav from './sidenav.jsx';
 import Login from './login.jsx';
 import Signup from './signup.jsx';
+import ReportDashboard from './reports/report-dashboard.jsx';
 import './app.css';
 
 export default class App extends Component {
@@ -61,7 +62,7 @@ export default class App extends Component {
       return (
         <Switch>
           <Route path="/dashboard" render={props => <Dashboard getAuth={this.getAuth} /> } />
-          <Route path="/reports" render={props => <ReportsPlaceholder getAuth={this.getAuth} /> } />
+          <Route path="/reports" render={props => <ReportDashboard getAuth={this.getAuth} /> } />
           <Route path="/settings" render={props => <Settings getAuth={this.getAuth} /> } />
           <Route path="/" render={props => <Redirect to="/dashboard" />} />
         </Switch>
