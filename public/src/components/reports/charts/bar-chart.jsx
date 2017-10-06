@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
+const debug = process.env.DEBUG || false;
+Chart.defaults.global.defaultFontSize = 12;
 
 export default class BarChart extends Component {
   constructor(props) {
@@ -39,11 +41,13 @@ export default class BarChart extends Component {
   }
 
   componentWillReceiveProps (props) {
+    if (debug) { console.log('Bar chart will rec: ', props.data); }
     this.chart.data = props.data;
     this.chart.update();
   }
 
   render() {
+    if (debug) { console.log('Bar chart is rendering.'); }
     return <canvas id={this.props.id}></canvas>;
   }
 }

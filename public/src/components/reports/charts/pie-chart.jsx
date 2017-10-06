@@ -6,7 +6,6 @@ const debug = process.env.DEBUG || false;
 Chart.defaults.global.defaultFontSize = 12;
 
 export default class PieChart extends Component {
-
   constructor(props) {
     super(props);
   }
@@ -33,15 +32,13 @@ export default class PieChart extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (debug) { console.log('Line chart will rec: ', props.data); }
+    if (debug) { console.log('Pie chart will rec: ', props.data); }
     this.chart.data = props.data;
     this.chart.update();
   }
 
   render() {
-    if (debug) {
-      console.log('Line chart is rendering.');
-    }
+    if (debug) { console.log('Pie chart is rendering.'); }
     return <canvas id={this.props.id}></canvas>;
   }
 }

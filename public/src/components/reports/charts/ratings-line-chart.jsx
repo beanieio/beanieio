@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 import moment from 'moment';
 const debug = process.env.DEBUG || false;
+Chart.defaults.global.defaultFontSize = 12;
 
 const fieldMap = {
   physicalScore: {legend: 'Physical'},
@@ -11,7 +12,6 @@ const fieldMap = {
 };
 
 export default class RatingsLineChart extends Component {
-
   constructor(props) {
     super(props);
   }
@@ -55,7 +55,7 @@ export default class RatingsLineChart extends Component {
               unitStepSize: 1,
               toolTipFormat: 'ddd',
               displayFormats: {
-                day: 'ddd',
+                day: 'dd',
               },
             },
             position: 'bottom'
@@ -66,15 +66,13 @@ export default class RatingsLineChart extends Component {
   }
 
   componentWillReceiveProps (props) {
-    if (debug) { console.log('Will rec: ', props.data); }
+    if (debug) { console.log('Ratings-Line-Chart will rec: ', props.data); }
     this.chart.data.datasets = props.data;
     this.chart.update();
   }
 
   render() {
-    if (debug) {
-      console.log('Line chart is rendering.');
-    }
+    if (debug) { console.log('Line chart is rendering.'); }
     return <canvas id={this.props.id}></canvas>;
   }
 }
