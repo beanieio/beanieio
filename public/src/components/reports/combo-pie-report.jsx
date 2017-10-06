@@ -70,7 +70,7 @@ export default class ComboPieReport extends Component {
         <div className="pie-report-container">
           <div className="pie-report-header">{this.props.title}</div>
           <div className="pie-report-content">
-            <PieChart data={this.state.data} id={`combo-pie-chart-${this.type.toLowerCase()}`}/>
+            <PieChart data={this.state.data} id={`combo-pie-chart-${this.props.type.toLowerCase()}`}/>
           </div>
         </div>
       </div>

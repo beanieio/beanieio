@@ -71,8 +71,10 @@ export default class ReportDashboard extends Component {
         <div className="form-bar-wrapper">
         </div>
         <div className="dashboard-window">
-          <div className="report-tile report-tile-wide shadow"><ComboLineReport data={this.state.data}/></div>
-          <div className="report-tile report-tile-wide shadow"><ComboPieReport data={this.state.data.mealMatches} type='Meal'/></div>
+          <div className="report-tile report-tile-wide shadow"><ComboLineReport data={this.state.data} title="Summary: "/></div>
+          <div className="report-tile report-tile-wide shadow"><ComboPieReport data={this.state.data.mealMatches} type="Meal" title="Ingredients:"/></div>
+          <div className="report-tile report-tile-wide shadow"><ComboPieReport data={this.state.data.pulseMatches} type="PulseEmo" title="Emotional tags:"/></div>
+          <div className="report-tile report-tile-wide shadow"><ComboPieReport data={this.state.data.pulseMatches} type="PulsePhys" title="Physical tags:"/></div>
         </div>
       </div>
     );
