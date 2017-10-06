@@ -77,12 +77,10 @@ export default class PieReport extends Component {
 
   render() {
     return (
-      <div className="pie-report">
-        <div className="pie-report-container">
-          <div className="pie-report-header">{this.props.title}</div>
-          <div className="pie-report-content">
-            <PieChart data={this.state.data} id={`pie-chart-${this.entryType.toLowerCase()}`}/>
-          </div>
+      <div className="report-container">
+        <div className="report-header">{this.props.title}</div>
+        <div className="report-content">
+          <PieChart data={this.state.data} id={`pie-chart-${this.entryType.toLowerCase()}`}/>
         </div>
       </div>
     );
