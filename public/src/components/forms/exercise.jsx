@@ -27,8 +27,10 @@ export default class Exercise extends Component {
       datetime: this.state.datetime
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
-      .then((res) => this.props.handleCancel())
-      .catch((err) => console.log('error: ', err));
+      .then((res) => {
+        this.props.handleCancel();
+        this.props.signalFormSubmitted('Exercise');
+      }).catch((err) => console.log('error: ', err));
   }
 
   render() {

@@ -24,8 +24,10 @@ export default class Meal extends Component {
       ingredients: this.state.ingredientsTags
     };
     axios.post('/api/formdata', formData, {headers: {'Authorization': 'bearer ' + this.props.auth()}})
-      .then((res) => this.props.handleCancel())
-      .catch((err) => console.log('error: ', err));
+      .then((res) => {
+        this.props.handleCancel();
+        this.props.signalFormSubmitted('Meal');
+      }).catch((err) => console.log('error: ', err));
   }
 
   render() {

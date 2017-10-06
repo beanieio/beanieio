@@ -23,10 +23,12 @@ export default class Dashboard extends Component {
     this.state = {
       openForm: '',
       ingredientConfig: [],
-      pulseConfig: {}
+      pulseConfig: {},
+      lastFormSubmitted: null,
     };
     this.closeForm = this.closeForm.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    this.signalFormSubmitted = this.signalFormSubmitted.bind(this);
   }
 
   componentWillMount() {
@@ -49,13 +51,19 @@ export default class Dashboard extends Component {
     this.setState({openForm: ''});
   }
 
+  signalFormSubmitted(formName) {
+    console.log('Form submitted: ', formName);
+    this.setState({lastFormSubmitted: {name: formName}});
+  }
+
   renderForm(FormComponent, formName, mount) {
     if (this.state.openForm === formName) {
       const formConfigData = formName === 'meal' ? this.state.ingredientConfig : formName === 'pulse' ? this.state.pulseConfig : null;
       const mountClass = classNames('entry-form-mount', {'entry-form-left': mount === 'left', 'entry-form-right': mount === 'right'});
       return (
         <div className={mountClass}>
-          <FormComponent auth={this.props.getAuth} handleCancel={this.closeForm} formConfigData={formConfigData} />
+          <FormComponent auth={this.props.getAuth} handleCancel={this.closeForm}
+            formConfigData={formConfigData} signalFormSubmitted={this.signalFormSubmitted} />
         </div>
       );
     }
