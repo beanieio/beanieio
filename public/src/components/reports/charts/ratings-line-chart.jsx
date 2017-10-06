@@ -53,7 +53,7 @@ export default class RatingsLineChart extends Component {
               max: moment().endOf('week'),
               unit: 'day',
               unitStepSize: 1,
-              toolTipFormat: 'ddd',
+              tooltipFormat: 'ddd',
               displayFormats: {
                 day: 'dd',
               },

@@ -14,9 +14,9 @@ const colors = [
 ];
 
 const fields = {
-  Sleep: {legend: 'Sleep Duration', axis: 'Hours', yAxisId: 'hours-y-axis'},
-  Water: {legend: 'Exercise Duration', axis: 'Minutes', yAxisId: 'minutes-y-axis'},
-  Exercise: {legend: 'Water', axis: 'fl oz', yAxisId: 'fl-oz-y-axis'},
+  Sleep: {legend: 'Sleep Duration', yAxisId: 'hours-y-axis'},
+  Water: {legend: 'Exercise Duration', yAxisId: 'minutes-y-axis'},
+  Exercise: {legend: 'Water', yAxisId: 'fl-oz-y-axis'},
 };
 
 export default class ComboLineReport extends Component {
@@ -92,7 +92,7 @@ export default class ComboLineReport extends Component {
               max: moment().endOf('week'),
               unit: 'day',
               unitStepSize: 1,
-              toolTipFormat: 'ddd',
+              tooltipFormat: 'ddd',
               displayFormats: {
                 day: 'ddd',
               },
