@@ -70,6 +70,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    const reportProps = {auth: this.props.getAuth, lastFormSubmitted: this.state.lastFormSubmitted};
     return (
       <div className="dashboard-container" onClick={this.closeForm}>
         <div className="form-bar-wrapper">
@@ -95,12 +96,12 @@ export default class Dashboard extends Component {
           </div>
         </div>
         <div className="dashboard-window">
-          <div className="report-tile shadow"><EntryList auth={this.props.getAuth} /></div>
-          <div className="report-tile shadow"><PieReport auth={this.props.getAuth} title="Current Week's Meals" type="Meal"/></div>
-          <div className="report-tile shadow"><BarReport type="Water" title="Current Week - Water" ind={3} auth={this.props.getAuth}/></div>
-          <div className="report-tile shadow"><BarReport type="Sleep" title="Current Week - Sleep" ind={3} auth={this.props.getAuth}/></div>
-          <div className="report-tile shadow"><BarReport type="Exercise" title="Current Week - Exercise" ind={3} auth={this.props.getAuth}/></div>
-          <div className="report-tile shadow"><RatingsLineReport auth={this.props.getAuth} title="Pulse Scores Summary: " type="Pulse" fields={['emotionalScore', 'physicalScore']}/></div>
+          <div className="report-tile report-tile-wide shadow"><EntryList {...reportProps}/></div>
+          <div className="report-tile shadow"><PieReport type="Meal" title="Current Week's Meals" {...reportProps}/></div>
+          <div className="report-tile shadow"><BarReport type="Water" title="Current Week - Water" ind={3} {...reportProps}/></div>
+          <div className="report-tile shadow"><BarReport type="Sleep" title="Current Week - Sleep" ind={3} {...reportProps}/></div>
+          <div className="report-tile shadow"><BarReport type="Exercise" title="Current Week - Exercise" ind={3} {...reportProps}/></div>
+          <div className="report-tile shadow"><RatingsLineReport type="Pulse" title="Current Week's Pulse" fields={['emotionalScore', 'physicalScore']} {...reportProps}/></div>
         </div>
       </div>
     );
