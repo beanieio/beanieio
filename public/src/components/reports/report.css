@@ -1,14 +1,7 @@
-.report {
-  display: flex;
-  flex-flow: column;
-  align-content: center;
-  height: 100%;
-}
-
 .report-container {
   display: flex;
   flex-flow: column;
-  flex: 1;
+  height: 100%;
 }
 
 .report-header {
