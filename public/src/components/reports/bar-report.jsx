@@ -16,16 +16,25 @@ export default class BarReport extends Component {
     super(props);
     this.state = { data: [] };
     this.config = typeMap[this.props.type];
+    this.updateData = this.updateData.bind(this);
   }
 
-  //TODO: update get/entries route to be time dependent, not amount dependent
-  componentDidMount() {
+  componentDidMount() { this.updateData(); }
+
+  updateData() { //TODO: update get/entries route to be time dependent, not amount dependent
     axios.get('/api/entries', {
       params: { limit: 50, type: this.props.type },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
       this.filterData(res.data);
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.lastFormSubmitted !== nextProps.lastFormSubmitted &&
+        this.props.type === nextProps.lastFormSubmitted.name) {
+      this.updateData();
+    }
   }
 
   filterData(entries) {

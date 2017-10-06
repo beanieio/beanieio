@@ -17,12 +17,14 @@ export default class PieReport extends Component {
     this.state = {
       data: [ ]
     };
-
     this.entryType = typeMap[this.props.type].type;
     this.field = typeMap[this.props.type].field;
+    this.updateData = this.updateData.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { this.updateData(); }
+
+  updateData() {
     axios.get('/api/entries', {
       params: {
         type: this.entryType
@@ -31,6 +33,13 @@ export default class PieReport extends Component {
     }).then(res => {
       this.filterData(res.data);
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.lastFormSubmitted !== nextProps.lastFormSubmitted &&
+        this.props.type === nextProps.lastFormSubmitted.name) {
+      this.updateData();
+    }
   }
 
   filterData(entries) {

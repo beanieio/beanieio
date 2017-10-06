@@ -32,17 +32,28 @@ export default class RatingsLineReport extends Component {
     };
     this.entryType = this.props.type || 'combo';
     this.fields = this.props.fields;
+    this.updateData = this.updateData.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { this.updateData(); }
+
+  updateData() {
     axios.get('/api/entries', {
       params: {
         type: this.entryType || null
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
+      console.log(res.data);
       this.filterData(res.data);
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.lastFormSubmitted !== nextProps.lastFormSubmitted &&
+        this.props.type === nextProps.lastFormSubmitted.name) {
+      this.updateData();
+    }
   }
 
   filterData(entries) {

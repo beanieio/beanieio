@@ -54,7 +54,6 @@ export default class Dashboard extends Component {
   }
 
   signalFormSubmitted(formName) {
-    console.log('Form submitted: ', formName);
     this.setState({lastFormSubmitted: {name: formName}});
   }
 

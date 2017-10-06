@@ -9,9 +9,20 @@ export default class EntryList extends Component {
     this.state = {
       entries: []
     };
+    this.updateEntries = this.updateEntries.bind(this);
   }
 
   componentDidMount() {
+    this.updateEntries();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.lastFormSubmitted !== nextProps.lastFormSubmitted) {
+      this.updateEntries();
+    }
+  }
+
+  updateEntries() {
     axios.get('/api/entries', {
       params: {limit: 5},
       headers: {'Authorization': 'bearer ' + this.props.auth()}
