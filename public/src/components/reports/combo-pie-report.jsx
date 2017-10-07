@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PieChart from './charts/pie-chart.jsx';
 import _ from 'lodash';
-import './chart-report.css';
+import './report.css';
 const debug = process.env.DEBUG || false;
 
 const typeMap = {
@@ -66,10 +66,10 @@ export default class ComboPieReport extends Component {
 
   render() {
     return (
-      <div className="pie-report">
-        <div className="pie-report-container">
-          <div className="pie-report-header">{this.props.title}</div>
-          <div className="pie-report-content">
+      <div className="report">
+        <div className="report-container">
+          <div className="report-header">{this.props.title}</div>
+          <div className="report-content">
             <PieChart data={this.state.data} id={`combo-pie-chart-${this.props.type.toLowerCase()}`}/>
           </div>
         </div>

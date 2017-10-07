@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ComboLineChart from './charts/combo-line-chart.jsx';
 import _ from 'lodash';
 import moment from 'moment';
-import './chart-report.css';
+import './report.css';
 const debug = process.env.DEBUG || false;
 
 
@@ -18,11 +18,10 @@ export default class ComboLineReport extends Component {
 
   componentWillReceiveProps (props) {
     if (debug) { console.log('Raw Data received by combo-line-report: ', props.data); }
-    this.handleData(props.data);
-    this.setState({feeling: props.feeling});
+    this.handleData(props.data, props.feeling);
   }
 
-  handleData(data) {
+  handleData(data, feeling) {
     console.log(data.raw);
     const rawData = data.raw;
     const fields = {
@@ -65,7 +64,7 @@ export default class ComboLineReport extends Component {
     });
 
     let matchDataset = {
-      label: this.state.feeling,
+      label: feeling,
       borderColor: 'red',
       pointBorderColor: 'red',
       showLine: false,
@@ -77,18 +76,16 @@ export default class ComboLineReport extends Component {
 
     if (debug) { console.log('matchDataset created in report: ', points); }
 
-    this.setState({data: datasets});
+    this.setState({data: datasets, feeling: feeling});
   }
 
 
   render() {
     return (
-      <div className="pie-report">
-        <div className="pie-report-container">
-          <div className="pie-report-header">{this.props.title}</div>
-          <div className="pie-report-content">
-            <ComboLineChart data={this.state.data} id='combo-report'/>
-          </div>
+      <div className="report-container">
+        <div className="report-header">{this.props.title}</div>
+        <div className="report-content">
+          <ComboLineChart data={this.state.data} id='combo-report'/>
         </div>
       </div>
     );

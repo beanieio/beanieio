@@ -14,7 +14,7 @@ export default class ChooseFeelingForm extends Component {
     };
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
     e && e.preventDefault();
     this.props.handleSubmit(this.state.feeling, this.state.tagType);
   }

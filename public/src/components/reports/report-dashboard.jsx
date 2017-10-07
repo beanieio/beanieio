@@ -19,6 +19,7 @@ export default class ReportDashboard extends Component {
     };
     this.closeForm = this.closeForm.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    this.handleFeeling = this.handleFeeling.bind(this);
   }
 
   componentDidMount() {
@@ -56,13 +57,13 @@ export default class ReportDashboard extends Component {
   handleFeeling(feeling, tagType) {
     axios.get('/api/reports/correlation', {
       params: {
-        feeling: this.state.feeling,
-        type: this.state.tagType,
+        feeling: feeling,
+        type: tagType,
       },
       headers: {'Authorization': 'bearer ' + this.props.getAuth()}
     }).then(res => {
-      this.setState({feeling: feeling, tagType: tagType});
-      this.setState({data: res.data});
+      this.closeForm();
+      this.setState({feeling: feeling, tagType: tagType, data: res.data});
       if (debug) { console.log(res.data); }
     });
   }
@@ -84,7 +85,7 @@ export default class ReportDashboard extends Component {
       <div className="dashboard-container" onClick={this.closeForm}>
         <div className="form-bar-wrapper">
           <div onClick={(e) => this.toggleForm(e, 'pulse')} className="form-bar-button">
-            <i className="mdi mdi-heart-pulse"></i>
+            <span>Choose a physical or emotional tag:</span>
             {this.renderForm(ChooseFeelingForm, 'pulse')}
           </div>
         </div>
