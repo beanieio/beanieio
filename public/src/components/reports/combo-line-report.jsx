@@ -81,6 +81,16 @@ export default class ComboLineReport extends Component {
 
 
   render() {
+    if (this.state.feeling == null) {
+      return (
+        <div className="report-container">
+          <div className="report-header">{this.props.title}</div>
+          <div className="report-content">
+            <span>Select an outcome to see results.</span>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="report-container">
         <div className="report-header">{this.props.title}</div>
