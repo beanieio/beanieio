@@ -11,6 +11,7 @@ export default class ComboLineReport extends Component {
     super(props);
     this.state = {
       data: { },
+      feeling: '',
     };
 
   }
@@ -18,6 +19,7 @@ export default class ComboLineReport extends Component {
   componentWillReceiveProps (props) {
     if (debug) { console.log('Raw Data received by combo-line-report: ', props.data); }
     this.handleData(props.data);
+    this.setState({feeling: props.feeling});
   }
 
   handleData(data) {
@@ -63,7 +65,7 @@ export default class ComboLineReport extends Component {
     });
 
     let matchDataset = {
-      label: 'feeling observed',
+      label: this.state.feeling,
       borderColor: 'red',
       pointBorderColor: 'red',
       showLine: false,

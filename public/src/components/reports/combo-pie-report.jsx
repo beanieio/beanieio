@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PieChart from './charts/pie-chart.jsx';
 import _ from 'lodash';
 import './chart-report.css';
-const debug = process.env.DEBUG || true;
+const debug = process.env.DEBUG || false;
 
 const typeMap = {
   Meal: {type: 'Meal', field: 'ingredients'},

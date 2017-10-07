@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import PieceLabel from 'chart.piecelabel.js';
-const debug = process.env.DEBUG || true;
+const debug = process.env.DEBUG || false;
 
 Chart.defaults.global.defaultFontSize = 12;
 
