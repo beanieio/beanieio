@@ -4,7 +4,7 @@ import ComboPieReport from './combo-pie-report.jsx';
 import { DropdownList } from 'react-widgets';
 import axios from 'axios';
 import classNames from 'classnames';
-import '../dashboard.css';
+import './report-dashboard.css';
 const debug = process.env.DEBUG || false;
 
 export default class ReportDashboard extends Component {
@@ -54,17 +54,19 @@ export default class ReportDashboard extends Component {
   render() {
     return (
       <div className="dashboard-container">
-        <div className="form-bar-wrapper">
-          <div className="form-bar-button">Correlate observations with:</div>
-          <DropdownList className="form-bar-button"
-            value={this.state.feeling} data={this.state.feelings}
-            textField="text" groupBy="group"
-            onChange={feeling => {
-              this.setState({feeling}, this.handleFeeling);
-            }} />
+        <div className="report-bar-wrapper">
+          <div className="report-bar-label">Correlate observations with:</div>
+          <div className="report-bar-dropdown">
+            <DropdownList
+              value={this.state.feeling} data={this.state.feelings}
+              textField="text" groupBy="group"
+              onChange={feeling => {
+                this.setState({feeling}, this.handleFeeling);
+              }} />
+          </div>
         </div>
         <div className="dashboard-window">
-          <div className="report-tile report-tile-wide shadow"><ComboLineReport data={this.state.data} title="Summary:" feeling={this.state.feeling}/></div>
+          <div className="report-tile report-tile-wide shadow"><ComboLineReport data={this.state.data} title="Summary:" feeling={this.state.feeling ? this.state.feeling.text : ''}/></div>
           <div className="report-tile shadow"><ComboPieReport data={this.state.data.mealMatches} type="Meal" title="Ingredients:"/></div>
           <div className="report-tile shadow"><ComboPieReport data={this.state.data.pulseMatches} type="PulseEmo" title="Emotional tags:"/></div>
           <div className="report-tile shadow"><ComboPieReport data={this.state.data.pulseMatches} type="PulsePhys" title="Tags:"/></div>

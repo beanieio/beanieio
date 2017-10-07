@@ -3,7 +3,7 @@
   height: 100%;
 }
 
-.form-bar-wrapper {
+.report-bar-wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -12,28 +12,26 @@
   background-color: var(--b2);
 }
 
-.form-bar-button {
+.report-bar-label {
   display: flex;
-  flex: 1 0 0;
+  flex: 1;
   justify-content: center;
   align-items: center;
-  height: 48px;
-  font-size: 2em;
+  font-size: 1.25em;
   color: white;
   cursor: pointer;
   position: relative;
+  padding: 0px 10px 0px 10px;
 }
 
-.form-bar-button:last-child {
-  border-right: none
-}
-
-.form-bar-button-wide {
-  flex: 2 0 0;
-}
-
-.form-bar-button:hover {
-  background-color: var(--b5);
+.report-bar-dropdown {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding: 0px 10px 0px 10px;
 }
 
 .dashboard-window {
@@ -46,20 +44,6 @@
   min-width: 300px;
   overflow-y: scroll;
   padding: 10px 20px;
-}
-
-/* styles to handle entry-form overlays */
-.entry-form-mount {
-  position: absolute;
-  top: 48px;
-}
-
-.entry-form-left {
-  left: 0;
-}
-
-.entry-form-right {
-  right: 0;
 }
 
 @media(max-width: 575px) {
