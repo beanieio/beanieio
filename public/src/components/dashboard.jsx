@@ -53,10 +53,15 @@ export default class Dashboard extends Component {
     }
   }
 
+  // this sends a one-time object (pseudo-event) to each of the reports with
+  // the name of the recently submitted form so they can decide if they need to update themselves
   signalFormSubmitted(formName) {
     this.setState({lastFormSubmitted: {name: formName}});
   }
 
+  // render form handles the display or hiding of a new entry form
+  // form is mounted using an absolutely (fixed in mobile) positioned div
+  // a form is open or not based on if the openForm string state matches the forms name
   renderForm(FormComponent, formName, mount) {
     if (this.state.openForm === formName) {
       const formConfigData = formName === 'meal' ? this.state.ingredientConfig : formName === 'pulse' ? this.state.pulseConfig : null;
@@ -72,7 +77,7 @@ export default class Dashboard extends Component {
 
   render() {
     const reportProps = {auth: this.props.getAuth, lastFormSubmitted: this.state.lastFormSubmitted};
-    return (
+    return ( // close form on click in the dashboard to make it more natural
       <div className="dashboard-container" onClick={this.closeForm}>
         <div className="form-bar-wrapper">
           <div onClick={(e) => this.toggleForm(e, 'meal')} className="form-bar-button">
