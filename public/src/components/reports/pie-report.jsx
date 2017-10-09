@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PieChart from './charts/pie-chart.jsx';
 import axios from 'axios';
 import _ from 'lodash';
+import { filterToCurrentWeek } from './report-helpers.js';
 import './report.css';
 const debug = process.env.DEBUG || false;
 
@@ -27,7 +28,8 @@ export default class PieReport extends Component {
   updateData() {
     axios.get('/api/entries', {
       params: {
-        type: this.entryType
+        type: this.entryType,
+        limit: 30,
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
@@ -43,6 +45,7 @@ export default class PieReport extends Component {
   }
 
   filterData(entries) {
+    entries = filterToCurrentWeek(entries);
     var tags = _.filter(entries, (entry) => {
       return entry[this.field].length !== 0;
     });
