@@ -18,7 +18,8 @@ export default class PieChart extends Component {
         maintainAspectRatio: false,
         responsive: true,
         legend: {
-          display: false
+          display: true,
+          position: 'bottom'
         },
         pieceLabel: {
           render: 'label',
