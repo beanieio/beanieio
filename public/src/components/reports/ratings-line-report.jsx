@@ -42,7 +42,6 @@ export default class RatingsLineReport extends Component {
       },
       headers: {'Authorization': 'bearer ' + this.props.auth()}
     }).then(res => {
-      console.log(res.data);
       this.filterData(res.data);
     });
   }
