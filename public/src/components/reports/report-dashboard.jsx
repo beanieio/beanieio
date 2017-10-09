@@ -29,8 +29,8 @@ export default class ReportDashboard extends Component {
       const data = resp.data;
       console.log(data);
       let feelings = [ ];
-      data.emotional.forEach(feeling => feelings.push({group: 'emotionalTags', text: feeling}));
-      data.physical.forEach(feeling => feelings.push({group: 'physicalTags', text: feeling}));
+      data.emotional.forEach(feeling => feelings.push({group: 'Emotional', field: 'emotionalTags', text: feeling}));
+      data.physical.forEach(feeling => feelings.push({group: 'Physical', field: 'physicalTags', text: feeling}));
       this.setState({
         feelings: feelings
       });
