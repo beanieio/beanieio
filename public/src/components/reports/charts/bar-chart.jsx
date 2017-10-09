@@ -34,7 +34,7 @@ export default class BarChart extends Component {
             },
             type: 'time',
             time: {
-              min: moment().startOf('week'),
+              min: moment().startOf('week').subtract(12, 'hours'),
               max: moment().endOf('week'),
               unit: 'day',
               unitStepSize: 1,
