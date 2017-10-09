@@ -83,6 +83,7 @@
   padding: 2px 10px;
   font-size: 0.8em;
   color: var(--mc1);
+  flex-wrap: wrap;
 }
 
 .feed-entry-detail .rating-element {
@@ -94,7 +95,7 @@
 .feed-entry-tag {
   font-size: 0.8em;
   padding: 2px 5px;
-  margin: 0 5px;
+  margin: 2px 5px;
   border: 1px solid grey;
   border-radius: 3px;
 }
