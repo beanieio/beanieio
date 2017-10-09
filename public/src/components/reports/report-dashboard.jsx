@@ -41,7 +41,7 @@ export default class ReportDashboard extends Component {
     axios.get('/api/reports/correlation', {
       params: {
         feeling: this.state.feeling.text,
-        type: this.state.feeling.group,
+        type: this.state.feeling.field,
       },
       headers: {'Authorization': 'bearer ' + this.props.getAuth()}
     }).then(res => {
