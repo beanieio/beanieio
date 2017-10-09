@@ -26,9 +26,10 @@
 ## Requirements
 
 - Node 6.11.3
-- MongoDb ?
-- Express 4
+- MongoDb latest
+- Express latest
 - React 16
+- else -> see the package
 
 ## Development
 
@@ -40,6 +41,31 @@ From within the root directory:
 sudo npm install -g nodemon
 npm install
 ```
+
+HTTPS Authentication Setup:
+ - App assumes that the certificate and key will be at:
+  ```
+   project-folder/app/cert/domain.crt
+   project-folder/app/cert/domain.key
+  ```
+
+Note: if you want to use storybook to develop components, and don't yet have the storybook CLI, use:
+```
+npm i-g @storybook/cli
+```
+then run: npm run storybook
+
+### Tasks
+
+To get started with a local dev server (code will assume: http port: 8080, https port: 8443)
+ npm run pack
+ npm start
+
+To start server with ports forced to 8080 and 8443
+ npm run startprod
+
+To start in debug mode (enables more server-side logging)
+ npm run startproddebug
 
 ### Roadmap
 
