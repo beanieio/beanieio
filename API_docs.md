@@ -21,7 +21,7 @@
   }).then(<handle response>)
 ```
 
-##### Response JSON
+##### response JSON
 ```javascript
 [
     {
@@ -52,7 +52,7 @@
   }).then(<handle response>)
 ```
 
-##### Response JSON
+##### response JSON
 ```javascript
 [
     {
@@ -78,7 +78,7 @@ Requires authorization headers as shown in example axios request
       }).then(<handle response>)
 ```
 
-##### Response JSON
+##### response JSON
 ```JSON
 [
     {
@@ -103,7 +103,7 @@ Requires authorization headers as shown in example axios request
       }).then(<handle response>)
 ```
 
-##### Response JSON
+##### response JSON
 ```JSON
 [
     {
@@ -141,7 +141,7 @@ Requires authorization headers to identify logged in user, as shown in example a
     }).then(<handle response>)
 ```
 
-##### Response JSON
+##### response JSON
 ```JSON
 [
   {
@@ -191,7 +191,7 @@ Requires authorization headers to identify logged in user, as shown in example a
     }).then(<handle response>);
 ```
 
-##### Response JSON
+##### response JSON
 ```
 [
   {
@@ -218,7 +218,7 @@ Requires authorization headers to identify logged in user, as shown in example a
 
 #### request body
 | param | description | data type | required for form type | examples |
-|------------|-----------|"------------:|:-----------:|:-----------:|
+|------------|-----------|:------------:|:-----------:|:-----------:|
 | datetime | date and time | ISO date | all | "2017-10-03T17:31:04.373Z"|
 | type | type of entry | String | all | 'Pulse' |
 | ingredients | list of ingredients | array of strings | Meal | [ "gluten", "soy", "wheat", "shellfish" ] |
@@ -247,5 +247,5 @@ Requires authorization headers to identify logged in user, as shown in example a
     }).then(<handle response>)
 ```
 
-##### Response
+##### response
 Responds with status code 201 'Entry created' for successful form submission
