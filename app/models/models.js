@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise; // overriding mongoose's promise library with global promises
 const bcrypt = require('bcrypt');
 mongoose.connect('mongodb://127.0.0.1:27017/healthme');
 
@@ -25,14 +25,14 @@ const physDefaults = [
 const userSchema = new Schema(
   {
     username: {type: String, unique: true},
-    password: String,
-    logins: Number,
-    submissions: Number,
+    password: String, // hashed password (bcrypt)
+    logins: Number, // TODO: track number of logins here
+    submissions: Number, // TODO: track submissions here
     email: String,
-    ingredients: [String],
-    goals: Schema.Types.Mixed,
-    physical: [String],
-    emotional: [String]
+    ingredients: [String], // available ingredients for meal form
+    goals: Schema.Types.Mixed, // TODO: goal system
+    physical: [String], // available options for pulse form physical
+    emotional: [String] // available options for pulse form emotional
   },
   {timestamps: true}
 );
