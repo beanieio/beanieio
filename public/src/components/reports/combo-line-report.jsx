@@ -13,7 +13,6 @@ export default class ComboLineReport extends Component {
       data: { },
       feeling: '',
     };
-
   }
 
   componentWillReceiveProps (props) {
@@ -22,7 +21,6 @@ export default class ComboLineReport extends Component {
   }
 
   handleData(data, feeling) {
-    console.log(data.raw);
     const rawData = data.raw;
     const fields = {
       Sleep: {field: 'sleepDuration', label: 'Sleep Duration', yAxisID: 'hours-y-axis', borderColor: '#8CB369', data: [ ]},
