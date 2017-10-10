@@ -42,6 +42,8 @@ export default class PulseCheck extends Component {
       }).catch((err) => console.log('error: ', err));
   }
 
+  // stop propagation on clicks allows form interaction to be contained within the form
+  // otherwise dashboard-level click handlers would also fire... not helpful!
   render() {
     return (
       <div className="form-wrapper shadow" onClick={e => e.stopPropagation()}>
