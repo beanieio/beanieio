@@ -26,7 +26,7 @@
 [
     {
         "message": "Login Successful!",
-        "token": <new JWT>
+        "token": (a new JWT is generated)
     }
 ]
 ```
@@ -57,7 +57,7 @@
 [
     {
         "message": "Thank you for signing up!",
-        "token": <new JWT>
+        "token": (a new JWT is generated)
     }
 ]
 ```
@@ -153,7 +153,7 @@ Requires authorization headers to identify logged in user, as shown in example a
     "emotionalTags" : [ "Energized", "Relaxed" ],
     "physicalTags" : [ "Great All Around", "Sick" ],
     "ingredients" : [ ], "__v" : 0
-  }
+  },
   {
     "_id" : "59d58dd187aa00348f95253c",
     "userId" : "59d573eebbac5a2ccd04d8f8",
@@ -165,7 +165,7 @@ Requires authorization headers to identify logged in user, as shown in example a
     "physicalTags" : [ "Sick", "Tired" ],
     "ingredients" : [ ],
     "__v" : 0
-  },
+  }
 ]
 ```
 
@@ -192,20 +192,24 @@ Requires authorization headers to identify logged in user, as shown in example a
 ```
 
 ##### Response JSON
-```JSON
+```
 [
   {
-    "raw" : { // this is separated raw data for past 2 weeks
+    "raw" : {
       "Meal": [],
       "Water: [],
       "Exercise": [],
       "Sleep": [],
       "Pulse": []},
-    "pulseMatches": [], // these are the pulses in past month with that feeling
-    "mealMatches": [], // these are the meals in the 12 hours preceeding any pulse that matched a feeling
+    "pulseMatches": [],
+    "mealMatches": []
   }
 ]
 ```
+
+"raw" is separated raw data for past 2 weeks
+"pulseMatches" are the pulses in past month with that feeling
+"mealMatches" are the meals in the 12 hours preceeding any pulse that matched a feeling
 
 ## formdata
 
@@ -214,7 +218,7 @@ Requires authorization headers to identify logged in user, as shown in example a
 
 #### request body
 | param | description | data type | required for form type | examples |
-|------------|-----------|------------|-----------|
+|------------|-----------|------------|-----------|-----------|
 | datetime | date and time | ISO date | all | "2017-10-03T17:31:04.373Z"|
 | type | type of entry | String | all | 'Pulse' |
 | ingredients | list of ingredients | array of strings | Meal | [ "gluten", "soy", "wheat", "shellfish" ] |
