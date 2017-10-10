@@ -1,33 +1,45 @@
+// libraries
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+
+// db setup
 const { User, Entry } = require('./models/models.js');
 const ObjectId = require('mongoose').Types.ObjectId;
 
-const morgan = require('morgan');
+// env setup
 const debug = process.env.DEBUG || false;
 const httpPort = process.env.HTTP_PORT || 8080;
 const httpsPort = process.env.HTTPS_PORT || 8443;
 
-const correlationHandler = require('./handlers/correlation-data.js');
-
+// auth setup
 const jwt = require('jsonwebtoken');
 const { jwtOptions, jwtAuth, pwdAuth } = require('./auth/auth.js');
 
-const app = express();
+// helper scripts
+const correlationHandler = require('./handlers/correlation-data.js');
 
+// setting up server
+const app = express();
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+// redirect non secure traffic to https
 const httpsRoute = function (req, res, next) {
   if (debug) { console.log((req.secure ? 'Secure' : 'Insecure') + ' connection received to: ', req.url); }
   if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + req.path); }
 };
-// redirect non secure traffic to https
 app.get('*', httpsRoute);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
+
+//====== API ROUTES START HERE =====\\
+// prefix all API routes with /api/ in order to explicitly identify them
+// all API routes to get data should be protected with jwtAuth()
+// all login routes should be prefixed with their respective passport strategy authentication helper
+// for now this is just: pwdAuth()
 
 app.get('/api/entries', jwtAuth(), (req, res) => {
   if (debug) { console.log('Get request entries for: ', req.user); }
@@ -109,6 +121,8 @@ app.post('/api/formdata', jwtAuth(), (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '/public/index.html'));
 });
+
+// END API ROUTES
 
 module.exports.app = app;
 module.exports.httpPort = httpPort;
