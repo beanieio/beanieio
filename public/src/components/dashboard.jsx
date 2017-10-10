@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
   }
 
   componentWillMount() {
-    axios.get('/api/users/formconfig',
+    axios.get('/api/users/formconfig', // go get user-specific form configuration data
       {headers: {'Authorization': 'bearer ' + this.props.getAuth()}}
     ).then(resp => {
       this.setState({
@@ -75,6 +75,11 @@ export default class Dashboard extends Component {
     }
   }
 
+
+  // dashboard is structured into a container with 2 main sections, the form-bar and the window
+  // form-bar will remain fairly constant, window could be refactored to be more modular
+  // each report is given a type, a title, and some standard report props
+  // TODO: refactor this into an array based rendering to enable custom / modular dashboards
   render() {
     const reportProps = {auth: this.props.getAuth, lastFormSubmitted: this.state.lastFormSubmitted};
     return ( // close form on click in the dashboard to make it more natural
