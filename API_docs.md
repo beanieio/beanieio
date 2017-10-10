@@ -22,11 +22,11 @@
 ```
 
 ##### Response JSON
-```JSON
+```javascript
 [
     {
         "message": "Login Successful!",
-        "token": (a new JWT is generated)
+        "token": //a new JWT is generated
     }
 ]
 ```
@@ -53,11 +53,11 @@
 ```
 
 ##### Response JSON
-```JSON
+```javascript
 [
     {
         "message": "Thank you for signing up!",
-        "token": (a new JWT is generated)
+        "token": //a new JWT is generated
     }
 ]
 ```
@@ -218,14 +218,14 @@ Requires authorization headers to identify logged in user, as shown in example a
 
 #### request body
 | param | description | data type | required for form type | examples |
-|------------|-----------|------------|-----------|-----------|
+|------------|-----------|"------------:|:-----------:|:-----------:|
 | datetime | date and time | ISO date | all | "2017-10-03T17:31:04.373Z"|
 | type | type of entry | String | all | 'Pulse' |
 | ingredients | list of ingredients | array of strings | Meal | [ "gluten", "soy", "wheat", "shellfish" ] |
 | sleepDuration | length of sleep in hours | Number | Sleep | 6 |
 | sleepQuality | rating of sleep quality from 1 to 5 | Number | Sleep | 4 |
 | exerciseDuration | duration of exercise in minutes | Number | Exercise | 60 |
-| exerciseIntensity | intensity of exercise on a scale from 1 to 5 | Exercise | 4 |
+| exerciseIntensity | intensity of exercise on a scale from 1 to 5 | Number | Exercise | 4 |
 | waterAmount | amount of water in fl oz | Number | Water | 20 |
 | physicalScore | rating of physical well being from 1 to 5 | Number | Pulse | 4 |
 | emotionalScore | rating of emotional well being from 1 to 5 | Number | Pulse | 5 |
