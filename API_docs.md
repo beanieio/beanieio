@@ -74,7 +74,9 @@ Requires authorization headers as shown in example axios request
 ```javascript
     axios.get('/api/users/formconfig',
       {
-        headers: {'Authorization': 'bearer ' + <method to retrieve JWT>}
+        headers: {
+          'Authorization': 'bearer ' + JWT_string_here
+        }
       }).then(<handle response>)
 ```
 
@@ -99,7 +101,9 @@ Requires authorization headers as shown in example axios request
 ```javascript
     axios.get('/api/users/formconfig',
       {
-        headers: {'Authorization': 'bearer ' + <method to retrieve JWT>}
+        headers: {
+          'Authorization': 'bearer ' + JWT_string_here
+        }
       }).then(<handle response>)
 ```
 
@@ -137,7 +141,9 @@ Requires authorization headers to identify logged in user, as shown in example a
         limit: 2,
         type: 'Pulse'
         },
-      headers: {'Authorization': 'bearer ' + <method to retrieve JWT>}
+      headers: {
+        'Authorization': 'bearer ' + JWT_string_here
+      }
     }).then(<handle response>)
 ```
 
@@ -148,7 +154,8 @@ Requires authorization headers to identify logged in user, as shown in example a
     "_id" : "59d3c9671e277887d042a495",
     "userId" : "59d3c9561e277887d042a494",
     "datetime" : "2017-10-03T17:31:04.373Z",
-    "type" : "Pulse", "physicalScore" : 4,
+    "type" : "Pulse",
+    "physicalScore" : 4,
     "emotionalScore" : 2,
     "emotionalTags" : [ "Energized", "Relaxed" ],
     "physicalTags" : [ "Great All Around", "Sick" ],
@@ -186,8 +193,13 @@ Requires authorization headers to identify logged in user, as shown in example a
 ##### example axios request
 ```javascript
     axios.get(‘/api/reports/correlation’, {
-      params: {feeling: ‘Tired’, type: ‘physicalTags’},
-      headers: {‘Authorization’: ‘bearer ’ + <method to retrieve JWT>}
+      params: {
+        feeling: ‘Tired’,
+        type: ‘physicalTags’
+      },
+      headers: {
+        ‘Authorization’: ‘bearer ’ + JWT_string_here
+      }
     }).then(<handle response>);
 ```
 
@@ -197,10 +209,11 @@ Requires authorization headers to identify logged in user, as shown in example a
   {
     "raw" : {
       "Meal": [],
-      "Water: [],
+      "Water": [],
       "Exercise": [],
       "Sleep": [],
-      "Pulse": []},
+      "Pulse": []
+    }
     "pulseMatches": [],
     "mealMatches": []
   }
@@ -239,11 +252,15 @@ Requires authorization headers to identify logged in user, as shown in example a
 ```javascript
     axios.post('/api/formdata', {
         type: 'Exercise',
-        excDuration: 60,
-        excIntensity: 4,
+        exerciseDuration: 60,
+        exerciseIntensity: 4,
         datetime: "2017-10-05T01:41:27.591Z"
+      },
+      {
+        headers: {
+          'Authorization': 'bearer ' + JWT_string_here
+          }
       }
-      {headers: {'Authorization': 'bearer ' + <method to retrieve JWT>}
     }).then(<handle response>)
 ```
 
