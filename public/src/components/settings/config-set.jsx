@@ -48,7 +48,7 @@ export default class ConfigSet extends Component {
     axios.put('/api/users/formconfig',
       {type: this.configType, configData: data},
       {headers: {'Authorization': 'bearer ' + this.props.auth()}}
-    ).then(() => this.refreshConfigData())
+    ).then(() => this.refreshConfigData()) // TODO: provide visual feedback on successful save
       .catch(err => console.log(err));
   }
 
