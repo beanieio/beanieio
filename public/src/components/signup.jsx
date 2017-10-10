@@ -15,7 +15,6 @@ export default class SignUp extends Component {
     };
   }
 
-
   handleSubmit(e) {
     e && e.preventDefault();
     if (this.validateForm(e)) {
@@ -25,7 +24,7 @@ export default class SignUp extends Component {
         email: this.state.email,
       }).then(resp => {
         if (resp.status === 201 && resp.statusText === 'Created') { // user successfully created
-          this.props.onLogin(resp.data.token);
+          this.props.onLogin(resp.data.token); // successful signup leads to login
         }
       }).catch(err => {
         this.setState({formWarning: err.response.data});
