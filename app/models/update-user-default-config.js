@@ -1,3 +1,4 @@
+// Basic script to update all users configs (if necessary)
 const { User, Entry, mongoose } = require('./models.js');
 
 const ingredientsDefaults = [
