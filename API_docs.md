@@ -235,7 +235,7 @@ Requires authorization headers to identify logged in user, as shown in example a
 ##### request headers
 Requires authorization headers to identify logged in user, as shown in example axios request.
 
-#### example axios request
+##### example axios request
 ```javascript
     axios.post('/api/formdata', {
         type: 'Exercise',
