@@ -259,7 +259,7 @@ Requires authorization headers to identify logged in user, as shown in example a
       {
         headers: {
           'Authorization': 'bearer ' + JWT_string_here
-          }
+        }
       }
     }).then(<handle response>)
 ```
