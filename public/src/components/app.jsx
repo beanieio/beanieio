@@ -1,18 +1,23 @@
+// libraries
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter, Switch } from 'react-router-dom';
-import Dashboard from './dashboard.jsx';
-import Settings from './settings/settings.jsx';
+import { Route, Link, Redirect, Switch } from 'react-router-dom';
+
+// components
 import Sidenav from './sidenav.jsx';
+import Dashboard from './dashboard.jsx';
+import ReportDashboard from './reports/report-dashboard.jsx';
+import Settings from './settings/settings.jsx';
 import Login from './login.jsx';
 import Signup from './signup.jsx';
-import ReportDashboard from './reports/report-dashboard.jsx';
+
+// styles
 import './app.css';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     // check for an existing token
-    // TODO: store this in encrypted https cookies instead for security!
+    // TODO: think about store this in encrypted https cookies instead for security
     const jwt = window.localStorage.getItem('healthme_jwt_token') || '';
     const loggedIn = !!jwt;
     this.state = {
@@ -26,7 +31,7 @@ export default class App extends Component {
     this.getAuth = this.getAuth.bind(this);
   }
 
-  getAuth() {
+  getAuth() { // enables child components to gain access to the auth token for their api calls
     return this.state.token;
   }
 
@@ -49,6 +54,8 @@ export default class App extends Component {
     }
   }
 
+  // handling authentication based routing in react-router-4 can be a bit unintuitive
+  // so we're handling here with conditional rendering based on state instead
   renderMainWindow() {
     if (!this.state.loggedIn) {
       return (
@@ -64,7 +71,7 @@ export default class App extends Component {
           <Route path="/dashboard" render={props => <Dashboard getAuth={this.getAuth} /> } />
           <Route path="/reports" render={props => <ReportDashboard getAuth={this.getAuth} /> } />
           <Route path="/settings" render={props => <Settings getAuth={this.getAuth} /> } />
-          <Route path="/" render={props => <Redirect to="/dashboard" />} />
+          <Redirect to="/dashboard" />
         </Switch>
       );
     }
@@ -89,11 +96,3 @@ export default class App extends Component {
     );
   }
 }
-
-const ReportsPlaceholder = () => (<div>Reports go here!</div>);
-
-const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
-  <Route {...rest} render={props => (
-    loggedIn ? (<Component {...props} {...rest}/>) : (<Redirect to="/login"/>)
-  )}/>
-);
