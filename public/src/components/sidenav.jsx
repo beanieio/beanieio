@@ -5,6 +5,7 @@ import './sidenav.css';
 const navs = [
   {label: 'dashboard', icon: 'mdi-home-circle', link: '/dashboard'},
   {label: 'reports', icon: 'mdi-chart-line', link: '/reports'},
+  {label: 'journal', icon: 'mdi-book', link: '/journal'},
   {label: 'settings', icon: 'mdi-settings', link: '/settings'}
 ];
 

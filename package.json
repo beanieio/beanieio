@@ -2,15 +2,20 @@
   "name": "beanieio",
   "version": "1.0.0",
   "description": "Health journalling app - hr greenfield 1",
+  "engines" : {
+    "node": "6.11.3"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "pack": "webpack --watch",
     "start": "nodemon app/index.js",
-    "startprod": "HTTP_PORT=8080 HTTPS_PORT=8443 nodemon app/index.js",
-    "startproddebug": "DEBUG=true HTTP_PORT=8080 HTTPS_PORT=8443 nodemon app/index.js",
+    "startprod": "PORT=8080 node app/index.js",
+    "startproddebug": "DEBUG=true PORT=8080 nodemon app/index.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "start-heroku": "PRODUCTION=true node app/index.js",
+    "heroku-postbuild": "webpack"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,7 @@
     "body-parser": "^1.18.2",
     "chart.js": "^2.7.0",
     "chart.piecelabel.js": "^0.8.1",
+    "clarifai": "^2.4.0",
     "classnames": "^2.2.5",
     "express": "^4.15.5",
     "jquery": "^3.2.1",
@@ -37,6 +43,7 @@
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.13",
     "morgan": "^1.9.0",
+    "multer": "^1.3.0",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.0",
     "passport-local": "^1.0.0",
@@ -47,24 +54,24 @@
     "react-router-dom": "^4.2.2",
     "react-widgets": "^4.0.2",
     "react-widgets-moment": "^4.0.2",
-    "redux": "^3.7.2"
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^3.2.11",
-    "@storybook/addon-links": "^3.2.10",
-    "@storybook/react": "^3.2.11",
+    "redux": "^3.7.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "chai": "^4.1.2",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
-    "mocha": "^3.5.3",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.6.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.2.11",
+    "@storybook/addon-links": "^3.2.10",
+    "@storybook/react": "^3.2.11",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
   }
 }

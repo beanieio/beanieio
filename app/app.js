@@ -1,8 +1,19 @@
 // libraries
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+
+// multer
+const multer = require('multer');
+const upload = multer({ dest: './uploads/' });
+
+// clarifai
+const Clarifai = require('clarifai');
+if (!process.env.PRODUCTION) {
+  const configKey = require('../config/config');
+}
 
 // db setup
 const { User, Entry } = require('./models/models.js');
@@ -10,8 +21,8 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 // env setup
 const debug = process.env.DEBUG || false;
-const httpPort = process.env.HTTP_PORT || 8080;
-const httpsPort = process.env.HTTPS_PORT || 8443;
+const httpPort = process.env.PORT || 8080;
+// const httpsPort = process.env.HTTPS_PORT || 8443;
 
 // auth setup
 const jwt = require('jsonwebtoken');
@@ -24,14 +35,14 @@ const correlationHandler = require('./handlers/correlation-data.js');
 const app = express();
 app.use(morgan('common'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 // redirect non secure traffic to https
-const httpsRoute = function (req, res, next) {
-  if (debug) { console.log((req.secure ? 'Secure' : 'Insecure') + ' connection received to: ', req.url); }
-  if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + req.path); }
-};
-app.get('*', httpsRoute);
+// const httpsRoute = function (req, res, next) {
+//   if (debug) { console.log((req.secure ? 'Secure' : 'Insecure') + ' connection received to: ', req.url); }
+//   if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + req.path); }
+// };
+// app.get('*', httpsRoute);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
@@ -118,6 +129,48 @@ app.post('/api/formdata', jwtAuth(), (req, res) => {
     .catch(err => res.status(500).send('Server error', err));
 });
 
+// Post route for single images to be saved to disk and analyzed by Clarifai visual recognition.
+// upload.fields is mutler middleware that requires formData with a name field.
+// File size is currently limited to 10mb through bodyParser.
+app.post('/api/clarifai', upload.fields([{ name: 'image' }]), (req, res, next) => {
+  //console.log('Uploads a picture --> ',req.files.image[0].path)
+  // get uploaded image file path and add to request
+  let originalImageFilePath = path.join(__dirname, '/../', req.files.image[0].path);
+  req.imagePath = originalImageFilePath;
+  next();
+}, (req, res) => {
+  // read image file from uploads folder
+  fs.readFile(req.imagePath, (err, data) => {
+    if(err) {
+      console.log('Read Image File Error: ', err);
+      res.status(500).send('Server error', err);
+    } else {
+    // create new clarifai instance using API key
+    let clarifaiApp = new Clarifai.App({apiKey: process.env.CLARIFAI_KEY || configKey.clarifaiKey});
+    // Save image from memory buffer to Base64 for Clarifai API bytes option
+    let imageBase64 = new Buffer(data).toString('base64');
+    // use specific 'food' model("bd..." string) and object with our base64 image
+    clarifaiApp.models.predict("bd367be194cf45149e75f01d59f77ba7", {base64: imageBase64 }).then(
+      (results) => {
+        // results.outputs is the parent array of objects where our food prediction data is stored
+        console.log('Clarifai Success: ', results.outputs);
+        res.send(results.outputs);
+      },
+      (err) => {
+        console.log('Clarifai Error: ', err);
+        res.status(500).send('Server error', err);
+      }
+    );
+    }
+  })
+});
+
+app.post('/picture',(req,res) => {
+
+  console.log('Req.body ---> ',req.body);
+  console.log('Req.file --> ',req.file);
+})
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '/public/index.html'));
 });
@@ -126,4 +179,4 @@ app.get('*', (req, res) => {
 
 module.exports.app = app;
 module.exports.httpPort = httpPort;
-module.exports.httpsPort = httpsPort;
+// module.exports.httpsPort = httpsPort;

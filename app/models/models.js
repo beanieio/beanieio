@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise; // overriding mongoose's promise library with global promises
 const bcrypt = require('bcrypt');
-mongoose.connect('mongodb://127.0.0.1:27017/healthme');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/healthme');
 
 const ingredientsDefaults = [
   'nuts', 'wheat', 'gluten', 'dairy', 'egg',

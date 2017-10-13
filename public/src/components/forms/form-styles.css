@@ -36,6 +36,7 @@
 }
 
 .form-multiselect {
+  display: inline-block;
   margin-bottom: 20px;
 }
 
@@ -55,3 +56,33 @@
 .form-submit-btn:focus:active {
   box-shadow: none !important;
 }
+.form-select {
+  font-size: 16px;
+  display: inline-block;
+  color: var(--b5);
+}
+.mdi {
+  text-align: center;
+  display: block;
+  font-size: 34px;
+}
+.camera-options{
+  text-align: left;
+}
+.imgPreview {
+  text-align: center;
+  margin: 5px 15px;
+  height: 200px;
+  width: 400px;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-top: 5px solid gray;
+  border-bottom: 5px solid gray;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+

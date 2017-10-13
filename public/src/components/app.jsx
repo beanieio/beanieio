@@ -6,6 +6,7 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Sidenav from './sidenav.jsx';
 import Dashboard from './dashboard.jsx';
 import ReportDashboard from './reports/report-dashboard.jsx';
+import Journal from './journal/journal.jsx';
 import Settings from './settings/settings.jsx';
 import Login from './login.jsx';
 import Signup from './signup.jsx';
@@ -70,6 +71,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/dashboard" render={props => <Dashboard getAuth={this.getAuth} /> } />
           <Route path="/reports" render={props => <ReportDashboard getAuth={this.getAuth} /> } />
+          <Route path="/journal" render={props => <Journal getAuth={this.getAuth} /> } />
           <Route path="/settings" render={props => <Settings getAuth={this.getAuth} /> } />
           <Redirect to="/dashboard" />
         </Switch>
