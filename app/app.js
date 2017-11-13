@@ -11,7 +11,6 @@ const ObjectId = require('mongoose').Types.ObjectId;
 // env setup
 const debug = process.env.DEBUG || false;
 const httpPort = process.env.HTTP_PORT || 8080;
-const httpsPort = process.env.HTTPS_PORT || 8443;
 
 // auth setup
 const jwt = require('jsonwebtoken');
@@ -26,12 +25,8 @@ app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-// redirect non secure traffic to https
-const httpsRoute = function (req, res, next) {
-  if (debug) { console.log((req.secure ? 'Secure' : 'Insecure') + ' connection received to: ', req.url); }
-  if (req.secure) { next(); } else { res.redirect('https://' + req.hostname + req.path); }
-};
-app.get('*', httpsRoute);
+// setup express behind an nginx proxy
+app.set('trust proxy', 'loopback');
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
